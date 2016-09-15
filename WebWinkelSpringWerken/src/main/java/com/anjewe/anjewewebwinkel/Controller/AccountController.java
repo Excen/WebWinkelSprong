@@ -86,7 +86,7 @@ validation
          * framework as well while still using internationalized messages.
          * 
          */
-        if(!accountService.isUsernameUnique(account.getId(), account.getUsername())){
+        if(!accountService.isBeanUniek(account.getId(), account.getUsername())){
             FieldError ssoError = new FieldError("account","username",
                     messageSource.getMessage("non.unique.username", new String[]{account.getUsername()}, 
                             Locale.getDefault()));

@@ -89,5 +89,10 @@ public class ArtikelService implements GenericServiceInterface <Artikel, Long> {
         int verwijderd = artikelDao.deleteAll(Artikel.class); 
         return verwijderd;
     }
+
+    @Override
+    public boolean isBeanUniek(long id, String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 } // eind artikelcontroller

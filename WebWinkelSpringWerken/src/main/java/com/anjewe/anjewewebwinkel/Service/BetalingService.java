@@ -91,6 +91,11 @@ private static final Logger log = LoggerFactory.getLogger(BetalingService.class)
         int verwijderd = betalingDao.deleteAll(Betaling.class); 
         return verwijderd; 
     }
+
+    @Override
+    public boolean isBeanUniek(long id, String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
    
 

@@ -30,7 +30,7 @@ public interface GenericServiceInterface <T, PK extends Serializable> {
     public boolean verwijderBeanGegevens(Long Id);
     public int verwijderAlleBeans();
 
-    public boolean isUsernameUnique(long id, String username);
+    public boolean isBeanUniek(long id, String string);
     
     
     

@@ -97,5 +97,10 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
         int rowsAffected = adresDao.deleteAll(Adres.class);
         return rowsAffected; 
     }
+
+    @Override
+    public boolean isBeanUniek(long id, String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
 }
