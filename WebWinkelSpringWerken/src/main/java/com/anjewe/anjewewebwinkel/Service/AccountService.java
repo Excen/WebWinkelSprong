@@ -106,10 +106,16 @@ private static final Logger log = LoggerFactory.getLogger(AccountService.class);
         return rowsAffected;
     }
 
+    
 //    boolean isUsernameUniek(String username, Long id){
 //        account = findByUsername(username); 
 //        return ( account == null || ((id != null) && (account.getId() == id)));
 //    } 
+
+    @Override
+    public boolean isBeanUniek(long id, String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
    

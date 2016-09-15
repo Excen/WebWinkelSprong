@@ -93,4 +93,9 @@ private static final Logger log = LoggerFactory.getLogger(FactuurService.class);
         return verwijderd;
     }
 
+    @Override
+    public boolean isBeanUniek(long id, String username) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
