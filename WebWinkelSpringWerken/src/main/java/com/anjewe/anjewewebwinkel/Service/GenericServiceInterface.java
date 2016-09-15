@@ -29,6 +29,8 @@ public interface GenericServiceInterface <T, PK extends Serializable> {
     //verwijder
     public boolean verwijderBeanGegevens(Long Id);
     public int verwijderAlleBeans();
+
+    public boolean isUsernameUnique(long id, String username);
     
     
     

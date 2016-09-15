@@ -15,6 +15,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,11 +27,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
-//@RequestMapping({"/", "/home"}) // wat doet dit specifiek?
-//@SessionAttributes() // wat doet dit specifiek?
-public class AppController {
+public class AccountController {
 
-private static final Logger log = LoggerFactory.getLogger(AppController.class);
+private static final Logger log = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired 
     GenericServiceInterface<Account, Long> accountService= new AccountService();
@@ -44,12 +43,12 @@ private static final Logger log = LoggerFactory.getLogger(AppController.class);
      * @return 
      */
     
-    @RequestMapping(value = { "/accounts", "/accountlijst" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/account/readallaccount" }, method = RequestMethod.GET)
     public String listAccounts(ModelMap model) { // wat doet modelMap?
  
         List<Account> accounts = accountService.zoekAlleBeans();
-        model.addAttribute("accountlijst", accounts);
-        return "accountlijst"; // accountlijst.jsp
+        model.addAttribute("account/readallaccount", accounts);
+        return "account/readallaccount"; // accountlijst.jsp
     }
     
     /**
@@ -57,11 +56,11 @@ private static final Logger log = LoggerFactory.getLogger(AppController.class);
      * @param model
      * @return 
      */
-    @RequestMapping(value = { "/nieuwaccount" }, method = RequestMethod.GET) // value= waarvan?
+    @RequestMapping(value = { "account/createaccount" }, method = RequestMethod.GET) // value= waarvan?
     public String nieuwAccount(ModelMap model) {
         Account account = new Account();
-        model.addAttribute("account", account);
-        model.addAttribute("edit", false);
+        model.addAttribute("account", account); //??
+        model.addAttribute("edit", false); // ??
         return "registratie"; // slaat op registration.jsp
     }
  
@@ -70,12 +69,12 @@ private static final Logger log = LoggerFactory.getLogger(AppController.class);
      * This method will be called on form submission, handling POST request for
      * saving user in database. It also validates the user input
      */
-    @RequestMapping(value = { "/nieuwaccount" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "account/createaccount" }, method = RequestMethod.POST)
     public String saveAccount(@Valid Account account, BindingResult result,
             ModelMap model) {
  
         if (result.hasErrors()) {
-            return "registratie";
+            return "account/createaccount"; // TODO: uiteindelijk naar een andere pagina die aangeeft waarom wel of niet gelukt
         }
         /*
          * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation 
@@ -87,14 +86,17 @@ validation
          * framework as well while still using internationalized messages.
          * 
          */
-//        if(!accountController.isUserSSOUnique(account.getId(), account.getSsoId())){
-//            FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new
-// 
-//String[]{account.getSsoId()}, Locale.getDefault()));
-//            result.addError(ssoError);
-//            return "registration";
-//        }
+        if(!accountService.isUsernameUnique(account.getId(), account.getUsername())){
+            FieldError ssoError = new FieldError("account","username",
+                    messageSource.getMessage("non.unique.username", new String[]{account.getUsername()}, 
+                            Locale.getDefault()));
+            
+            result.addError(ssoError);
+            return "registration";
+        }
 //         
+
+
         accountService.voegNieuweBeanToe(account);
  
         model.addAttribute("success", "Account " + account.getUsername()+ " "+ account.getPassword()+
