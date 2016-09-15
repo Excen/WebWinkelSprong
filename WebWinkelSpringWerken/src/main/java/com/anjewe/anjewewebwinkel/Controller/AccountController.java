@@ -111,7 +111,7 @@ validation
     /**
      * This method will provide the medium to update an existing user.
      */
-    @RequestMapping(value = { "/edit-account-{Id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "account/updateaccount-{Id}" }, method = RequestMethod.GET)
     public String editUser(@PathVariable Long Id, ModelMap model) {
         Account account = (Account)accountService.zoekNaarBean(Id);
         model.addAttribute("account", account);
@@ -123,7 +123,7 @@ validation
      * This method will be called on form submission, handling POST request for
      * updating user in database. It also validates the user input
      */
-    @RequestMapping(value = { "/edit-account-{Id}" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "account/updateaccount-{Id}" }, method = RequestMethod.POST)
     public String updateUser(@Valid Account account, BindingResult result,
             ModelMap model, @PathVariable Long Id) {
  
