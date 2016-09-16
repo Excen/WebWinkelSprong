@@ -11,11 +11,27 @@
 
 <html>
     <head>
+        <link href="<c:url value="../resources/main.css" />" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <h1>Welkom</h1>
+        <b>Note:</b>Website updated on: <%= (new java.util.Date()).toLocaleString() %>
+        <br>
+        <br>
+        <a href = "<c:url value = '/artikel/homeartikel'/>"> artikel </a> |
+       
+        <a href = "<c:url value = '/account/homeaccount'/>"> account </a> |
+         <a href = "<c:url value = '/factuur/homefactuur'/>"> factuur </a> |
+        
+        
+        
+        
+        
+
+        
+
     </body>
     
     

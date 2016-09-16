@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
+@RequestMapping (value = "account/homeaccount")
 public class AccountController {
 
 private static final Logger log = LoggerFactory.getLogger(AccountController.class);
@@ -43,11 +44,11 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
      * @return 
      */
     
-    @RequestMapping(value = { "/account/readallaccount" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"accountlijst", "/account/readallaccount" }, method = RequestMethod.GET)
     public String listAccounts(ModelMap model) { // wat doet modelMap?
  
         List<Account> accounts = accountService.zoekAlleBeans();
-        model.addAttribute("account/readallaccount", accounts);
+        model.addAttribute("accountlijst", accounts);
         return "account/readallaccount"; // accountlijst.jsp
     }
     
@@ -56,12 +57,12 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
      * @param model
      * @return 
      */
-    @RequestMapping(value = { "account/createaccount" }, method = RequestMethod.GET) // value= waarvan?
+    @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.GET) // value= waarvan?
     public String nieuwAccount(ModelMap model) {
         Account account = new Account();
         model.addAttribute("account", account); //??
         model.addAttribute("edit", false); // ??
-        return "registratie"; // slaat op registration.jsp
+        return "account/registratie"; // slaat op registration.jsp
     }
  
     
@@ -153,7 +154,7 @@ validation
     /**
      * This method will delete an user by it's ID value.
      */
-    @RequestMapping(value = { "/delete-account-{Id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/deleteallaccount-{Id}" }, method = RequestMethod.GET)
     public String deleteUser(@PathVariable Long Id) {
         accountService.verwijderBeanGegevens(Id);
         return "redirect:/list";
