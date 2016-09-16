@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,55 +36,55 @@ public class BestellingController {
 
     @Autowired
     MessageSource messageSource;
-    
-    
-    
+
     // Methoden
     
     // Bestelling toevoegen
-    @RequestMapping(value = {value = "/nieuwbestelling", method = RequestMethod.POST})
-        public String addBestelling(@ModelAttribute("bestelling") Bestelling bestelling){
+    @RequestMapping(value = {"bestelling/createbestelling"}, method = RequestMethod.POST)
+        public String createBestelling(@ModelAttribute("bestelling") ModelMap model){
+            Bestelling bestelling = new Bestelling();
+            model.addAttribute("bestelling", bestelling);
+            model.addAttribute("edit", false);
+            return "createbestelling";              
+    }
+    
+    // Alle bestellingen ophalen
+    @RequestMapping(value = {"/bestelling/readallbestelling"}, method = RequestMethod.GET)
+        public String readAllBestelling(ModelMap model) { 
+            List <Bestelling> bestellingen = bestellingService.zoekAlleBeans();
+            model.addAttribute("bestellinglijst", bestellingen);
+            return "readallbestelling"; 
+    }
+    
+    // bestelling ophalen
+    @RequestMapping(value = {"/bestelling/readbestelling"}, method = RequestMethod.GET)
+        public String readBestelling (@PathVariable Long id, ModelMap model){
+            Bestelling bestelling = bestellingService.zoekNaarBean(id);
+            model.addAttribute("bestelling", bestelling);
+            return "readbestelling";
+        }
         
-                if ()
-                
-
-
-
-    }
+    // bestelling updaten     
+    @RequestMapping(value = {"/bestelling/updatebestelling"}, method = RequestMethod.POST)    
+        public String updateBestelling (@PathVariable Long Id, ModelMap model) {
+            Bestelling bestelling = (Bestelling)bestellingService.zoekNaarBean(Id);
+            model.addAttribute("bestelling", bestelling);
+            model.addAttribute("edit", true);
+            return "updatebestelling";
+        }
+        
+    // bestelling verwijderen
+    @RequestMapping(value = {"/bestelling/deletebestelling"}, method = RequestMethod.POST)
+        public String deleteBestelling(@PathVariable Long Id) {
+            bestellingService.verwijderBeanGegevens(Id);
+            return "deletebestelling";
+        }
     
-    /*
-    
-    @RequestMapping(value= "/person/add", method = RequestMethod.POST)
-	public String addPerson(@ModelAttribute("person") Person p){
-		
-		if(p.getId() == 0){
-			//new person, add it
-			this.personService.addPerson(p);
-		}else{
-			//existing person, call update
-			this.personService.updatePerson(p);
-		}
-		
-		return "redirect:/persons";
-		
-	}
-    
-    */
-    
-    // Bestellinglijst ophalen
-    @RequestMapping(value = { "/bestellingen", "/bestellinglijst" }, method = RequestMethod.GET)
-    public String listBestellingen(ModelMap model) { 
- 
-        List <Bestelling> accounts = bestellingService.zoekAlleBeans();
-        model.addAttribute("bestellinglijst", accounts);
-        return "bestellinglijst"; // bestellinglijst.jsp
-    }
-    
-    
-    
-    
-    
-    
-    
+    // alle bestellingen verwijderen    
+    @RequestMapping(value = {"/bestelling/deleteallbestelling"}, method = RequestMethod.POST)    
+        public String delleteAllBestelling(){
+            bestellingService.verwijderAlleBeans();
+            return "deleteallbestelling";
+        }
     
 }
