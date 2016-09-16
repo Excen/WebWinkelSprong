@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 
     Document   : deleteallartikel
     Created on : 15-sep-2016, 11:12:30
