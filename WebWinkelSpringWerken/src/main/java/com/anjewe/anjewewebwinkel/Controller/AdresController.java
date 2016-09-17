@@ -16,6 +16,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -73,5 +74,44 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         return "adres/toevoegengelukt";
         
     }
+    //update
     
+    @RequestMapping (value ="/adres/updateadres", method = RequestMethod.GET)
+    public String update(){
+        return "adres/updateadres";
+    }
+    
+    // werkelijke update methode
+    @RequestMapping (value = "/adres/updateadres-{Id}", method = RequestMethod.POST)
+    public String updateAdres(@Valid Adres adres, BindingResult result, 
+            ModelMap model, @PathVariable Long Id){
+        
+        if (result.hasErrors()) {
+            return "adres/updateadres-{Id}";
+        }
+        
+        adresService.wijzigBeanGegevens(adres);
+        model.addAttribute("succes", "Adres met id: " + adres.getId() + "is toegevoegd." +
+                "Straatnaam: " + adres.getStraatnaam() + " ,huisnummer: " + adres.getHuisnummer() +
+                " ,toevoeging: " + adres.getToevoeging() + " , postcode: " + adres.getPostcode() + 
+                " , woonplaats: " + adres.getWoonplaats() + ". AdresType: " + adres.getAdresType());
+        
+        return "adres/toevoegengelukt";
+        
+    }
+    
+    
+    
+    //delete
+    @RequestMapping (value = "/adres/deleteadres", method = RequestMethod.GET)
+    public String delete(){
+        return "adres/deleteadres";
+    }
+    
+    // werkelijke delete methode
+    @RequestMapping (value = "/adres/deleteadres-{Id}" , method = RequestMethod.GET)
+    public String deleteAdres(@PathVariable Long Id){
+        adresService.verwijderBeanGegevens(Id);
+        return "redirect:/adres/readalladres";
+    }
 }

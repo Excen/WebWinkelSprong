@@ -13,6 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:forward page ="/readallartikel.jsp"/>
+        <jsp:forward page ="/artikel/readallartikel.jsp"/>
     </body>
 </html>

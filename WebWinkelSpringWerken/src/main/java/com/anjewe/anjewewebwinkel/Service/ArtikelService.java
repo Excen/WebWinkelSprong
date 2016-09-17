@@ -72,6 +72,8 @@ public class ArtikelService implements GenericServiceInterface <Artikel, Long> {
         if (gewijzigdArtikel!= null){
             gewijzigdArtikel.setArtikelNaam(artikel.getArtikelNaam());
             gewijzigdArtikel.setArtikelPrijs(artikel.getArtikelPrijs());
+            gewijzigdArtikel.setOmschrijving(artikel.getOmschrijving());
+            gewijzigdArtikel.setArtikelNummer(artikel.getArtikelNummer());
         }
         
          artikelDao.update(gewijzigdArtikel); 
