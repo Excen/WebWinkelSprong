@@ -19,6 +19,6 @@
         <a href = "<c:url value = '/account/updateaccount'/>"> Account update </a><br>
         <a href = "<c:url value = '/account/readallaccount'/>"> Accounts opvragen </a><br>
         <a href = "<c:url value = '/account/deleteaccount'/>"> Account verwijderen </a><br>
-    </body>
+    </body> 
 </html>
 
