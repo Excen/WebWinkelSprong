@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Artikel toevoegen</title>
     </head>
     <body>
         <h1>Artikel toegevoegd</h1>
