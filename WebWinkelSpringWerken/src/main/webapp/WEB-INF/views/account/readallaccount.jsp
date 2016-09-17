@@ -22,7 +22,7 @@
                  
                 <c:forEach var="account" items="${accountlijst}" varStatus="status">
                 <tr>
-                    <td>${status.index + 1}</td>
+                    <td>${account.id + 1}</td>
                     <td>${account.username}</td>
                     <td>${account.password}</td>
                              
