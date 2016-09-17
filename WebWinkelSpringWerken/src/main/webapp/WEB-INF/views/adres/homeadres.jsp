@@ -14,6 +14,7 @@
     </head>
     <body>
         <h1>Adressen bestand</h1>
+        <p></p>
         
         <a href = "<c:url value = '/adres/createadres'/>"> Adres toevoegen</a><br>
         <a href = "<c:url value = '/adres/updateadres'/>"> Adres wijzigen </a><br>
