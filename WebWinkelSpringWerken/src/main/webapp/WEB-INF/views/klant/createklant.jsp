@@ -21,6 +21,7 @@
             Emailadres <input type = "text" name = "email" /> <br>
         </form>
             <a href = "<c:url value = '/'/>"> Terug naar huis!</a>
+            
     </body>
 </html>
 
