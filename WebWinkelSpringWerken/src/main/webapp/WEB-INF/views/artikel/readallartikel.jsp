@@ -14,31 +14,33 @@
     </head>
     <body>
        <div align = "center">
-           <h1>Artikel lijst</h1>    
+           <h1>Artikellijst</h1>    
            <table>
-               <th>Id</th>
-               <th>Artikelnummer</th>
+                <th>Id</th>
+                <th>Artikelnummer</th>
                 <th>Artikelnaam</th>
                 <th>Artikel omschrijving</th>
                 <th>ArtikelPrijs</th>
+                <th></th>
+                <th></th>
              
                   <c:forEach var="artikel" items="${artikellijst}" varStatus="status">
                 <tr>
-                    <td>${status.index + 1}</td>
-                    <td>${artikel.artikelnummmer}></td>
+                    <td>${artikel.id}</td>
+                    <td>${artikel.artikelNummer}></td>
                     <td>${artikel.artikelNaam}></td>
                     <td>${artikel.omschrijving}</td>
                     <td>${artikel.artikelPrijs}</td>
-                             
+                    <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
+                    <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td>         
                 </tr>
                 </c:forEach>
                 
-              
-              
            </table>
+           <br/>
         <a href = "<c:url value = '/artikel/createartikel'/>" >Nieuw artikel toevoegen </a>
-        
-        <a href = "<c:url value = '/'/>"> Terug naar huis!</a>
+        <br/>
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         </div>
     </body>
 </html>

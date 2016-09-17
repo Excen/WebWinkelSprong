@@ -120,6 +120,7 @@ validation
         return "registratie";
     }
      
+    
     /**
      * This method will be called on form submission, handling POST request for
      * updating user in database. It also validates the user input
