@@ -10,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -29,8 +26,8 @@ public class Artikel implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(unique = true, nullable = false, name = "ARTIKEL_ID")
     private Long Id; 
-    @Column (name = "ARTIKELNR")
-    private String artikelNummmer; 
+    @ Column (name = "ARTIKELNR")
+    private String artikelNummer; 
     @Column (name = "ARTIKELNAAM")
     private String artikelNaam;
     private String omschrijving; 
@@ -43,12 +40,14 @@ public class Artikel implements Serializable{
     public Artikel(){
     }
     
-    public Artikel(Long artikelId, String artikelNaam, double artikelPrijs) {
+    public Artikel(Long artikelId, String artikelNaam, double artikelPrijs, String artikelNummer) {
         this.Id = artikelId;
         this.artikelNaam = artikelNaam;
         this.artikelPrijs = artikelPrijs;
+        this.artikelNummer = artikelNummer; 
     }
 
+    // getters
     public Long getId() {
         return Id;
     }
@@ -61,6 +60,28 @@ public class Artikel implements Serializable{
         return artikelPrijs;
     }
 
+     /**
+     * @return the omschrijving
+     */
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+    
+     /**
+     * @return the bestellingen
+     */
+    public Set<BestellingArtikel> getBestellingen() {
+        return bestellingArtikellen;
+    }
+    
+     public String getArtikelNummer() {
+        return artikelNummer;
+    }
+
+     
+    // setters
+   
+    
     public void setId(Long artikelId) {
         this.Id = artikelId;
     }
@@ -68,30 +89,13 @@ public class Artikel implements Serializable{
     public void setArtikelNaam(String artikelNaam) {
         this.artikelNaam = artikelNaam;
     }
-
+    
+    public void setArtikelNummer(String artikelNummer) {
+        this.artikelNummer = artikelNummer;
+    }
+    
     public void setArtikelPrijs(double artikelPrijs) {
         this.artikelPrijs = artikelPrijs;
-    }
-
-    /**
-     * @return the artikelNummmer
-     */
-    public String getArtikelnummmer() {
-        return artikelNummmer;
-    }
-
-    /**
-     * @param artikelnummmer the artikelNummmer to set
-     */
-    public void setArtikelnummmer(String artikelnummmer) {
-        this.artikelNummmer = artikelnummmer;
-    }
-
-    /**
-     * @return the omschrijving
-     */
-    public String getOmschrijving() {
-        return omschrijving;
     }
 
     /**
@@ -99,13 +103,6 @@ public class Artikel implements Serializable{
      */
     public void setOmschrijving(String omschrijving) {
         this.omschrijving = omschrijving;
-    }
-
-    /**
-     * @return the bestellingen
-     */
-    public Set<BestellingArtikel> getBestellingen() {
-        return bestellingArtikellen;
     }
 
     /**

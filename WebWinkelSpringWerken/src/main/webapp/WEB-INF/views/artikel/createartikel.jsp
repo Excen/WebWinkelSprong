@@ -16,18 +16,21 @@
     <body>
         <h1>Hello Artikel!</h1>
         <p> Het is vandaag:
-        <%=new java.util.Date() %> 
+            <%=new java.util.Date()%> 
         </p>
-        
-        <h3>Artikel toevoegen</h3>
+
+        <h3>Artikel gegevens</h3>
         <form method = "POST">
-            Artikelnaam <input type = "text" name = "artikelnaam" /> <br/>
-            Prijs <input type = "text" name = "artikelprijs" /> <br/>
-            Omschrijving <input type = "text" name = "omschrijving"/><br/>
-            <input type = "submit" value = "opslaan"/>
+            Artikelnaam <input type = "text" name = "artikelNaam" placeholder = ${artikel.artikelNaam}/> <br/>
+            Prijs € <input type = "text" name = "artikelPrijs" placeholder =${artikel.artikelPrijs}/> <br/>
+            Omschrijving <input type = "text" name = "omschrijving" placeholder = ${artikel.omschrijving}/><br/>
+            Art.nummer   <input type = "text" name = "artikelNummer" placeholder = ${artikel.artikelNummer}/><br/>
+
+            <input type = "submit" value = "opslaan"/> | 
+            <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
         </form>   
-        
-        
-        <a href = "<c:url value = '/'/>"> Terug naar huis!</a>
-        </body>
+
+
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
+    </body>
 </html>

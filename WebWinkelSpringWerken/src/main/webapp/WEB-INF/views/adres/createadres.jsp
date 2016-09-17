@@ -1,7 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 
-    Document   : updateartikel
-    Created on : 15-sep-2016, 11:09:37
+    Document   : createadres
+    Created on : 17-sep-2016, 15:01:25
     Author     : Wendy
 --%>
 
@@ -13,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:forward page ="/readallartikel.jsp"/>
+        <h1>Hello World!</h1>
     </body>
 </html>
