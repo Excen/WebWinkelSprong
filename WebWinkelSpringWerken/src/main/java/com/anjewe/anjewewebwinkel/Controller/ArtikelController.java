@@ -102,7 +102,7 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
             Artikel artikel = (Artikel)artikelService.zoekNaarBean(Id);
             model.addAttribute("artikel", artikel);
             model.addAttribute("edit", true);
-            return "artikel/createartikel";
+            return "artikel/addartikel"; // klopt dt?
         }
         
         @RequestMapping (value = {"/artikel/updateartikel"}, method = RequestMethod.GET)
@@ -139,6 +139,12 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
         }
 
         //delete
+        
+        @RequestMapping(value ="/artikel/deleteartikel", method = RequestMethod.GET)
+        public String delete(){
+            return "artikel/deleteartikel";
+        }
+        
         @RequestMapping(value = { "/artikel/deleteartikel-{Id}" }, method = RequestMethod.GET)
         public String deleteArtikel(@PathVariable Long Id) {
             artikelService.verwijderBeanGegevens(Id);

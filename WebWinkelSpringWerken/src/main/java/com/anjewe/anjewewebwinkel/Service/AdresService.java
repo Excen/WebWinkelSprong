@@ -43,7 +43,7 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
     }
 
     @Override
-    public Long voegNieuweBeanToe(Adres t) {
+    public Long voegNieuweBeanToe(Adres adres) {
         Long adresId = adresDao.insert(adres);
         return adresId;
     }
