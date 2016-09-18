@@ -4,7 +4,9 @@ package com.anjewe.anjewewebwinkel.Controller;
 
 import com.anjewe.anjewewebwinkel.Service.AccountService;
 import com.anjewe.anjewewebwinkel.POJO.Account;
+import com.anjewe.anjewewebwinkel.POJO.Klant;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
+import com.anjewe.anjewewebwinkel.Service.KlantService;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import java.util.Date;
 
 /**
  * @author Wendy
@@ -33,7 +36,8 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
 
     @Autowired 
     GenericServiceInterface<Account, Long> accountService= new AccountService();
-     
+    @Autowired
+    GenericServiceInterface<Klant, Long> klantService= new KlantService(); 
     @Autowired
     MessageSource messageSource;
 
@@ -61,15 +65,40 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
      * @param model
      * @return 
      */
-    @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.GET) // value= waarvan?
-    public String nieuwAccount(ModelMap model) {
+    @RequestMapping(value = { "account", "/account/createaccount-{Id}" }, method = RequestMethod.GET) // value= waarvan?
+    public String nieuwAccount(ModelMap model, @PathVariable Long Id) {
         Account account = new Account();
-        accountService.voegNieuweBeanToe(account);
-        model.addAttribute("account", account); //??
-        model.addAttribute("edit", false); // ??
-        return "account/registratie"; // slaat op registration.jsp
+        
+//        dit wil je kunnen doen
+//        Klant klant = klantService.zoekNaarBean(Id);
+//        account.setKlant(klant);
+//        Date date = new Date();
+//        account.setCreatieDatum(date);
+        
+        model.addAttribute("account", account); 
+        model.addAttribute("edit", false); 
+        return "account/addaccount"; 
     }
- 
+    
+     // save        
+        @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.POST)
+        public String saveAccount(@Valid Account account,  BindingResult result,
+            ModelMap model){
+            
+                if (result.hasErrors()) {
+                    return "account/addaccount"; // aanpassen> aangeven waar error zit
+                }
+                
+                
+                
+                
+                accountService.voegNieuweBeanToe(account); 
+                model.addAttribute("success", "Account: Account username " + account.getUsername()
+                        + " account password " + account.getPassword() + " is toegevoegd aan het bestand");
+            //return "success"; 
+            return "account/registratiegelukt"; 
+        }
+        
     
     /**
      * This method will be called on form submission, handling POST request for
