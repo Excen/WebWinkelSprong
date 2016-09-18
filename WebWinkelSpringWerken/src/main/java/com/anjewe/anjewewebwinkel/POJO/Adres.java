@@ -44,7 +44,7 @@ public class Adres implements Serializable {
         
     @Column(nullable = false)
     private String straatnaam;
-    @Column(nullable = false)
+    @Column(nullable = false, length =6)
     private String postcode;
     private String toevoeging;
     @Column(nullable = false)

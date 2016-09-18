@@ -28,12 +28,12 @@
              
                   <c:forEach var="adres" items="${adressenlijst}" varStatus="status">
                 <tr>
-                    <td>${adres.id}</td>
-                    <td>${adres.straatnaam}></td>
-                    <td>${adres.huisnummer}></td>
-                    <td>${adres.toevoeging}</td>
-                    <td>${adres.postcode}</td>
-                    <td>${adres.woonplaats}</td>
+                    <td><c:out value ="${adres.id}"/></td>
+                    <td><c:out value = "${adres.straatnaam}"/>></td>
+                    <td><c:out value = "${adres.huisnummer}"/>></td>
+                    <td><c:out value = "${adres.toevoeging}"/></td>
+                    <td><c:out value = "${adres.postcode}"/></td>
+                    <td><c:out value = "${adres.woonplaats}"/></td>
                     <td><a href="<c:url value='/adres/updateadres-${adres.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/adres/deleteadres-${adres.id}' />">verwijder </a></td>         
                 </tr>

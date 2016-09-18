@@ -1,3 +1,5 @@
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- 
     Document   : createadres
@@ -8,6 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <a href="../../../../java/com/anjewe/anjewewebwinkel/Controller/ArtikelController.java"></a>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ADRES TOEVOEGEN</title>

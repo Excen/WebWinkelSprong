@@ -24,10 +24,10 @@
                         
           <c:choose>
                     <c:when test="${edit}">
-                        Artikelnaam <input type = "text" name = "artikelNaam" /> <br/>
-                        Prijs <input type = "text" name = "artikelPrijs"/> <br/>
-                        Omschrijving <input type = "text" name = "omschrijving"/><br/>
-                        Art.nummer   <input type = "text" name = "artikelNummer" /><br/>        
+                        Artikelnaam <input type = "text" name = "artikelNaam" value ="${artikel.artikelNaam}" /> <br/>
+                        Prijs <input type = "text" name = "artikelPrijs" value ="${artikel.artikelPrijs}"/> <br/>
+                        Omschrijving <input type = "text" name = "omschrijving" value ="${artikel.omschrijving}"/><br/>
+                        Art.nummer   <input type = "text" name = "artikelNummer" value ="${artikel.artikelNummer}" /><br/>        
                         
                         <input type="submit" value="opslaan"/> | 
                         <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>

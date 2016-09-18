@@ -17,12 +17,12 @@
        <form method = "POST">
            <c:choose>
                <c:when test = "${edit}">
-            Straatnaam <input type = "text" name = "straatnaam" /> <br/>
-            Huisnummer <input type = "text" name = "huisnummer" /> <br/>
-            Toevoeging <input type = "text" name = "toevoeging" /><br/>
-            Postcode  <input type = "text" name = "postcode" /><br/>
-            Woonplaats <input type = "text" name = "woonplaats" /><br/>
-            AdresType <input type = "text" name = "adrestype" /><br/>
+            Straatnaam <input type = "text" name = "straatnaam" value = "${adres.straatnaam}"/>  <br/>
+            Huisnummer <input type = "text" name = "huisnummer" value = "${adres.huisnummer}"/> <br/>
+            Toevoeging <input type = "text" name = "toevoeging" value = "${adres.toevoeging}"/><br/>
+            Postcode  <input type = "text" name = "postcode"  value = "${adres.postcode}"/><br/>
+            Woonplaats <input type = "text" name = "woonplaats"  value = "${adres.woonplaats}"/><br/>
+            AdresType <input type = "text" name = "adrestype"  value = "${adres.adresType}"/><br/>
             
             <input type = "submit" value = "opslaan"/> | 
             <a href="<c:url value='/adres/readalladres' />">Annuleer</a>
