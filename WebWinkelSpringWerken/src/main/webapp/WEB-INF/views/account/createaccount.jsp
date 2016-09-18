@@ -14,8 +14,10 @@
     <body>
         <h1>account toevoegen</h1>
         <form method = "POST">
+            
             Username <input type = "text" name = "username" />  <br>
             Password <input type = "text" name = "password" /> <br>
+            
             <input type = "submit" value = "opslaan"/>
             <%-- klant toevoegen --%>
         </form>   

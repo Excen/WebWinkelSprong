@@ -14,7 +14,7 @@
     <body>
         <h1>Klant aanmaken</h1>
         <form method = "POST">
-            <%-- create nr --%>
+            Art.nummer <input type = "text" name = "artikelNummer" /> <br>
             Voornaam <input type = "text" name = "voornaam" />  <br>
             Achternaam <input type = "text" name = "achternaam" />  <br>
             Tussenvoegsel <input type = "text" name = "tussenvoegsel" /> <br>
