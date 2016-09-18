@@ -81,7 +81,16 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         return "adres/updateadres";
     }
     
+    
     // werkelijke update methode
+    @RequestMapping (value = {"/adres/updateadres-{Id}"}, method = RequestMethod.GET)
+        public String editArtikel(@PathVariable Long Id, ModelMap model){
+            Adres adres = (Adres)adresService.zoekNaarBean(Id);
+            model.addAttribute("adres", adres);
+            model.addAttribute("edit", true);
+            return "adres/addadres"; // klopt dt?
+        }
+    
     @RequestMapping (value = "/adres/updateadres-{Id}", method = RequestMethod.POST)
     public String updateAdres(@Valid Adres adres, BindingResult result, 
             ModelMap model, @PathVariable Long Id){
