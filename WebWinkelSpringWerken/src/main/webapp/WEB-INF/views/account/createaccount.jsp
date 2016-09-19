@@ -13,16 +13,8 @@
     </head>
     <body>
         <h1>account toevoegen</h1>
-        <form method = "POST">
-            
-            Username <input type = "text" name = "username" />  <br>
-            Password <input type = "text" name = "password" /> <br>
-            
-            <input type = "submit" value = "opslaan"/>
-            <%-- klant toevoegen --%>
-        </form>   
         
-        <a href = "<c:url value = '/'/>"> Terug naar huis!</a>
+        <jsp:forward page ="/klant/createklant"/>
     </body>
 </html>
 

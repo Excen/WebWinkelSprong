@@ -65,15 +65,27 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
      * @param model
      * @return 
      */
-    @RequestMapping(value = { "account", "/account/createaccount-{Id}" }, method = RequestMethod.GET) // value= waarvan?
-    public String nieuwAccount(ModelMap model, @PathVariable Long Id) {
+    
+    @RequestMapping(value = {"account", "/account/createaccount"}, method = RequestMethod.GET)
+    public String nieuwAccount() {
+        return "klant/createklant";
+    }
+    
+    @RequestMapping(value = { "account", "/account/createaccountklant-{Id}" }, method = RequestMethod.GET) // value= waarvan?
+    public String nieuwAccountKlant(ModelMap model, @PathVariable Long Id) {
         Account account = new Account();
+        Klant klant = klantService.zoekNaarBean(Id);
+        account.setKlant(klant);
         
 //        dit wil je kunnen doen
-//        Klant klant = klantService.zoekNaarBean(Id);
-//        account.setKlant(klant);
-//        Date date = new Date();
-//        account.setCreatieDatum(date);
+//        begin vanuit account view create
+//          
+//        eerst klant aanmaken met createklant
+//        dan via createadres
+//        via klantcontroller naar nieuwe account view create account
+//        alles in een view?
+//        
+
         
         model.addAttribute("account", account); 
         model.addAttribute("edit", false); 
@@ -81,15 +93,13 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
     }
     
      // save        
-        @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.POST)
-        public String saveAccount(@Valid Account account,  BindingResult result,
+        @RequestMapping(value = { "/account/createaccountklant-{Id}" }, method = RequestMethod.POST)
+        public String saveAccount(@Valid Account account, @PathVariable Long Id, BindingResult result, 
             ModelMap model){
             
                 if (result.hasErrors()) {
                     return "account/addaccount"; // aanpassen> aangeven waar error zit
-                }
-                
-                
+                } 
                 
                 
                 accountService.voegNieuweBeanToe(account); 
