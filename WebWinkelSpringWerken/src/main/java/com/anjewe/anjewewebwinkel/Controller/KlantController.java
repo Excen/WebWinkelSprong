@@ -59,7 +59,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
 
         // save        
         @RequestMapping(value = { "/klant/createklant" }, method = RequestMethod.POST)
-        public String saveKlant(@Valid Klant klant,  BindingResult result,
+        public String saveKlant(@Valid Klant klant, BindingResult result,
             ModelMap model){
             
                 if (result.hasErrors()) {
@@ -67,12 +67,15 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
                 }
                 
                 klantService.voegNieuweBeanToe(klant); 
+                
+                Long id = klant.getId();
                 model.addAttribute("success", "Klant: Klant nummer " + klant.getKlantNummer()
                         + " Klant voornaam " + klant.getVoornaam() + " Klant achternaam " 
                         + klant.getAchternaam() + " Tussenvoegsel " + klant.getTussenvoegsel() 
                         + " Klant email " + klant.getEmail() + " is toegevoegd aan het bestand");
             //return "success"; 
-            return "klant/registratiegelukt"; 
+               model.addAttribute("klantId", id);
+            return "klant/toevoegengelukt"; 
         }
         
          /*** 

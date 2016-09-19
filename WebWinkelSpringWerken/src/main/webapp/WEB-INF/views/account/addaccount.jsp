@@ -21,10 +21,11 @@
               <c:otherwise>
                     Account gebruikersnaam &nbsp <input type = "text" name = "username" /><br/>
                     Wachtwoord &nbsp &nbsp <input type = "text" name = "password" /> <br/>
-                    Klant id &nbsp <input type = "text" name = "password" /> <br/>
+                    Datum <input type="date" name ="creatieDatum" /> <br/>
                     
                     <input type="submit" value="voeg toe" /> |
                     <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
+                    
               </c:otherwise>
            </c:choose> 
         </form>

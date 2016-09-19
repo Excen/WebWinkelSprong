@@ -30,9 +30,16 @@
                     Voornaam &nbsp &nbsp <input type = "text" name = "voornaam" /> <br/>
                     Achternaam &nbsp <input type = "text" name = "achternaam" /> <br/>
                     Tussenvoegsel &nbsp <input type = "text" name = "tussenvoegsel" /> <br/>
-                    Email &nbsp &nbsp &nbsp <input type = "text" name = "email" /> <br/>
+                    Email &nbsp &nbsp &nbsp <input type = "email" name = "email" /> <br/>
                     <input type="submit" value="voeg toe" /> |
                     <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
+                    
+                    <%--
+                    doorverwijzen naar methode die klant kan terug geven
+                    --%>
+                   
+                    
+                    
               </c:otherwise>
            </c:choose> 
         </form>
