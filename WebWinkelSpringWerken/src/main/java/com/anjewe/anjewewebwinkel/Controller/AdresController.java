@@ -5,9 +5,12 @@ package com.anjewe.anjewewebwinkel.Controller;
 
 
 import com.anjewe.anjewewebwinkel.POJO.Adres;
+import com.anjewe.anjewewebwinkel.POJO.AdresType;
 import com.anjewe.anjewewebwinkel.Service.AdresService;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +54,11 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     @RequestMapping (value = "/adres/createadres", method = RequestMethod.GET)
     public String nieuwAdres(ModelMap model){
         Adres adres = new Adres();
+        
+        AdresType[] at = AdresType.values();
+        List<AdresType> enumValues =  Arrays.asList(at);
         model.addAttribute("adres", adres);
+        model.addAttribute("enumValues", enumValues);
         model.addAttribute("edit", false);
         return "adres/addadres";
         
@@ -69,7 +76,8 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
                         + " straatnaam" + adres.getStraatnaam() + " huisnummer " 
                         + adres.getHuisnummer() + " toevoeging " + adres.getToevoeging() + 
                         " postcode " + adres.getPostcode() + " woonplaats " + adres.getWoonplaats() +
-                        " is toegevoegd aan het bestand");
+                        " adresType = " + adres.getAdresType() + " is toegevoegd aan het bestand");
+        
         
         return "adres/toevoegengelukt";
         
@@ -86,7 +94,11 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     @RequestMapping (value = {"/adres/updateadres-{Id}"}, method = RequestMethod.GET)
         public String editArtikel(@PathVariable Long Id, ModelMap model){
             Adres adres = (Adres)adresService.zoekNaarBean(Id);
+            AdresType[] at = AdresType.values();
+            List<AdresType> enumValues =  Arrays.asList(at);
+            
             model.addAttribute("adres", adres);
+            model.addAttribute("enumValues", enumValues);
             model.addAttribute("edit", true);
             return "adres/addadres"; // klopt dt?
         }

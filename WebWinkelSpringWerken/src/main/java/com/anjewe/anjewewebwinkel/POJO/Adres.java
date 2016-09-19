@@ -52,7 +52,9 @@ public class Adres implements Serializable {
     @Column(nullable = false)
     private String woonplaats;  
     //default? bij niets invullen => bezorg en factuuradres.. 
-    private int adresType; 
+    @Column
+    private AdresType adresType;
+   
     
 //    @ManyToMany(mappedBy = "adressen")
 //    protected Set<Klant> klanten = new HashSet<>();
@@ -65,12 +67,13 @@ public class Adres implements Serializable {
     }
     
     public Adres(String straatnaam, String postcode, 
-            String toevoeging, int huisnummer, String woonplaats) {         
+            String toevoeging, int huisnummer, String woonplaats, AdresType adresType) {         
         this.straatnaam = straatnaam;
         this.postcode = postcode;
         this.toevoeging = toevoeging;
         this.huisnummer = huisnummer;
-        this.woonplaats = woonplaats;         
+        this.woonplaats = woonplaats;   
+        this.adresType = adresType; 
     } 
    
        
@@ -98,13 +101,7 @@ public class Adres implements Serializable {
         return this.woonplaats;
     }
     
-      /**
-     * @return the adresType
-     */
-    public int getAdresType() {
-        return this.adresType;
-    }
-
+    
 //     public Set<Klant> getKlanten() {
 //        return klanten;
 //    }
@@ -115,7 +112,15 @@ public class Adres implements Serializable {
     public Set<KlantAdres> getKlantAdressen() {
         return this.klantAdressen;
     }
-     
+
+    public AdresType getAdresType() {
+        return adresType;
+    }
+
+    public void setAdresType(AdresType adresType) {
+        this.adresType = adresType;
+    }
+
     
     public void setId(Long Id) {
         this.Id = Id;
@@ -141,13 +146,8 @@ public class Adres implements Serializable {
         this.woonplaats = woonplaats;
     }
       
-  
-    /**
-     * @param adresType the adresType to set
-     */
-    public void setAdresType(int adresType) {
-        this.adresType = adresType;
-    }
+    
+    
 
 //    public void setKlanten(Set<Klant> klanten) {
 //        this.klanten = klanten;

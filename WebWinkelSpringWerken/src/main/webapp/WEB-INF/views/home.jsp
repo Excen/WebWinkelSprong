@@ -11,7 +11,7 @@
 
 <html>
     <head>
-        <link href="<c:url value="../resources/css/main.css" />" rel="stylesheet" type = "text/css">
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
     </head>
@@ -20,16 +20,18 @@
         
         <br/>
         <br/>
-        <a href = "<c:url value = '/account/homeaccount'/>"> account </a> |
-        <a href = "<c:url value = '/adres/homeadres'/>"> adres </a> |
-        <a href = "<c:url value = '/artikel/homeartikel'/>"> artikel </a> |       
-        <a href = "<c:url value = '/bestelling/homebestelling'/>"> bestelling </a> |
-        <a href = "<c:url value = '/betaling/homebetaling'/>"> betaling </a> |
-        <a href = "<c:url value = '/factuur/homefactuur'/>"> factuur </a> |        
-        <a href = "<c:url value = '/klant/homeklant'/>"> klant </a> |
+        <ul>
+            <li><a href = "<c:url value = '/account/homeaccount'/>"> account </a><li> 
+            <li><a href = "<c:url value = '/adres/homeadres'/>"> adres </a></li> 
+            <li><a href = "<c:url value = '/artikel/homeartikel'/>"> artikel </a></li>       
+            <li><a href = "<c:url value = '/bestelling/homebestelling'/>"> bestelling </a></li>
+            <li><a href = "<c:url value = '/betaling/homebetaling'/>"> betaling </a> </li>
+            <li><a href = "<c:url value = '/factuur/homefactuur'/>"> factuur </a></li> 
+            <li><a href = "<c:url value = '/klant/homeklant'/>"> klant </a></li>
+        </ul>
         <br/>
         <br/>
-        <footer>Note:</footer>Website updated on: <%= (new java.util.Date()).toLocaleString() %>
+        <footer>Note:</footer>Website updated on: <%= (new java.util.Date()) %>
         
         
         

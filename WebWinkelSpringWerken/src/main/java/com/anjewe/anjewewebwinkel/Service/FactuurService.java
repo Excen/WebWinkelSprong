@@ -51,7 +51,7 @@ private static final Logger log = LoggerFactory.getLogger(FactuurService.class);
     }
 
     @Override
-    public Long zoekNaarBean(Factuur t) {
+    public Long zoekNaarBean(Factuur factuur) {
         Long factuurId = (Long)factuurDao.insert(factuur); 
         return factuurId;
     }
