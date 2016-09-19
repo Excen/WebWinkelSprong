@@ -23,15 +23,6 @@ private static final Logger log = LoggerFactory.getLogger(HomeController.class);
         return "home";
     }
     
-    @RequestMapping (value = "/factuur/homefactuur", method = GET)
-    public String factuur(){
-        return "factuur/homefactuur";
-    }
-   
     
-    @RequestMapping (value = "/account/homeaccount", method = GET)
-    public String account(){
-        return "account/homeaccount";
-    }
 
 }

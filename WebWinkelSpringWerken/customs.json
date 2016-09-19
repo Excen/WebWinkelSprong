@@ -1,0 +1,8 @@
+{
+    "elements": {
+        "c:set": {},
+        "c:choose": {},
+        "form:select": {}
+    },
+    "attributes": {}
+}

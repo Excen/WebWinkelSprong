@@ -23,17 +23,19 @@
                 <th>Toevoeging</th>
                 <th>Postcode</th>
                 <th>Woonplaats</th>
+                <th>AdresType</th>
                 <th></th>
                 <th></th>
              
                   <c:forEach var="adres" items="${adressenlijst}" varStatus="status">
                 <tr>
                     <td><c:out value ="${adres.id}"/></td>
-                    <td><c:out value = "${adres.straatnaam}"/>></td>
-                    <td><c:out value = "${adres.huisnummer}"/>></td>
+                    <td><c:out value = "${adres.straatnaam}"/></td>
+                    <td><c:out value = "${adres.huisnummer}"/></td>
                     <td><c:out value = "${adres.toevoeging}"/></td>
                     <td><c:out value = "${adres.postcode}"/></td>
                     <td><c:out value = "${adres.woonplaats}"/></td>
+                    <td><c:out value = "${adres.adresType}"/></td>
                     <td><a href="<c:url value='/adres/updateadres-${adres.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/adres/deleteadres-${adres.id}' />">verwijder </a></td>         
                 </tr>

@@ -22,10 +22,10 @@
 
         <h3>Artikel gegevens</h3>
         <form method = "POST">
-            Artikelnaam <input type = "text" name = "artikelNaam" placeholder = ${artikel.artikelNaam}/> <br/>
-            Prijs € <input type = "text" name = "artikelPrijs" placeholder =${artikel.artikelPrijs}/> <br/>
-            Omschrijving <input type = "text" name = "omschrijving" placeholder = ${artikel.omschrijving}/><br/>
-            Art.nummer   <input type = "text" name = "artikelNummer" placeholder = ${artikel.artikelNummer}/><br/>
+            Artikelnaam <input type = "text" name = "artikelNaam" value = ${artikel.artikelNaam}/> <br/>
+            Prijs € <input type = "text" name = "artikelPrijs" value =${artikel.artikelPrijs}/> <br/>
+            Omschrijving <input type = "text" name = "omschrijving" value = ${artikel.omschrijving}/><br/>
+            Art.nummer   <input type = "text" name = "artikelNummer" value = ${artikel.artikelNummer}/><br/>
 
             <input type = "submit" value = "opslaan"/> | 
             <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>

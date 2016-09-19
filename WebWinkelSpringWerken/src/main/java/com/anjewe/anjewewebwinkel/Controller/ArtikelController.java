@@ -149,6 +149,6 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
         public String deleteArtikel(@PathVariable Long Id) {
             artikelService.verwijderBeanGegevens(Id);
             return "redirect:/artikel/readallartikel";
-    }    
+         }    
         
 }
