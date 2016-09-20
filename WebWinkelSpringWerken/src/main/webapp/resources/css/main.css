@@ -1,3 +1,90 @@
+body {
+    text-align: center;
+    background: url("http://www.hvrgroup.nl/wp-content/uploads/2014/07/Kunst-die-je-op-het-verkeerde-been-zet-720x427.jpg");
+    background-size: cover;
+    background-position: center center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: orange;
+    font-family: 'Agency FB';
+    text-decoration:none;
+}
+
+nav {
+    position: fixed;
+    width: 95%;
+}
+
+.navigatie{
+    text-transform: uppercase; 
+}
+
+.navigatie li{
+    display: inline;
+    padding: 3px;
+}
+
+.navigatie li:hover{
+    color: orange;
+    cursor:pointer;
+    font-weight: bold;
+    font-size:34px;
+}
+
+a:link{
+        text-decoration: none;
+        transition: all 1.8s; 
+        -moz-transition: all 1.8s; 
+        -webkit-transition: all 1.8s; 
+        -o-transition: all 1.8s;
+} 
+    
+li a:visited{
+    color: orange;
+    text-decoration: none;
+}
+li a:active{
+    color: orange;
+    text-decoration: none;
+}
+    
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+
+p{
+    font-size: 28px; 
+    color: orange;
+}
+
+input{
+     border: 0; 
+     padding:12px;
+     font-size: 20px;
+     border-radius: 20px;
+}
+    
+<!-- ik wil de rand om de input onderdelen weg, werkt niet in Chrome-->
+    input:focus {
+        outline:none !important;}
+    
+input[type="submit"]{
+    background: darkorange;
+    color: gray;
+}
+
+img{
+    opacity: 0.5;
+    border-radius: 5px;
+    margin-top:70px
+    }
+
+    div welkomhome{
+        
+    }
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -8,7 +95,7 @@ and open the template in the editor.
     Author     : Wendy
 */
 
-h1{
+/*h1{
 	color:greenyellow;
         font-size: 28px;
         font-family:Arial, Verdana, sans-serif;
@@ -18,12 +105,24 @@ h1{
 h2, h3 {
         color:darksalmon;
 }
+a       { 
+        color:coral;
+}*/
 
-a{
-    color: #555;
-}
+/*a {
+    border-bottom: 1px solid #777777;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #333333;
+    border-top: 1px solid #000000;
+    color: #000000;
+    display: block;
+    height: 2.5em;
+    padding: 0 1em;
+    width: 5em;       
+    text-decoration: none;       
+}*/
 
-ul {
+/*ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -38,8 +137,8 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color on hover */
+ Change the link color on hover 
 li a:hover {
     background-color: #555;
     color: white;
-}
+}*/

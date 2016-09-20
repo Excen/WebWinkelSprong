@@ -105,10 +105,12 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
             return "artikel/addartikel"; // klopt dt?
         }
         
+        
         @RequestMapping (value = {"/artikel/updateartikel"}, method = RequestMethod.GET)
         public String update () {
                 return "artikel/updateartikel";
             }
+        
         
         @RequestMapping (value = {"/artikel/updateartikel-{Id}"}, method = RequestMethod.POST)
         public String updateArtikel(@Valid Artikel artikel, BindingResult result,

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri ="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : updatefactuur
     Created on : 18-sep-2016, 23:19:28
@@ -13,6 +14,6 @@
     </head>
     <body>
         <h1>Factuurgegevens wijzigen</h1>
-        <jsp:forward page = "/factuur/readallfactuur.jsp"/>
+        <c:redirect url = "/factuur/readallfactuur.jsp"/>
     </body>
 </html>

@@ -11,9 +11,14 @@
     <head>
         <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Succcesvol update</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+        
+        
+        
+        
+         <c:redirect url ="/betaling/readallbetaling.jsp"/>
     </body>
 </html>

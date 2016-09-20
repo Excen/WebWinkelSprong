@@ -9,11 +9,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>update</title>
     </head>
     <body>
         <h1>update adres</h1>
-        <jsp:forward page = "/adres/readalladres"/>
+        <c:redirect url = "/adres/readalladres"/>
     </body>
 </html>

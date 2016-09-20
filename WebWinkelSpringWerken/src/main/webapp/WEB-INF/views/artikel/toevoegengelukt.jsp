@@ -18,7 +18,8 @@
         ${success}
         </div>
     
-        Go to: <a href="<c:url value='/artikel/readallartikel' />">Artikellen in bestand</a>
+        <a href="<c:url value='/artikel/readallartikel' />">
+            <input type="button" value="alle artikelen"></a>
         
     </body>
 </html>

@@ -11,9 +11,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
-        <title>JSP Page</title>
+        <title>toevoegen gelukt</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Betaling toegevoegd</h1>
+        
+        <div>
+          <p>${betalingid}</p>  
+          <p>${betalingfactuur}</p>   
+          <p>${betalingklant}</p>   
+          <p>${betaaldatum}</p> 
+          <p>${betaalwijze}</p> 
+          <p>${betaalgegevens}</p> 
+          <p>bedrag</p> 
+        </div>
+        
+        <a href="<c:url value='/betaling/readallbetaling' />">alle betalingen</a>
     </body>
 </html>
