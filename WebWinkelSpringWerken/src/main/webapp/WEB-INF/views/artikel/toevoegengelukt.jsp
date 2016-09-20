@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+z<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : toevoegengelukt
     Created on : 16-sep-2016, 17:03:31
@@ -10,15 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Artikel toevoegen</title>
+        <title>Artikel Toegevoegd</title>
     </head>
     <body>
-        <h1>Artikel toegevoegd</h1>
+        <h1>Artikel Toegevoegd</h1>
         <div>
-        ${success}
+        ${succes}
         </div>
     
-        Go to: <a href="<c:url value='/artikel/readallartikel' />">Artikellen in bestand</a>
+        Go to: <a href="<c:url value='/artikel/readallartikel' />">Bestellingen</a>
         
     </body>
 </html>

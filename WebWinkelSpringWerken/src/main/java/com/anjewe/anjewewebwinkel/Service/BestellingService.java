@@ -7,8 +7,10 @@ package com.anjewe.anjewewebwinkel.Service;
 
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
+import com.anjewe.anjewewebwinkel.DAOs.BestellingArtikelDao;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingDao;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
+import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -34,7 +36,10 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     private static final Logger testLogger = (Logger) LoggerFactory.getLogger("com.webshop.test");
     
     @Autowired
-    protected GenericDaoImpl<Bestelling, Long> bestellingDao = new BestellingDao(); 
+    protected BestellingArtikelDao bestellingArtikelDao;
+    
+    @Autowired
+    protected GenericDaoImpl<Bestelling, Long> bestellingDao;
     
     @Autowired
     Bestelling bestelling;
@@ -84,7 +89,6 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
             gewijzigdeBestelling.setFactuur(t.getFactuur());
             gewijzigdeBestelling.setId(t.getId());
             gewijzigdeBestelling.setKlant(t.getKlant());
-            gewijzigdeBestelling.setDatum(t.getDatum());
             gewijzigdeBestelling.setBestellingDatum(t.getBestellingDatum());
             gewijzigdeBestelling.setBestellingArtikellen(t.getBestellingArtikellen());
         }
@@ -104,7 +108,17 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
         return rowsAffected;
     }
 
-
+    // Optionele bestellingArtikel lijstzoekmethode
+    
+    public ArrayList<BestellingArtikel> zoekBestellingArtikelByBestellingId(Long Id){
+        return bestellingArtikelDao.readByBestellingId(Id);
+                
+    }
+    
+    
+    
+    
+    
     /*
     
     Scanner scanner = new Scanner(System.in);
