@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>verwijder artikel</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <jsp:forward page= "/readallartikel"/>
+        <h1>artikel verwijderen</h1>
+        <c:redirect url= "/readallartikel.jsp"/>
     </body>
 </html>

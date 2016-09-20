@@ -14,13 +14,14 @@
     </head>
     <body>
         <h1>Uw adres is toegevoegd</h1>
-        <div>${success} </div>
+        <div>${succes} </div>
         <a href=" " >  </a>
         
          Go to: <a href="<c:url value='/adres/readalladres' />">Ga naar alle adressen in het bestand</a>
          <br/>
-          Go to: <a href="<c:url value='/' />">terug naar start</a>
+         Go to: <a href="<c:url value='/' />">terug naar start</a>
         
-        
+          <div>${klantadres-lijst}</div>
+          
     </body>
 </html>

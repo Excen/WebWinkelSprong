@@ -11,9 +11,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
-        <title>JSP Page</title>
+        <title>Alle betalingen</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div align = "center">
+        <h1>Betalingen Lijst</h1>
+        
+        <table>
+            
+            <th>Betaling id</th>
+            <th>Betaaldatum</th>
+            <th>Factuur</th>
+            <th>Betaalwijze</th>
+            <th>Klant</th>
+            <th>Betaalgegevens</th>
+            <th></th>
+            <th></th>
+        
+        <c:forEach var= "betaling" items="${betalinglijst}" varStatus= "status">
+           
+            <td>${betaling.id}</td> 
+            <td>${betaling.betaaldatum}</td>
+            <td>${betaling.factuur}</td>
+            <td>${betaling.betaalwijze}</td>
+            <td>${betaling.klant}</td>
+            <td>${betaling.betalingsGegevens}</td>
+            <td><a href="<c:url value='/betaling/updatebetaling-${betaling.id}' />">wijzig</a></td>
+            <td><a href="<c:url value='/betaling/deletebetaling-${betaling.id}' />">verwijder </a></td>  
+            
+        </c:forEach>
+        
+        </table>
+        </div>
+        
     </body>
 </html>

@@ -17,7 +17,7 @@
        <div align = "center">
            <h1>Artikellijst</h1>    
            <table>
-                <th>Id</th>
+                <th>Artikel id</th>
                 <th>Artikelnummer</th>
                 <th>Artikelnaam</th>
                 <th>Artikel omschrijving</th>
@@ -28,10 +28,10 @@
                   <c:forEach var="artikel" items="${artikellijst}" varStatus="status">
                 <tr>
                     <td>${artikel.id}</td>
-                    <td>${artikel.artikelNummer}></td>
-                    <td>${artikel.artikelNaam}></td>
+                    <td>${artikel.artikelNummer}</td>
+                    <td>${artikel.artikelNaam}</td>
                     <td>${artikel.omschrijving}</td>
-                    <td>${artikel.artikelPrijs}</td>
+                    <td>€ ${artikel.artikelPrijs}</td>
                     <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td>         
                 </tr>

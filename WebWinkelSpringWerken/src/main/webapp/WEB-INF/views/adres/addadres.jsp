@@ -24,16 +24,18 @@
             Toevoeging <input type = "text" name = "toevoeging" value = "${adres.toevoeging}"/><br/>
             Postcode  <input type = "text" name = "postcode"  value = "${adres.postcode}"/><br/>
             Woonplaats <input type = "text" name = "woonplaats"  value = "${adres.woonplaats}"/><br/>            
-             Adres type <select name="adresType" value = "${adres.adresType}">                
+             Adres type <select name="adresType" >                
                     <c:forEach items="${enumValues}" var="adresType" varStatus = "status">
-                            <option value="${adresType}" label="--Please Select">                                
+                            <option value="${adresType}" label="--Maak uw keuze">                                
                                 <c:out value="${adresType}"></c:out>
                             </option>
                     </c:forEach>
             </select>
-            <input type = "submit" value = "opslaan"/> | 
-            <a href="<c:url value='/adres/readalladres' />">Annuleer</a>
+            <input type = "submit" value = "opslaan"/> || 
+            <a href="<c:url value='/adres/readalladres' />">Annuleer</a> || 
             
+            <a href = "<c:url value = "/adres/addklanttoadres-${adres.id}"/>">voeg klant toe</a>
+             
                 </c:when>
                 <c:otherwise>
             Straatnaam <input type = "text" name = "straatnaam" /> <br/>
@@ -43,7 +45,7 @@
             Woonplaats <input type = "text" name = "woonplaats" /><br/>
             Adres type <select name= "adresType">
                     <c:forEach items="${enumValues}" var="adresType" varStatus="status">
-                            <option value="${adresType}" label="--Please Select">                                
+                            <option value="${adresType}" label="--Maak uw keuze">                                
                                 <c:out value="${adresType}"/>
                             </option>
                     </c:forEach>

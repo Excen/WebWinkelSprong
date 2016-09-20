@@ -17,7 +17,7 @@
         <h1>Startpagina betaling</h1>
         <p>Wat wilt u doen?</p>
         
-        <ul type="disc">
+        <ul>
             <li> <a href = "<c:url value = '/betaling/createbetaling'/>"> Betaling toevoegen</a></li>
             <li> <a href = "<c:url value = '/betaling/updatebetaling'/>"> Betaling wijzigen</a></li>
             <li> <a href = "<c:url value = '/betaling/deletebetaling'/>"> Betaling verwijderen</a></li>
