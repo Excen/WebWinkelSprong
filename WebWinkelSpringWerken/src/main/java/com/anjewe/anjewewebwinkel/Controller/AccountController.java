@@ -100,7 +100,8 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
                 if (result.hasErrors()) {
                     return "account/addaccount"; // aanpassen> aangeven waar error zit
                 } 
-                
+                Klant klant = klantService.zoekNaarBean(Id);
+                account.setKlant(klant);
                 
                 accountService.voegNieuweBeanToe(account); 
                 model.addAttribute("success", "Account: Account username " + account.getUsername()
