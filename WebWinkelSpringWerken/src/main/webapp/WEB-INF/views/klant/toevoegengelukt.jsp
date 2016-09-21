@@ -13,9 +13,14 @@
     </head>
     <body>
         <h1>Toevoegen gelukt</h1>
+      
+        <div>
+        ${success}
+        </div>
         
-        
+        <c:redirect url ="/account/createaccountklant-${klantId}"/>
+        <%--
         <a href="<c:url value='/account/createaccountklant-${klantId}' />">acoount toevoegen</a>
-        
+        --%>
     </body>
 </html>

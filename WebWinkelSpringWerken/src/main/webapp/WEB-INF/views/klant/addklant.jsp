@@ -32,7 +32,7 @@
                     Tussenvoegsel &nbsp <input type = "text" name = "tussenvoegsel" /> <br/>
                     Email &nbsp &nbsp &nbsp <input type = "email" name = "email" /> <br/>
                     <input type="submit" value="voeg toe" /> |
-                    <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
+                    <a href="<c:url value='/klant/readallklant' />">Annuleer</a>
                     
                     <%--
                     doorverwijzen naar methode die klant kan terug geven
