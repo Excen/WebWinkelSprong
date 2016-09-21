@@ -34,9 +34,11 @@
                     <td>${artikel.artikelNummer}</td>
                     <td>${artikel.artikelNaam}</td>
                     <td>${artikel.omschrijving}</td>
+                    <fmt:setLocale value='de-DE' />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
                     <td>€ ${artikel.artikelPrijs}</td>
-                    <td> ##aantal veranderen nog toevoegen</td>
-                    <td><a href="<c:url value='/bestelling/artikelinbestelling-${artikel.id}' />">In winkelmandje</a></td>
+                    Aantal <input type = "number" name = "artikelAantal" value = ${artikelAantal}/> <br/>
+                    <td><a href="<c:url value='/bestelling/artikelinbestelling-${artikel.id}-${artikelAantal}' />">In winkelmandje</a></td>
                     <td><a href="<c:url value='/artikel/readartikel-${artikel.id}' />"> Bekijk artikel </a></td>         
                 </tr>
                 </c:forEach>

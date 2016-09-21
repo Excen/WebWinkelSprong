@@ -42,7 +42,7 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
         // startpagina artikelen
         @RequestMapping (value = "/artikel/homeartikel", method = RequestMethod.GET)
         public String artikel(){
-            return "artikel/artikelkeuzelijst";
+            return "artikel/homeartikel";
         }
 
         
