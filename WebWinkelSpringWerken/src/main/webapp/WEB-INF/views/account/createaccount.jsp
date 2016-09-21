@@ -13,8 +13,10 @@
     </head>
     <body>
         <h1>account toevoegen</h1>
+            <form action="klant/createklant">
+            <input type="submit">
+            </form>
         
-        <jsp:forward page ="/klant/createklant"/>
     </body>
 </html>
 

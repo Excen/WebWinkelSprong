@@ -16,11 +16,11 @@
         <div align="center">
             <h1>Contact List</h1>
             <table border="1">
-                <th>Id</th>
-                <th>Accountnaam</th>
-                <th>Email</th>
+                <th width="80">Id</th>
+                <th width="120">Accountnaam</th>
+                <th width="150">Email</th>
                  
-                <c:forEach var="account" items="${accountlijst}" varStatus="status">
+                <c:forEach var="account" items="${accounts}" varStatus="status">
                 <tr>
                     <td>${account.id + 1}</td>
                     <td>${account.username}</td>
