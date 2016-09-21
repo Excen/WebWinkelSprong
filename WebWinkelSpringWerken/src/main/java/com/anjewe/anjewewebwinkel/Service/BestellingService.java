@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Excen
  */
 
-@Transactional
+
 @Service
 public class BestellingService implements GenericServiceInterface <Bestelling, Long> {
     

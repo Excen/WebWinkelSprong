@@ -39,8 +39,10 @@ public class BestellingController {
     
     // Datafields
     @Autowired 
-    GenericServiceInterface<Bestelling, Long> bestellingServiceImpl;
+    GenericServiceInterface <Bestelling, Long> bestellingService;
     
+    BestellingService bs = new BestellingService();
+
     @Autowired
     GenericServiceInterface<Klant, Long> klantService= new KlantService(); 
     
@@ -56,7 +58,7 @@ public class BestellingController {
         }
     
     // Bestelling maken
-    @RequestMapping(value = "bestelling/createbestelling", method = RequestMethod.GET)
+    @RequestMapping(value = "/bestelling/createbestelling", method = RequestMethod.GET)
         public String createBestelling(ModelMap model){
             Bestelling bestelling = new Bestelling();
             model.addAttribute("bestelling", bestelling);
@@ -72,7 +74,7 @@ public class BestellingController {
               return "bestelling/addbestelling";
           }  
           
-          bestellingServiceImpl.voegNieuweBeanToe(bestelling);
+          bestellingService.voegNieuweBeanToe(bestelling);
           model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
           
           return "bestelling/toevoegengelukt";
@@ -116,7 +118,7 @@ public class BestellingController {
     // Alle bestellingen ophalen
     @RequestMapping(value = {"/bestelling/readallbestelling"}, method = RequestMethod.GET)
         public String readAllBestelling(ModelMap model) { 
-            ArrayList <Bestelling> bestellingLijst = (ArrayList<Bestelling>)bestellingServiceImpl.zoekAlleBeans();
+            ArrayList <Bestelling> bestellingLijst = (ArrayList<Bestelling>)bestellingService.zoekAlleBeans();
             model.addAttribute("bestellinglijst", bestellingLijst);
             return "bestelling/readallbestelling"; 
     }
@@ -137,11 +139,11 @@ public class BestellingController {
         
     
     // bestelling ophalen
-    @RequestMapping(value = {"/bestelling/readbestelling"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"bestelling/readbestelling-{id}"}, method = RequestMethod.GET)
         public String readBestelling (@PathVariable Long id, ModelMap model){
-            Bestelling bestelling = bestellingServiceImpl.zoekNaarBean(id);
-            // ArrayList <BestellingArtikel> bestellingartikellijst = bestellingServiceImpl.zoekBestellingArtikelByBestellingId(id);
-            // model.addAttribute("bestellingartikellijst", bestellingartikellijst);
+            Bestelling bestelling = bestellingService.zoekNaarBean(id);
+            ArrayList <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(id);
+            model.addAttribute("bestellingartikellijst", bestellingartikellijst);
             model.addAttribute("bestelling", bestelling);
             return "bestelling/readbestelling";
         }
@@ -149,7 +151,7 @@ public class BestellingController {
     // bestelling updaten     
     @RequestMapping(value = {"/bestelling/updatebestelling"}, method = RequestMethod.POST)    
         public String updateBestelling (@PathVariable Long Id, ModelMap model) {
-            Bestelling bestelling = (Bestelling)bestellingServiceImpl.zoekNaarBean(Id);
+            Bestelling bestelling = (Bestelling)bestellingService.zoekNaarBean(Id);
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("edit", true);
             return "bestelling/updatebestelling";
@@ -158,14 +160,14 @@ public class BestellingController {
     // bestelling verwijderen
     @RequestMapping(value = {"/bestelling/deletebestelling"}, method = RequestMethod.POST)
         public String deleteBestelling(@PathVariable Long Id) {
-            bestellingServiceImpl.verwijderBeanGegevens(Id);
+            bestellingService.verwijderBeanGegevens(Id);
             return "bestelling/deletebestelling";
         }
     
     // alle bestellingen verwijderen    
     @RequestMapping(value = {"/bestelling/deleteallbestelling"}, method = RequestMethod.POST)    
         public String delleteAllBestelling(){
-            bestellingServiceImpl.verwijderAlleBeans();
+            bestellingService.verwijderAlleBeans();
             return "bestelling/deleteallbestelling";
         }
     

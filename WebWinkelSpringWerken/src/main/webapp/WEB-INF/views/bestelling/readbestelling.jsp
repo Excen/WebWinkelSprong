@@ -10,18 +10,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bestellingen</title>
+        <title>Bestelling</title>
     </head>
     <body>
-       <div align = "center">
-           
-             
-                  
+       <div align = "center"> 
                 <tr>
-                    
-                    
                     <td>${bestelling.id}</td>
-                    
                     <td>${bestelling.klant.id}</td>
                     <td>${bestelling.bestellingDatum}</td> 
                     <td><c:forEach var="bestellingartikel" items="${bestellingartikellijst}">

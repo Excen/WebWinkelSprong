@@ -40,7 +40,7 @@
                              KlantId   <input type = "text" name = "klant"  /><br/> 
                             
                             <input type="submit" value="voeg toe" /> |
-                            <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
+                            <a href="<c:url value='/bestelling/homebestelling' />">Annuleer</a>
                     </c:otherwise>
                 </c:choose>  
         
