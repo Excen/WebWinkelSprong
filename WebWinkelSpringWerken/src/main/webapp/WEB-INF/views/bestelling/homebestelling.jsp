@@ -15,10 +15,10 @@
         <title>Bestelling startpagina</title>
     </head>
     <body>
-        <h1>Startpagina Bestellinguh</h1>
-        <a href = "<c:url value = '/bestelling/createbestelling'/>"> Bestelling toevoegen</a><br>
-        <a href = "<c:url value = '/bestelling/updatebestelling'/>"> Bestelling wijzigen </a><br>
-        <a href = "<c:url value = '/bestelling/readbestelling'/>"> Zoek bestellinginfo op </a><br>
+        <h1>Startpagina Bestelling</h1>
+        <a href = "<c:url value = '/klant/readallklant'/>"> Bestelling toevoegen</a><br>
+        <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Bestelling wijzigen </a><br>
+        <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Zoek bestellinginfo op </a><br>
         <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Alle Bestellingen opvragen </a><br>
         <a href = "<c:url value = '/bestelling/deleteallbestelling'/>"> Alle Bestellingen verwijderen </a><br>
         

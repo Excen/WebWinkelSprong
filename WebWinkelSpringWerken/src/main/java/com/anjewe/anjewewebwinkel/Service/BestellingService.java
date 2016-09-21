@@ -111,7 +111,9 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     // Optionele bestellingArtikel lijstzoekmethode
     
     public ArrayList<BestellingArtikel> zoekBestellingArtikelByBestellingId(Long Id){
-        return bestellingArtikelDao.readByBestellingId(Id);
+        ArrayList<BestellingArtikel>BSLijst = new ArrayList<>();
+        BSLijst = bestellingArtikelDao.readByBestellingId(Id);
+        return BSLijst;
                 
     }
     

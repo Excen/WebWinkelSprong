@@ -43,9 +43,11 @@ public class BestellingController {
     GenericServiceInterface <Bestelling, Long> bestellingService;
     
     BestellingService bs = new BestellingService();
+    
+
 
     @Autowired
-    GenericServiceInterface<Klant, Long> klantService= new KlantService(); 
+    GenericServiceInterface<Klant, Long> klantService;
     
     @Autowired
     MessageSource messageSource;
@@ -59,10 +61,12 @@ public class BestellingController {
         }
     
     // Bestelling maken
-    @RequestMapping(value = "/bestelling/createbestelling", method = RequestMethod.GET)
-        public String createBestelling(ModelMap model){
+    @RequestMapping(value = "/bestelling/createbestelling{klantId}", method = RequestMethod.GET)
+        public String createBestelling(ModelMap model, @PathVariable Long klantId){
+            Klant klant = klantService.zoekNaarBean(klantId);    
             Bestelling bestelling = new Bestelling();
             bestelling.setBestellingDatum(new Date());
+            bestelling.setKlant(klant);
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("edit", false);
             return "bestelling/addbestelling";              
