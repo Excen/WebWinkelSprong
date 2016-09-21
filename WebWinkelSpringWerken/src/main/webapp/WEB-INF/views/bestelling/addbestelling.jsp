@@ -34,18 +34,19 @@
                     </c:when>
                         
                     <c:otherwise>
-                             Artikel <input type = "text" name = "bestellingArtikellen"  /> <br/>
+                             Artikelnummer <input type = "text" name = "bestellingArtikellen"  /> <br/>
                              Aantal <input type = "text" name = "artikelAantal" /> <br/>
                              Datum <input type = "date" name = "bestellingDatum" /><br/>
-                             Klant   <input type = "text" name = "klant"  /><br/> 
+                             KlantId   <input type = "text" name = "klant"  /><br/> 
                             
                             <input type="submit" value="voeg toe" /> |
-                            <a href="<c:url value='/artikel/readallartikel' />">Annuleer</a>
+                            <a href="<c:url value='/bestelling/homebestelling' />">Annuleer</a>
                     </c:otherwise>
                 </c:choose>  
         
         </form>   
-        
+        <div> ${error}
+        </div>
         
         <a href = "<c:url value = '/'/>"> Terug naar huis</a>
     </body>

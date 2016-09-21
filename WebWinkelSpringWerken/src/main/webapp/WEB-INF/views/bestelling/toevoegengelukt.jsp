@@ -1,19 +1,17 @@
 <%-- 
-    Document   : home
-    Created on : 11-sep-2016, 10:21:06
-    Author     : Wendy
+    Document   : toevoegengelukt
+    Created on : Sep 19, 2016, 1:19:58 PM
+    Author     : Excen
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
+        <title>Toevoegen gelukt</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

@@ -105,6 +105,7 @@ public class Factuur implements Serializable {
     }
     
     
+    @Override
     public String toString(){
         
         String output = "factuurgegevens Id: " + getId() + " aanmaakdatum : " +
