@@ -13,15 +13,18 @@
         <title>adres toegevoegd</title>
     </head>
     <body>
-        <h1>Uw adres is toegevoegd</h1>
-        <div>${succes} </div>
-        <a href=" " >  </a>
+        <h1>Adres toevoegen gelukt</h1>
+        <div>${succes} </div><br/>
+        <div>${adres} </div><br/>
+        <div>${postcode} </div><br/>
+        <div>${woonplaats} </div><br/>
+        <div>${adrestype} </div><br/>
         
-         Go to: <a href="<c:url value='/adres/readalladres' />">Ga naar alle adressen in het bestand</a>
+       
+         Go to: <a href="<c:url value='/adres/homeadres' />">startpagina adres</a>
          <br/>
          Go to: <a href="<c:url value='/' />">terug naar start</a>
         
-          <div>${klantadres-lijst}</div>
           
     </body>
 </html>

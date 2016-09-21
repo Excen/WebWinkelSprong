@@ -34,8 +34,8 @@
                     </c:when>
                         
                     <c:otherwise>
-                             Artikelnummer <input type = "text" name = "bestellingArtikellen"  /> <br/>
-                             Aantal <input type = "text" name = "artikelAantal" /> <br/>
+                            <%-- Artikelnummer <input type = "text" name = "bestellingArtikellen"  /> <br/>
+                             Aantal <input type = "text" name = "artikelAantal" /> <br/--%>
                              Datum <input type = "date" name = "bestellingDatum" /><br/>
                              KlantId   <input type = "text" name = "klant"  /><br/> 
                             

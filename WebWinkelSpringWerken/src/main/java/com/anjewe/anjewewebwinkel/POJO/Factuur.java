@@ -40,7 +40,7 @@ public class Factuur implements Serializable {
     
     private String factuurnummer;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date factuurdatum;
     
     @ManyToOne (fetch = FetchType.EAGER)

@@ -27,7 +27,7 @@
                     Email <input type = "text" name = "email" /> <br/>
                     <c:choose>
                         <c:when test="${adresId}">
-                            Adres <input type = "text" name = "adresId" value = "${adresId}"/>
+                            Adres <input type = "text" name = "adresId" value = "${adres.id}"/>
                         </c:when>    
                     </c:choose>     
                    

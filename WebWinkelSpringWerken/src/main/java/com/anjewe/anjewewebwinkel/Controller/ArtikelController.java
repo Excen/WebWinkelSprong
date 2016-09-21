@@ -42,7 +42,7 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
         // startpagina artikelen
         @RequestMapping (value = "/artikel/homeartikel", method = RequestMethod.GET)
         public String artikel(){
-            return "artikel/homeartikel";
+            return "artikel/artikelkeuzelijst";
         }
 
         
@@ -80,21 +80,31 @@ private static final Logger log = LoggerFactory.getLogger(ArtikelController.clas
          */
         
         // readAll
-        @RequestMapping (value = {"artikelen", "/artikel/readallartikel" }, method = RequestMethod.GET)
+        @RequestMapping (value = {"/artikel/readallartikel" }, method = RequestMethod.GET)
         public String listArtikelen(ModelMap model){            
             ArrayList <Artikel> artikelLijst = (ArrayList <Artikel>) artikelService.zoekAlleBeans();
             model.addAttribute("artikellijst", artikelLijst);
             return "artikel/readallartikel";
         }
 
-        /* // readOne - is die wel nodig?
-        @RequestMapping (value = {"/artikel/readartikel"}, method = RequestMethod.GET)
-        public String readArtikel(ModelMap model){
+        // readOne - >> in view knop voor voeg toe // aantal aanpassen
+        @RequestMapping (value = {"/artikel/readartikel-{Id}"}, method = RequestMethod.GET)
+        public String readArtikel(ModelMap model, @PathVariable Long Id) {
             // id ophalen in view
-            Artikel artikel = (Artikel) artikelService.zoekNaarBean(Long.MIN_VALUE);
-            model.addAttribute ();
+            Artikel artikel = (Artikel) artikelService.zoekNaarBean(Id);
+            model.addAttribute ("artikel", artikel);
             return "artikel/readartikel";
-        } */
+        } 
+        
+        // readall tbv artikel bestellen >> zelfde als in readall maar knop voeg toe + aantal aanpassen
+        @RequestMapping (value = {"/artikel/artikelkeuzelijst"}, method = RequestMethod.GET)
+        public String artikelKeuzeLijst(ModelMap model){
+            ArrayList<Artikel> artikelLijst = (ArrayList<Artikel>) artikelService.zoekAlleBeans();
+            model.addAttribute("artikellijst", artikelLijst);            
+            
+            return "artikel/artikelkeuzelijst ";
+        }
+        
         
         // update
         @RequestMapping (value = {"/artikel/updateartikel-{Id}"}, method = RequestMethod.GET)
