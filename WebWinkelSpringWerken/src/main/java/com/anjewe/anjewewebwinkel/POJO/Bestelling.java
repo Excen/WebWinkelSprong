@@ -39,7 +39,7 @@ public class Bestelling implements Serializable {
     @JoinColumn (name = "KLANT_ID")
     private Klant klant;   
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date bestellingDatum;
     
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "pk.bestelling", cascade = CascadeType.ALL)

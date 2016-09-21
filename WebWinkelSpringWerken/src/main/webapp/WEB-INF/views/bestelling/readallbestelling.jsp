@@ -31,7 +31,9 @@
                     <td>${bestelling.klant.id}</td>
                     <td>${bestelling.bestellingDatum}</td>  
                     <td>${bestelling.factuur.id}</td>
-                <td><a href="<c:url value='/bestelling/readbestelling-${bestelling.id}' />">informatie</a></td>     
+                <td><a href="<c:url value='/bestelling/readbestelling-${bestelling.id}' />">bestelling info</a></td>
+                <td><a href="<c:url value='/bestelling/updatebestelling-${bestelling.id}' />">bestelling wijzigen</a></td>
+                <td><a href="<c:url value='/bestelling/deletebestelling-${bestelling.id}' />">bestelling verwijderen</a></td>
                 </tr>
                 </c:forEach>
                 
