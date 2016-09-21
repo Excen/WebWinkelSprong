@@ -18,30 +18,26 @@
         
         
         <div align="center">
-        <h1>Klanten bij adres ${adres.id}</h1>
+        <h1>Klanten bij adres met adresId - ${adres.id}</h1>
         
         <table>
-                <th>Klant Id</th>
-                <th>voornaam</th>
-                <th>tussenvoegsel<th>
-                <th>achternaam</th>
-                <th>email</th>
-                <th>klantnummer</th>
-                <th></th>
-                <th></th>
-                
-             
-                  <c:forEach  items="${klantadressen}" varStatus="status" var="klantAdres">
+               
+            <th>KlantId</th>
+            <th>Voornaam</th>
+            <th>Tussenvoegsel</th>    
+            <th>Achternaam</th>    
+            <th>Email</th>    
+            <th>Klantnummer</th>    
+            <th></th>
+                  <c:forEach  items="${klanten}" varStatus="status" var="klant">
                 <tr>
-                    <td><c:out value = "${klantAdres.klant.id}"/></td>
-                    <td><c:out value = "${klantAdres.klant.voornaam}"/></td>
-                    <td><c:out value = "${klantAdres.klant.tussenvoegsel}"/></td>
-                    <td><c:out value = "${klantAdres.klant.achternaam}"/></td>
-                    <td><c:out value = "${klantAdres.klant.email}"/></td>
-                    <td><c:out value = "${klantAdres.klant.klantNummer}"/></td>
-                    
-                    
-                    <td><a href="<c:url value='/adres/deleteklantvanadres-${adres.id}-${klantAdres.klant.id}' />">verwijder klant</a></td>  
+                    <td><c:out value = "${klant.id}"/></td>
+                    <td><c:out value = "${klant.voornaam}"/></td>
+                    <td><c:out value = "${klant.tussenvoegsel}"/></td>
+                    <td><c:out value = "${klant.achternaam}"/></td>
+                    <td><c:out value = "${klant.email}"/></td>
+                    <td><c:out value = "${klant.klantNummer}"/></td>                    
+                    <td><a href="<c:url value='/adres/deleteklantvanadres-${adres.id}-${klant.id}' />">Verwijder</a></td>  
                 </tr>
                 </c:forEach>
             

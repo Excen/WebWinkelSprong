@@ -162,7 +162,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         ka.setAdres(adres);
         ka.setKlant(klant);
         ka.setCreatedDate(new Date());
-        klant.getKlantAdressen().add(ka);
+        adres.getKlantAdressen().add(ka);
         klantService.wijzigBeanGegevens(klant);
         
         model.addAttribute("succes",  "klant met Id: " + klant.getId() + 
@@ -172,7 +172,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         model.addAttribute("postcode","Postcode " + adres.getPostcode());
         model.addAttribute("woonplaats","Woonplaats " + adres.getWoonplaats());
         model.addAttribute("adrestype", "AdresType " + adres.getAdresType());
-        
+        // deze kan niet worden aan geroepen ivm lazy / bij eager stackoverflow
         model.addAttribute("klantadresset", adres.getKlantAdressen());
         
         
@@ -181,12 +181,12 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     
     // read klanten van adres
     @RequestMapping (value= "/adres/klantenbijadres-{Id}", method = RequestMethod.GET)
-    public String readKlanten(ModelMap model, @PathVariable Long Id){
+    public String readKlanten(ModelMap model, @PathVariable Long Id, @Valid Adres adres){
+        KlantAdres ka = new KlantAdres();
+       
+        List<Klant> klanten = (List<Klant>)as.zoekKlantenBijAdres(adres);
         
-        Adres adres =(Adres) adresService.zoekNaarBean(Id);
-        
-        Set<KlantAdres> klantadressen = as.zoekKlantenBijAdres(Id);
-        model.addAttribute("klanten", klantadressen);
+        model.addAttribute("klanten", klanten);
         
         return "adres/klantenbijadres";
     }
