@@ -15,6 +15,7 @@ import com.anjewe.anjewewebwinkel.Service.BestellingService;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import com.anjewe.anjewewebwinkel.Service.KlantService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class BestellingController {
     @RequestMapping(value = "/bestelling/createbestelling", method = RequestMethod.GET)
         public String createBestelling(ModelMap model){
             Bestelling bestelling = new Bestelling();
+            bestelling.setBestellingDatum(new Date());
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("edit", false);
             return "bestelling/addbestelling";              

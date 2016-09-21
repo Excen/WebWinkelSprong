@@ -39,6 +39,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantAdresId.class);
             this.adres = adres;
         }
      
+@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -52,6 +53,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantAdresId.class);
         return true;
     }
 
+@Override
     public int hashCode() {
         int result;
         result = (klant != null ? klant.hashCode() : 0);

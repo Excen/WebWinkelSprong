@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 /**
  *
@@ -36,7 +37,7 @@ public class Betaling implements Serializable {
 @Column(unique = true, nullable = false)
 private long Id;
 
-@Temporal(javax.persistence.TemporalType.DATE)
+@Temporal(TemporalType.TIMESTAMP)
 private java.util.Date betaaldatum;
 
 

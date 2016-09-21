@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+
 import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 
@@ -35,18 +36,32 @@ public class KlantAdres implements Serializable {
 
         @EmbeddedId
 	private KlantAdresId pk = new KlantAdresId();
-        private Date createdDate;
+        @Temporal(TemporalType.TIMESTAMP)
+        private java.util.Date createdDate;
+        @Column
 	private String createdBy;
         
    
         public KlantAdres(){            
         }
+
+    public KlantAdres(Date createdDate, String createdBy) {
+        this.createdDate = createdDate;
+        this.createdBy = createdBy;
+    }
         
         
+        /**
+     * @return the pk
+     */
+       
         public KlantAdresId getPk() {
             return pk;
         }
 
+         /**
+     * @param pk the pk to set
+     */
         public void setPk(KlantAdresId pk) {
             this.pk = pk;
         }
@@ -68,19 +83,17 @@ public class KlantAdres implements Serializable {
         public void setAdres(Adres adres){
             getPk().setAdres(adres);
         }
-        
-        @Temporal(TemporalType.DATE)
-	@Column(name = "CREATED_DATE", nullable = false, length = 10)
-	public Date getCreatedDate() {
-		return this.createdDate;
-	}
-        
-        public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
 
-	@Column(name = "CREATED_BY", nullable = false, length = 10)
-	public String getCreatedBy() {
+        public Date getCreatedDate() {
+            return createdDate;
+        }
+
+        public void setCreatedDate(Date createdDate) {
+            this.createdDate = createdDate;
+        }
+
+	
+        public String getCreatedBy() {
 		return this.createdBy;
 	}
 
@@ -88,6 +101,7 @@ public class KlantAdres implements Serializable {
 		this.createdBy = createdBy;
 	}
         
+        @Override
         public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -96,13 +110,11 @@ public class KlantAdres implements Serializable {
 
 		KlantAdres that = (KlantAdres) o;
 
-		if (getPk() != null ? !getPk().equals(that.getPk())
-				: that.getPk() != null)
-			return false;
-
-		return true;
+		return !(getPk() != null ? !getPk().equals(that.getPk())
+                        : that.getPk() != null);
 	}
 
+        @Override
 	public int hashCode() {
 		return (getPk() != null ? getPk().hashCode() : 0);
 	}

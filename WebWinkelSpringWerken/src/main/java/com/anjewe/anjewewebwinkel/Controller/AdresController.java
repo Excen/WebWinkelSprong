@@ -13,7 +13,9 @@ import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import com.anjewe.anjewewebwinkel.Service.KlantService;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +41,8 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     GenericServiceInterface <Adres, Long> adresService = new AdresService();
     @Autowired
     GenericServiceInterface <Klant, Long> klantService = new KlantService();
+    @Autowired
+    AdresService as = new AdresService();
     
     @Autowired
     MessageSource messageSource; 
@@ -55,6 +59,11 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         model.addAttribute("adressenlijst", adressenLijst);
         return "adres/readalladres";            
     }
+    
+//    // readAdres
+//    @RequestMapping (value = "adres/readadres", method = RequestMethod.GET)
+//    public String 
+    
     
     @RequestMapping (value = "/adres/createadres", method = RequestMethod.GET)
     public String nieuwAdres(ModelMap model){
@@ -96,7 +105,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     
        
     
-    // werkelijke update methode
+    // werkelijke update methoden
     @RequestMapping (value = {"/adres/updateadres-{Id}"}, method = RequestMethod.GET)
         public String editArtikel(@PathVariable Long Id, ModelMap model){
             Adres adres = (Adres)adresService.zoekNaarBean(Id);
@@ -108,47 +117,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
             model.addAttribute("edit", true);
             return "adres/addadres"; // klopt dt?
         }
-    
-    // voeg klant toe aan adres
-    @RequestMapping (value = "/adres/addklanttoadres-{Id}", method = RequestMethod.GET)    
-        public String createKlantVoorAdres(@PathVariable Long Id, ModelMap model){
-            Long adresId = Id;
-            Klant klant = new Klant();
-            model.addAttribute("klant", klant);
-            model.addAttribute("adresId", Id);
         
-        return "/klant/addklant"; // 
-        }
-        
-    
-    @RequestMapping (value = "/adres/addklanttoadres-{Id}", method = RequestMethod.POST) 
-    public String voegKlantAanAdresToe(@Valid Klant klant, ModelMap model, 
-            BindingResult result, @PathVariable Long Id){
-        
-        if (result.hasErrors()){
-            return "adres/addadres"; // nog aanpassen naar een geschikte pagina
-        }
-        Adres adres = adresService.zoekNaarBean(Id);
-        KlantAdres ka = new KlantAdres();
-        ka.setAdres(adres);
-        ka.setKlant(klant);
-        klant.getKlantAdressen().add(ka);
-        klantService.voegNieuweBeanToe(klant);
-        
-        
-        model.addAttribute("succes",  "klant met Id " + klant.getId() + "is toegevoegd aan adres met id" 
-                        + adres.getId() + " straatnaam" + adres.getStraatnaam() + " huisnummer " 
-                        + adres.getHuisnummer() + " toevoeging " + adres.getToevoeging() + 
-                        " postcode " + adres.getPostcode() + " woonplaats " + adres.getWoonplaats() +
-                        " adresType = " + adres.getAdresType());
-        model.addAttribute("klantadres", ka);
-        model.addAttribute("klantbijadres", adres.getKlantAdressen());
-        
-        return "adres/toevoegengelukt";
-    }  
-    
-    
-    
     @RequestMapping (value = "/adres/updateadres-{Id}", method = RequestMethod.POST)
     public String updateAdres(@Valid Adres adres, BindingResult result, 
             ModelMap model, @PathVariable Long Id){
@@ -164,7 +133,65 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
                 " , woonplaats: " + adres.getWoonplaats() + ". AdresType: " + adres.getAdresType());
         
         return "adres/toevoegengelukt";        
+    }   
+    
+    
+    // voeg klant toe aan adres
+    @RequestMapping (value = "/adres/addklanttoadres-{Id}", method = RequestMethod.GET)    
+        public String createKlantVoorAdres(@PathVariable Long Id, ModelMap model){
+            Long adresId = Id;
+            Klant klant = new Klant();
+            model.addAttribute("klant", klant);
+            model.addAttribute("adresId", Id);
+            model.addAttribute("edit", false);
+        
+        return "/klant/addklant"; // 
+        }
+        
+    
+    @RequestMapping (value = "/adres/addklanttoadres-{Id}", method = RequestMethod.POST) 
+    public String voegKlantAanAdresToe( @Valid Klant klant, ModelMap model, 
+            BindingResult result, @PathVariable Long Id){
+        
+        if (result.hasErrors()){
+            return "adres/addadres"; // nog aanpassen naar een geschikte pagina
+        }
+        Adres adres = adresService.zoekNaarBean(Id);
+        klantService.voegNieuweBeanToe(klant);
+        KlantAdres ka = new KlantAdres();
+        ka.setAdres(adres);
+        ka.setKlant(klant);
+        ka.setCreatedDate(new Date());
+        klant.getKlantAdressen().add(ka);
+        klantService.wijzigBeanGegevens(klant);
+        
+        model.addAttribute("succes",  "klant met Id: " + klant.getId() + 
+                " is toegevoegd aan adres met id: " + adres.getId());
+        model.addAttribute("adres", "Adres " + adres.getStraatnaam() + " " 
+                        + adres.getHuisnummer() + " " + adres.getToevoeging());
+        model.addAttribute("postcode","Postcode " + adres.getPostcode());
+        model.addAttribute("woonplaats","Woonplaats " + adres.getWoonplaats());
+        model.addAttribute("adrestype", "AdresType " + adres.getAdresType());
+        
+        model.addAttribute("klantadresset", adres.getKlantAdressen());
+        
+        
+        return "adres/toevoegengelukt";
+    }  
+    
+    // read klanten van adres
+    @RequestMapping (value= "/adres/klantenbijadres-{Id}", method = RequestMethod.GET)
+    public String readKlanten(ModelMap model, @PathVariable Long Id){
+        
+        Adres adres =(Adres) adresService.zoekNaarBean(Id);
+        
+        Set<KlantAdres> klantadressen = as.zoekKlantenBijAdres(Id);
+        model.addAttribute("klanten", klantadressen);
+        
+        return "adres/klantenbijadres";
     }
+    
+   
     
     
     //delete
@@ -179,4 +206,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         adresService.verwijderBeanGegevens(Id);
         return "redirect:/adres/readalladres";
     }
+    
+    // delete klant van adres 
+    // @RequestMapping(value ="/adres/deleteklantvanadres-{Id}-{Id}", method = RequestMethod.GET)
 }

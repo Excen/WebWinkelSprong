@@ -6,7 +6,10 @@ import com.anjewe.anjewewebwinkel.POJO.Betaling;
 import com.anjewe.anjewewebwinkel.POJO.Factuur;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -170,4 +173,7 @@ public class FactuurController {
             return totaalBedrag;
         }
 
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+// Date date = new Date();
+// System.out.println(dateFormat.format(date));
 }
