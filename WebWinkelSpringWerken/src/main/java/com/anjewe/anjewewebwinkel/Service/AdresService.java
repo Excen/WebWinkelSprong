@@ -8,9 +8,15 @@ package com.anjewe.anjewewebwinkel.Service;
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
 import com.anjewe.anjewewebwinkel.DAOs.AdresDao;
+import com.anjewe.anjewewebwinkel.DAOs.KlantAdresDao;
 import com.anjewe.anjewewebwinkel.POJO.Adres;
+import com.anjewe.anjewewebwinkel.POJO.Klant;
+import com.anjewe.anjewewebwinkel.POJO.KlantAdres;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +36,15 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
     private static final Logger errorLogger = (Logger) LoggerFactory.getLogger("com.anjewe.anjewewebwinkel.err");
     private static final Logger testLogger = (Logger) LoggerFactory.getLogger("com.anjewe.anjewewebwinkel.test");
    
+    @Autowired 
+    Klant klant; 
    @Autowired 
    Adres adres;    
    ArrayList<Adres> adressenLijst = new ArrayList();
    @Autowired
     protected GenericDaoImpl<Adres, Long> adresDao = new AdresDao();
+   @Autowired
+   protected GenericDaoImpl<KlantAdres, Long> klantadresDao = new KlantAdresDao();
     
 
     @Override
@@ -79,6 +89,8 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
             gewijzigdAdres.setHuisnummer(adres.getHuisnummer());
             gewijzigdAdres.setToevoeging(adres.getToevoeging());
             gewijzigdAdres.setWoonplaats(adres.getWoonplaats()); 
+            gewijzigdAdres.setKlantAdressen(adres.getKlantAdressen());
+            
         }
         adresDao.update(gewijzigdAdres);
         return gewijzigdAdres;
@@ -103,4 +115,18 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
+    
+    public List<Klant> zoekKlantenBijAdres(Adres a){
+        List <Klant> lijst = new ArrayList<>();
+        ArrayList<KlantAdres> KA = (ArrayList<KlantAdres>) klantadresDao.readAll(KlantAdres.class);
+        for(KlantAdres ka : KA){
+            adres = ka.getAdres();
+            if (Objects.equals(a.getId(), adres.getId())){
+                klant = ka.getKlant();
+                lijst.add(klant);
+            } 
+        }
+        return lijst;
+    }
+    
 }

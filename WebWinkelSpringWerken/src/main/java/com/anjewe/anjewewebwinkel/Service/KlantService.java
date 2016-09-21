@@ -4,9 +4,12 @@
 package com.anjewe.anjewewebwinkel.Service;
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
+import com.anjewe.anjewewebwinkel.POJO.Adres;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
+import com.anjewe.anjewewebwinkel.POJO.KlantAdres;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,15 @@ public class KlantService implements GenericServiceInterface <Klant, Long> {
 private static final Logger log = LoggerFactory.getLogger(KlantService.class);
 
 
+
     @Autowired
     protected GenericDaoImpl <Klant, Long> klantDao; 
     @Autowired
+    protected GenericDaoImpl <KlantAdres, Long> klantadresDao;
+    @Autowired
     Klant klant; 
+    @Autowired
+    Adres adres;
     
     @Override
     public Klant voegNieuweBeanToe(Long Id) {
@@ -99,6 +107,19 @@ private static final Logger log = LoggerFactory.getLogger(KlantService.class);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    public List<Adres> zoekAdressenBijKlant(Klant k){
+        List <Adres> lijst = new ArrayList<>();
+        ArrayList<KlantAdres> KA = (ArrayList<KlantAdres>) klantadresDao.readAll(KlantAdres.class);
+        for(KlantAdres ka : KA){
+            klant = ka.getKlant();
+            if (Objects.equals(k.getId(), klant.getId())){
+                adres = ka.getAdres();
+                lijst.add(adres);
+            } 
+        }
+        return lijst;
+    }
 
 }
 
