@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- 
     Document   : readallartikel
     Created on : 15-sep-2016, 11:10:24
@@ -31,7 +32,9 @@
                     <td>${artikel.artikelNummer}</td>
                     <td>${artikel.artikelNaam}</td>
                     <td>${artikel.omschrijving}</td>
-                    <td>€ ${artikel.artikelPrijs}</td>
+                    <td><fmt:setLocale value='de-DE' />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
+                    </td>
                     <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td>         
                 </tr>
@@ -45,3 +48,4 @@
         </div>
     </body>
 </html>
+

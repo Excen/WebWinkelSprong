@@ -198,7 +198,8 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     @RequestMapping (value = "/adres/deleteadres", method = RequestMethod.GET)
     public String delete(){
         return "adres/deleteadres";
-    }
+    }   
+    
     
     // werkelijke delete methode
     @RequestMapping (value = "/adres/deleteadres-{Id}" , method = RequestMethod.GET)
@@ -210,3 +211,4 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     // delete klant van adres 
     // @RequestMapping(value ="/adres/deleteklantvanadres-{Id}-{Id}", method = RequestMethod.GET)
 }
+
