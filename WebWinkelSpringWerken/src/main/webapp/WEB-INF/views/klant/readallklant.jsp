@@ -30,6 +30,7 @@
                     <td>${klant.achternaam}</td>
                     <td>${klant.tussenvoegsel}</td>
                     <td>${klant.email}</td>
+                    <td><a href="<c:url value='/bestelling/createbestelling-${klant.id}' />">bestelling aanmaken</a></td>
                 </tr>
                 </c:forEach>             
             </table>

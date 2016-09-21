@@ -58,7 +58,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         }
 
         // save        
-        @RequestMapping(value = { "/klant/createklant" }, method = RequestMethod.POST)
+        @RequestMapping(value = { "/klant/createklant", "/account/createaccount" }, method = RequestMethod.POST)
         public String saveKlant(@Valid Klant klant, BindingResult result,
             ModelMap model){
             
