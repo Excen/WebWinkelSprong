@@ -9,6 +9,7 @@ package com.anjewe.anjewewebwinkel.Service;
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
 import com.anjewe.anjewewebwinkel.DAOs.AdresDao;
 import com.anjewe.anjewewebwinkel.DAOs.KlantAdresDao;
+import com.anjewe.anjewewebwinkel.DAOs.KlantDao;
 import com.anjewe.anjewewebwinkel.POJO.Adres;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
 import com.anjewe.anjewewebwinkel.POJO.KlantAdres;
@@ -38,15 +39,17 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
    
     @Autowired 
     Klant klant; 
-   @Autowired 
-   Adres adres;    
-   ArrayList<Adres> adressenLijst = new ArrayList();
-   @Autowired
+    @Autowired 
+    Adres adres;    
+    ArrayList<Adres> adressenLijst = new ArrayList();
+    @Autowired
     protected GenericDaoImpl<Adres, Long> adresDao = new AdresDao();
-   @Autowired
-   protected GenericDaoImpl<KlantAdres, Long> klantadresDao = new KlantAdresDao();
-    
+    @Autowired
+    protected GenericDaoImpl<Klant, Long> klantDao = new KlantDao();
+    @Autowired
+    protected GenericDaoImpl<KlantAdres, Long> klantadresDao = new KlantAdresDao();
 
+    
     @Override
     public Adres voegNieuweBeanToe(Long Id) {         
          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -139,4 +142,24 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
         return lijst;
     }
     
+    public boolean verwijderVanKlantAdres(Long adresId, Long klantId){
+        boolean verwijderd = false; 
+        adres = adresDao.readById(adresId);
+        klant = klantDao.readById(klantId);
+        ArrayList<KlantAdres> KA = (ArrayList<KlantAdres>) klantadresDao.readAll(KlantAdres.class);
+        for (KlantAdres ka:  KA){
+            Adres a = ka.getAdres();
+            Klant k = ka.getKlant();
+            if (Objects.equals(a.getId(), adres.getId()) && Objects.equals(k.getId(), klant.getId())){
+                verwijderd = klantadresDao.delete(ka);
+            }
+            
+        }
+        
+        
+        return verwijderd; 
+    }
+    
+    
 }
+

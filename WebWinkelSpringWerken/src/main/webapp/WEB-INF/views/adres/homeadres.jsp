@@ -22,7 +22,7 @@
         <a href = "<c:url value = '/adres/createadres'/>"> Adres toevoegen</a><br>
         <a href = "<c:url value = '/adres/updateadres'/>"> Adres wijzigen </a><br>
         <a href = "<c:url value = '/adres/readalladres'/>"> Adressenlijst opvragen </a><br>
-        <a href = "<c:url value = '/adres/deletealladres'/>"> Adressenlijst verwijderen </a><br>
+        <%--a href = "<c:url value = '/adres/deletealladres'/>"> Adressenlijst verwijderen </a><br--%>
         
         
     </body>
