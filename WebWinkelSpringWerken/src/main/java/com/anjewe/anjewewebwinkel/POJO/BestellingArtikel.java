@@ -44,6 +44,7 @@ public class BestellingArtikel implements Serializable {
     private Artikel artikel;
     
     @ManyToOne
+    @JoinColumn (name = "BESTELLING_ID", insertable = false, updatable = false)
     private Bestelling bestelling;
     
    

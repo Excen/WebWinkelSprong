@@ -30,7 +30,9 @@
                     <td>${klant.achternaam}</td>
                     <td>${klant.tussenvoegsel}</td>
                     <td>${klant.email}</td>
-                    <td><a href="<c:url value='/bestelling/createbestelling-${klant.id}' />">bestelling aanmaken</a></td>
+                    <td><form method="POST"><input type ="hidden" name="KlantId" value="${klant.id}">
+                            <input type="submit" value="Bestelling maken"></input></form>
+                    </td>
                 </tr>
                 </c:forEach>             
             </table>

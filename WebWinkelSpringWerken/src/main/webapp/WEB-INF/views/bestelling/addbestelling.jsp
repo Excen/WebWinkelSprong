@@ -34,19 +34,35 @@
                     </c:when>
                         
                     <c:otherwise>
-                           
-                        Artikel <select name="artikelnaam" >                
-                                <c:forEach items="${artikellijst}" var="option" varStatus = "status">
-                                    <option value="${artikel.artikelNaam}" label="--Please Select">                                
-                                        <c:out value="${artikel.artikelNaam}"></c:out>
-                                        </option>
-                                </c:forEach> 
-                            </select>  >         
-                             
-                             Datum <input type = "date" name = "bestellingDatum" /><br/>
-                             KlantId   <input type = "text" name = "klant"  /><br/> 
                             
-                            <input type="submit" value="voeg toe" /> |
+                        <table>
+                <th>Artikel id</th>
+                <th>Artikelnummer</th>
+                <th>Artikelnaam</th>
+                <th>Artikel omschrijving</th>
+                <th>ArtikelPrijs</th>
+                <th></th>
+                <th></th>
+             
+                  <c:forEach var="artikel" items="${artikellijst}" varStatus="status">
+                <tr>
+                    <td>${artikel.id}</td>
+                    <td>${artikel.artikelNummer}</td>
+                    <td>${artikel.artikelNaam}</td>
+                    <td>${artikel.omschrijving}</td>
+                    <td><fmt:setLocale value='de-DE' />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
+                    </td>
+                    <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
+                    <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td> 
+                    <input type="submit" value="voeg toe" /> |
+                </tr>
+                </c:forEach>
+                
+           </table>
+                        
+                        
+                            
                             <a href="<c:url value='/bestelling/homebestelling' />">Annuleer</a>
                     </c:otherwise>
                 </c:choose>  

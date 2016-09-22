@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -45,7 +46,8 @@ public class BestellingController {
     @Autowired 
     GenericServiceInterface <Bestelling, Long> bestellingService = new BestellingService();
     
-    BestellingService bs = new BestellingService();
+    @Autowired
+    BestellingService bs;
     
     @Autowired
     GenericServiceInterface<Artikel, Long> artikelService = new ArtikelService();
@@ -67,22 +69,33 @@ public class BestellingController {
             return "bestelling/homebestelling";
         }
     
-    // Bestelling maken
-    @RequestMapping(value = "/bestelling/createbestelling{klantId}", method = RequestMethod.GET)
-        public String createBestelling(ModelMap model, @PathVariable Long klantId){
+    // Standaard bestelling aanmaken
+    @RequestMapping(value = "/klant/readallklant", method = RequestMethod.POST)
+        public String bestellingToevoegen(ModelMap model, @RequestParam("KlantId") Long klantId){
             Klant klant = klantService.zoekNaarBean(klantId);    
             Bestelling bestelling = new Bestelling();
+            bestelling.setBestellingDatum(new Date());
+            bestelling.setKlant(klant);
+            Long bestellingId = bestellingService.voegNieuweBeanToe(bestelling);
+            
+            return "redirect:/bestelling/createbestelling" + bestellingId;
+        } 
+        
+    // Bestelling maken
+    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.GET)
+        public String createBestelling(ModelMap model, @PathVariable Long bestellingId){
+           
+            Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
             ArrayList<Artikel>artikelLijst = (ArrayList<Artikel>)artikelService.zoekAlleBeans();
-            //bestelling.setBestellingDatum(new Date());
-            //bestelling.setKlant(klant);
             model.addAttribute("bestelling", bestelling);
-            model.addAttribute("klant", klant);
-            //model.addAttribute("artikellijst", artikelLijst);
+            model.addAttribute("artikellijst", artikelLijst);
             model.addAttribute("edit", false);
+            
+            
             // in view regelen dat er een artikel en aantal naar post gaat >> tussenoplossing om te zien of het werkt
             // code klopt nu niet
             // artikellijst blijft leeg. in readallartkel werkt het wel. wellciht met manier van weergave te maken. 
-            //beter een artikel id opvragen en verder op omzetten naar artikel? 
+            // beter een artikel id opvragen en verder op omzetten naar artikel? 
             // later sowieso via andere view? 
             // idee: naar artikelkeuzelijst, daar artikelen aan klikken die in bestelling horen
             // probleem: kunnen nu geen bestelling opslaan zonder artikel. zodat met eerst de bestelling opslaat en dan update
