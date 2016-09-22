@@ -34,11 +34,21 @@
                     </c:when>
                         
                     <c:otherwise>
-                             <%--Artikel <input type = "text" name = "bestellingArtikellen"  /> <br/>
-                             Aantal <input type = "text" name = "artikelAantal" /> <br/--%>
+                             
+                            Artikel <select name="artikelnaam" >                
+                                <c:forEach items="${artikellijst}" var="option" varStatus = "status">
+                                    <option value="${artikel.artikelNaam}" label="--Please Select">                                
+                                        <c:out value="${artikel.artikelNaam}"></c:out>
+                                        </option>
+                                </c:forEach> 
+                            </select>         
+                             
                              Datum <input type = "date" name = "bestellingDatum" /><br/>
-                             Klant <input type = "text" name = "klant"  /><br/> 
-                            
+                            <c:choose>
+                        <c:when test="${klant}">
+                            Klant <input type = "text" name = "klant" value ="${klant}"/>
+                        </c:when>    
+                            </c:choose>
                             <input type="submit" value="voeg toe" /> |
                             <a href="<c:url value='/bestelling/homebestelling' />">Annuleer</a>
                     </c:otherwise>
@@ -50,3 +60,5 @@
         <a href = "<c:url value = '/'/>"> Terug naar huis</a>
     </body>
 </html>
+
+            
