@@ -40,6 +40,9 @@
                                     <option value="${artikel.artikelNaam}" label="--Please Select">                                
                                         <c:out value="${artikel.artikelNaam}"></c:out>
                                         </option>
+                                        <td><form method="POST"><input type ="hidden" name="ArtikelId" value="${artikel.id}">
+                                        <input type="submit" value="Artikel toevoegen"></input></form></td>
+                                        
                                 </c:forEach> 
                             </select>         
                              
