@@ -98,9 +98,19 @@ public class AdresService implements GenericServiceInterface <Adres, Long>{
     
         
 
-    @Override
+    @Override // is de volgorde wel okay?
     public boolean verwijderBeanGegevens(Long Id) {
+        Adres a = adresDao.readById(Id);
         boolean isDeletedInAdres = adresDao.deleteById(Id);
+        ArrayList<KlantAdres> KA = (ArrayList<KlantAdres>) klantadresDao.readAll(KlantAdres.class);
+        if (isDeletedInAdres){
+            for (KlantAdres ka: KA){
+                adres = ka.getAdres();
+                if (Objects.equals(a.getId(), adres.getId())){  
+                    klantadresDao.delete(ka);
+                } 
+            }
+        }
         return isDeletedInAdres;
     }
 

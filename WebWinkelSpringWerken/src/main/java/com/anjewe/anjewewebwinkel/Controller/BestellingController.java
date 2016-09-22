@@ -111,7 +111,7 @@ public class BestellingController {
               return "bestelling/addbestelling";
           }  
          // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
-          bs.voegBestellingToe(bestelling, artikelAantal, artikel);
+         // bs.voegBestellingToe(bestelling, artikelAantal, artikel);
           model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
           
           return "bestelling/toevoegengelukt";

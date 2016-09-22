@@ -36,18 +36,7 @@
     </div>
 </nav>
         
-        <div class= "welkomhome">
-        <br/><h1>Welkom bij "Het juiste been"</h1>
-        <br/>       
         
-        <p> Kom je liever standaard met je juiste been uit bed. Zit je hoofd vol, wil je een lege?
-            Heb je blauwe bloed en wil je groene handen? Of juist andersom. Alles is hier mogelijk. Benieuwd? Meld u aan voor de nieuwsbrief</p>
-        <input type="email" placeholder="Uw e-mail">
-        <input type= "submit" value="Zend" >
-        </div>   
-            
-            
-        <footer>Note:</footer>Website updated on: <%= (new java.util.Date()) %>
         
         
         

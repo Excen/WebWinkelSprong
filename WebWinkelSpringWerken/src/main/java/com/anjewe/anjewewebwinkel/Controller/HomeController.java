@@ -17,10 +17,13 @@ public class HomeController {
 private static final Logger log = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping (value = "/", method = GET)        
+    public String start(){
+        return "startpagina";
+    }
+    
+    @RequestMapping (value = "/home", method = GET)        
     public String home(){
         return "home";
     }
-    
-    
 
 }

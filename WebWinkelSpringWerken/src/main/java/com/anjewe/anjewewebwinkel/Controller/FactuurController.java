@@ -6,10 +6,7 @@ import com.anjewe.anjewewebwinkel.POJO.Betaling;
 import com.anjewe.anjewewebwinkel.POJO.Factuur;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -21,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * @author Wendy
@@ -31,7 +27,9 @@ public class FactuurController {
 
         private static final Logger log = LoggerFactory.getLogger(FactuurController.class);
 
+        @Autowired
         GenericServiceInterface<Factuur, Long> factuurService;
+        @Autowired
         GenericServiceInterface<Bestelling, Long> bestellingService;
 
 

@@ -15,7 +15,7 @@ nav {
     width: 95%;
 }
 
-.navigatie{
+.navigatie, .footer{
     text-transform: uppercase; 
 }
 
@@ -28,15 +28,15 @@ nav {
     color: darkorange;
     cursor:pointer;
     font-weight: bold;
-    font-size:34px;
+    font-size:28px;
 }
 
 a:link{
         text-decoration: none;
-        transition: all 1.8s; 
-        -moz-transition: all 1.8s; 
+/*        transition: all 1.8s; */
+/*        -moz-transition: all 1.8s; 
         -webkit-transition: all 1.8s; 
-        -o-transition: all 1.8s;
+        -o-transition: all 1.8s;*/
 } 
     
 li a:visited{
@@ -56,7 +56,7 @@ li a:active{
 }
 
 p{
-    font-size: 28px; 
+    font-size: 30px; 
     color: darkorange;
 }
 
@@ -77,15 +77,28 @@ input[type="submit"]{
 }
 
 img{
-    opacity: 0.4;
+    opacity: 0.65;
     border-radius: 5px;
     margin-top:70px
     }
 
-    div welkomhome{
-        
+welkomhome{
+        font-size: 48px;
     }
-/*
+
+    .footer{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        background-color: #efefef;
+        text-align: center;  
+        
+    }  
+    
+    
+    /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
