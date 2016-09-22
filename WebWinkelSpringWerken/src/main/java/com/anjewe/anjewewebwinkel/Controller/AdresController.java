@@ -86,12 +86,12 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         }
         
         adresService.voegNieuweBeanToe(adres);
-        model.addAttribute("succes", "Adres met id" + adres.getId()
-                        + " straatnaam" + adres.getStraatnaam() + " huisnummer " 
-                        + adres.getHuisnummer() + " toevoeging " + adres.getToevoeging() + 
-                        " postcode " + adres.getPostcode() + " woonplaats " + adres.getWoonplaats() +
-                        " adresType = " + adres.getAdresType() + " is toegevoegd aan het bestand");
-        
+        model.addAttribute("succes", "toevoegen van het volgende adres gelukt: ");
+        model.addAttribute("adres", "Adres " + adres.getStraatnaam() + " " 
+                        + adres.getHuisnummer() + " " + adres.getToevoeging());
+        model.addAttribute("postcode","Postcode " + adres.getPostcode());
+        model.addAttribute("woonplaats","Woonplaats " + adres.getWoonplaats());
+        model.addAttribute("adrestype", "AdresType " + adres.getAdresType());
         
         return "adres/toevoegengelukt";
         
@@ -204,7 +204,10 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     // werkelijke delete methode
     @RequestMapping (value = "/adres/deleteadres-{Id}" , method = RequestMethod.GET)
     public String deleteAdres(@PathVariable Long Id){
-        adresService.verwijderBeanGegevens(Id);
+        boolean deleted = adresService.verwijderBeanGegevens(Id);
+        if (deleted){
+            // verwijder adres uit koppeltabel >> nu via service. werkt het?
+        }
         return "redirect:/adres/readalladres";
     }
     

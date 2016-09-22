@@ -17,26 +17,28 @@
     <body>
        <div align = "center">
            <h1>Artikellijst</h1>    
-           <table>
-                <th>Artikel id</th>
+           
+           
+           
+           <table>                
                 <th>Artikelnummer</th>
-                <th>Artikelnaam</th>
-                <th>Artikel omschrijving</th>
+                <th>Artikelnaam</th>               
                 <th>ArtikelPrijs</th>
+                <th></th>
                 <th></th>
                 <th></th>
              
                   <c:forEach var="artikel" items="${artikellijst}" varStatus="status">
-                <tr>
-                    <td>${artikel.id}</td>
+                <tr>                    
                     <td>${artikel.artikelNummer}</td>
-                    <td>${artikel.artikelNaam}</td>
-                    <td>${artikel.omschrijving}</td>
+                    <td>${artikel.artikelNaam}</td>                    
                     <td><fmt:setLocale value='de-DE' />
-                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="€" value="${artikel.artikelPrijs}" />
                     </td>
+                    <td><a href="<c:url value='/artikel/readartikel-${artikel.id}' />">bekijk</a></td>
                     <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
-                    <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td>         
+                    <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td>  
+                    
                 </tr>
                 </c:forEach>
                 
