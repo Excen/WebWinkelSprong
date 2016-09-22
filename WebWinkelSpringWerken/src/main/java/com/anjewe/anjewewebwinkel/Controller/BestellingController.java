@@ -51,7 +51,6 @@ public class BestellingController {
     
     @Autowired
     GenericServiceInterface<Artikel, Long> artikelService = new ArtikelService();
-    
 
     @Autowired
     GenericServiceInterface<Klant, Long> klantService = new KlantService();
@@ -59,8 +58,6 @@ public class BestellingController {
     @Autowired
     MessageSource messageSource;
     
-    
-
     // Methoden
     
     // Bestelling home
@@ -71,19 +68,21 @@ public class BestellingController {
     
     // Standaard bestelling aanmaken
     @RequestMapping(value = "/klant/readallklant", method = RequestMethod.POST)
-        public String bestellingToevoegen(ModelMap model, @RequestParam("KlantId") Long klantId){
+        public String standaardBestellingMaken(ModelMap model, @RequestParam("KlantId") Long klantId){
+            
             Klant klant = klantService.zoekNaarBean(klantId);    
             Bestelling bestelling = new Bestelling();
             bestelling.setBestellingDatum(new Date());
             bestelling.setKlant(klant);
             Long bestellingId = bestellingService.voegNieuweBeanToe(bestelling);
             
+            // return "redirect:/bestelling/createbestelling" + bestellingId;
             return "redirect:/bestelling/createbestelling" + bestellingId;
         } 
         
     // Bestelling vullen
-    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.POST)
-        public String createBestelling(ModelMap model, @RequestParam("ArtikelId") Long ArtikelId, @RequestParam("ArtikelAantal") Long ArtikelAantal, @PathVariable Long bestellingId){
+    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.GET)
+        public String bestellingInfoEnArtikellenTonen(ModelMap model, @PathVariable Long bestellingId){
            
             Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
             ArrayList<Artikel>artikelLijst = (ArrayList<Artikel>)artikelService.zoekAlleBeans();
@@ -91,26 +90,25 @@ public class BestellingController {
             model.addAttribute("artikellijst", artikelLijst);
             model.addAttribute("edit", false);
             
+            return "redirect:/bestelling/createbestelling" + bestellingId;                           
+    }
+    
+    @RequestMapping(value = {"/bestelling/createbestelling{bestellingId}"}, method = RequestMethod.POST)
+        public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, @Valid Bestelling bestelling, 
+               @RequestParam ("ArtikelId") Long ArtikelId, BindingResult result, ModelMap model){
+            
+            // Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
+
             Artikel artikel = artikelService.zoekNaarBean(ArtikelId);
             BestellingArtikel bestellingArtikel = new BestellingArtikel();
             bestellingArtikel.setArtikel(artikel);
-            bestellingArtikel.setArtikelAantal(ArtikelAantal);
+            bestellingArtikel.setArtikelAantal(1);
+            bestelling.getBestellingArtikellen().add(bestellingArtikel);
+            bestellingService.wijzigBeanGegevens(bestelling);
             
+            model.addAttribute("bestelling", bestelling);
             
-            // in view regelen dat er een artikel en aantal naar post gaat >> tussenoplossing om te zien of het werkt
-            // code klopt nu niet
-            // artikellijst blijft leeg. in readallartkel werkt het wel. wellciht met manier van weergave te maken. 
-            // beter een artikel id opvragen en verder op omzetten naar artikel? 
-            // later sowieso via andere view? 
-            // idee: naar artikelkeuzelijst, daar artikelen aan klikken die in bestelling horen
-            // probleem: kunnen nu geen bestelling opslaan zonder artikel. zodat met eerst de bestelling opslaat en dan update
-            
-            return "bestelling/addbestelling";              
-    }
-    
-    @RequestMapping(value = {"/bestelling/addbestelling"})
-        public String completeBestellingOpslaan (@Valid Bestelling bestelling, BindingResult result, ModelMap model){
-            
+            return "bestelling/toevoegengelukt";  
         }
 
     // Bestelling opslaan
