@@ -14,13 +14,19 @@
     </head>
     <body>
        <div align = "center"> 
+           <table>
+                <th>Bestelling ID   </th>
+                <th>Klant Id   </th>
+                <th>Bestelling Datum   </th>
+                <th>Aanwezige Artikellen </th>
+                <th>Factuur ID   </th>
                 <tr>
                     <td>${bestelling.id}</td>
                     <td>${bestelling.klant.id}</td>
                     <td>${bestelling.bestellingDatum}</td> 
                     <td><c:forEach var="bestellingartikel" items="${bestellingartikellijst}">
-                            <c:out value='Artikel: ${bestellingartikel.artikel.artikelNaam}<br/>
-                                           Aantal: ${bestellingartikel.artikelAantal}'>
+                            <c:out value='${bestellingartikel.artikel.artikelNaam} 
+                                           ${bestellingartikel.artikelAantal}: keer'>
                             </c:out></c:forEach></td>
                     <td>${bestelling.factuur.id}</td>
                      

@@ -81,15 +81,20 @@ public class BestellingController {
             return "redirect:/bestelling/createbestelling" + bestellingId;
         } 
         
-    // Bestelling maken
-    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.GET)
-        public String createBestelling(ModelMap model, @PathVariable Long bestellingId){
+    // Bestelling vullen
+    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.POST)
+        public String createBestelling(ModelMap model, @RequestParam("ArtikelId") Long ArtikelId, @RequestParam("ArtikelAantal") Long ArtikelAantal, @PathVariable Long bestellingId){
            
             Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
             ArrayList<Artikel>artikelLijst = (ArrayList<Artikel>)artikelService.zoekAlleBeans();
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("artikellijst", artikelLijst);
             model.addAttribute("edit", false);
+            
+            Artikel artikel = artikelService.zoekNaarBean(ArtikelId);
+            BestellingArtikel bestellingArtikel = new BestellingArtikel();
+            bestellingArtikel.setArtikel(artikel);
+            bestellingArtikel.setArtikelAantal(ArtikelAantal);
             
             
             // in view regelen dat er een artikel en aantal naar post gaat >> tussenoplossing om te zien of het werkt
@@ -103,6 +108,11 @@ public class BestellingController {
             return "bestelling/addbestelling";              
     }
     
+    @RequestMapping(value = {"/bestelling/addbestelling"})
+        public String completeBestellingOpslaan (@Valid Bestelling bestelling, BindingResult result, ModelMap model){
+            
+        }
+
     // Bestelling opslaan
     @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
         public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){

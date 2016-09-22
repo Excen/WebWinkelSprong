@@ -20,10 +20,8 @@
                 <th>Klant Id   </th>
                 <th>Bestelling Datum   </th>
                 <th>Factuur ID   </th>
-                <th></th>
-                <th></th>
-             
-                  <c:forEach var="bestelling" items="${bestellinglijst}" varStatus="status">
+
+                 <c:forEach var="bestelling" items="${bestellinglijst}" varStatus="status">
                 <tr>
                     
                     
