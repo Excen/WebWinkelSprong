@@ -53,8 +53,11 @@
                     <td><fmt:setLocale value='de-DE' />
                     <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
                     </td>
-                    <td><a href="<c:url value='/artikel/updateartikel-${artikel.id}' />">wijzig</a></td>
+                    
                     <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td> 
+                    <td><form method="POST"><input type ="hidden" name="ArtikelId" value="${artikel.id}">
+                            <input type="submit" value="Artikel toevoegen"></input></form>
+                    </td>
                     <input type="submit" value="voeg toe" /> |
                 </tr>
                 </c:forEach>
