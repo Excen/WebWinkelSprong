@@ -205,13 +205,25 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
     @RequestMapping (value = "/adres/deleteadres-{Id}" , method = RequestMethod.GET)
     public String deleteAdres(@PathVariable Long Id){
         boolean deleted = adresService.verwijderBeanGegevens(Id);
-        if (deleted){
-            // verwijder adres uit koppeltabel >> nu via service. werkt het?
-        }
+        
+        
         return "redirect:/adres/readalladres";
     }
     
     // delete klant van adres 
-    // @RequestMapping(value ="/adres/deleteklantvanadres-{Id}-{Id}", method = RequestMethod.GET)
+     @RequestMapping(value ="/adres/deleteklantvanadres-{adresId}-{klantId}", method = RequestMethod.GET)
+    public String deleteKlantVanAdres(@PathVariable Long adresId, @PathVariable Long klantId, ModelMap model){
+        // verwijder uit klantadres waar klantId = x en adresId = y
+        boolean verwijderd = as.verwijderVanKlantAdres(adresId, klantId);    
+        model.addAttribute("succes", "De volgende klant-adres koppeling is succesvol verwijderd: " );
+        model.addAttribute("klantId", "klant met klantId " + klantId);
+        model.addAttribute("adresId", "adres met adresId " + adresId);
+        
+        
+        
+        return "adres/success";
+    }
+    
+    
 }
 

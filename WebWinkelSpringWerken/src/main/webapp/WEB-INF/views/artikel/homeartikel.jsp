@@ -21,6 +21,6 @@
         <a href = "<c:url value = '/artikel/createartikel'/>"> Artikel toevoegen</a><br>
         <a href = "<c:url value = '/artikel/updateartikel'/>"> Artikel wijzigen </a><br>
         <a href = "<c:url value = '/artikel/readallartikel'/>"> Artikellijst opvragen </a><br>
-        <a href = "<c:url value = '/artikel/deleteallartikel'/>"> Artikellijst verwijderen </a><br>
+        <%--a href = "<c:url value = '/artikel/deleteallartikel'/>"> Artikellijst verwijderen </a><br--%>
     </body>
 </html>
