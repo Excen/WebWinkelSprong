@@ -24,7 +24,7 @@
                         
           <c:choose>
                     <c:when test="${edit}">
-                        Artikel <input type = "text" name = "bestellingArtikellen"  /> <br/>
+                        Artikel <input type = "text" name = "bestellingArtikellen"/> <br/>
                         Aantal <input type = "text" name = "artikelAantal" /> <br/>
                         Datum <input type = "date" name = "bestellingDatum" value ="${bestelling.bestellingDatum}"/><br/>
                         Klant   <input type = "text" name = "klant"  /><br/>        
@@ -53,11 +53,11 @@
                     <td><fmt:setLocale value='de-DE' />
                     <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="$" value="${artikel.artikelPrijs}" />
                     </td>
-                    
-                    <td><a href="<c:url value='/artikel/deleteartikel-${artikel.id}' />">verwijder </a></td> 
+
                     <td><form method="POST"><input type ="hidden" name="ArtikelId" value="${artikel.id}">
                             <input type="submit" value="Artikel toevoegen"></input></form>
                     </td>
+                    
                     <input type="submit" value="voeg toe" /> |
                 </tr>
                 </c:forEach>

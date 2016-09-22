@@ -15,7 +15,7 @@
     <body>
         <h1>Bestelling toegevoegd</h1>
         <div>
-        ${success}
+        ${bestelling}
         </div>
     
         <a href="<c:url value='/bestelling/homebestelling' />">
