@@ -20,7 +20,7 @@
                     <td>${bestelling.bestellingDatum}</td> 
                     <td><c:forEach var="bestellingartikel" items="${bestellingartikellijst}">
                             <c:out value='Artikel: ${bestellingartikel.artikel.artikelNaam}<br/>
-                                           Aantal: ${bestellingArtikel.artikelAantal}'>
+                                           Aantal: ${bestellingartikel.artikelAantal}'>
                             </c:out></c:forEach></td>
                     <td>${bestelling.factuur.id}</td>
                      

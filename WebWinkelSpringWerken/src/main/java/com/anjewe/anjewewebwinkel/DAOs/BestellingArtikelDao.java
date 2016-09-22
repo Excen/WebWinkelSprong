@@ -30,9 +30,9 @@ private static final Logger log = LoggerFactory.getLogger(BestellingArtikelDao.c
     public ArrayList<BestellingArtikel> readByBestellingId (Long Id){
          
         String sqlQuery = "SELECT * FROM bestellingartikel where BESTELLING_ID = " + Id;
-        String hqlQuery = "FROM BestellingArtikel ba WHERE ba.bestelling = " + Id;
+        String hqlQuery = "FROM BestellingArtikel ba WHERE ba.bestelling.Id = " + Id;
         Session session = getSession();
-        Query query = session.createQuery(sqlQuery);
+        Query query = session.createQuery(hqlQuery);
         return (ArrayList<BestellingArtikel>) query.list();
         
     }
