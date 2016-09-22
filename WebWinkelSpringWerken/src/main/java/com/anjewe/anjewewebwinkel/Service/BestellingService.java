@@ -9,8 +9,10 @@ package com.anjewe.anjewewebwinkel.Service;
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingArtikelDao;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingDao;
+import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
+import com.anjewe.anjewewebwinkel.POJO.BestellingArtikelId;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -46,7 +48,8 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     
     @Autowired
     Bestelling gewijzigdeBestelling;
-    
+    @Autowired
+    BestellingArtikel bestellingArtikel;
     // ----
     
     @Override
@@ -56,10 +59,30 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
 
     @Override
     public Long voegNieuweBeanToe(Bestelling t) {
-        Long bestellingId = bestellingDao.insert(t);
+            Long bestellingId = bestellingDao.insert(t);
         return bestellingId;
     }
 
+    
+    public Long voegBestellingToe(Bestelling bestelling, int artikelAantal, Artikel artikel ){
+        
+            bestellingArtikel.setArtikelAantal(artikelAantal);
+            bestellingArtikel.setArtikel(artikel);
+            
+            BestellingArtikelId bestellingArtikelId = new BestellingArtikelId();
+            bestellingArtikelId.setArtikel(artikel);
+            bestellingArtikelId.setBestelling(bestelling);
+            bestellingArtikel.setPk(bestellingArtikelId);
+            
+            bestelling.getBestellingArtikellen().add(bestellingArtikel);
+            
+        Long bestellingId = bestellingDao.insert(bestelling);
+        return bestellingId;
+            
+    }
+    
+    
+    
     @Override
     public Bestelling zoekNaarBean(Long Id) {
         bestelling = (Bestelling)bestellingDao.readById(Id);

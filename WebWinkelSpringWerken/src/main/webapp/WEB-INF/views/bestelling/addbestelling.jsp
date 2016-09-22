@@ -34,8 +34,15 @@
                     </c:when>
                         
                     <c:otherwise>
-                            <%-- Artikelnummer <input type = "text" name = "bestellingArtikellen"  /> <br/>
-                             Aantal <input type = "text" name = "artikelAantal" /> <br/--%>
+                           
+                        Artikel <select name="artikelnaam" >                
+                                <c:forEach items="${artikellijst}" var="option" varStatus = "status">
+                                    <option value="${artikel.artikelNaam}" label="--Please Select">                                
+                                        <c:out value="${artikel.artikelNaam}"></c:out>
+                                        </option>
+                                </c:forEach> 
+                            </select>  >         
+                             
                              Datum <input type = "date" name = "bestellingDatum" /><br/>
                              KlantId   <input type = "text" name = "klant"  /><br/> 
                             

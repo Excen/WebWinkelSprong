@@ -8,15 +8,18 @@ package com.anjewe.anjewewebwinkel.Controller;
 // imports
 
 import com.anjewe.anjewewebwinkel.POJO.Account;
+import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
+import com.anjewe.anjewewebwinkel.Service.ArtikelService;
 import com.anjewe.anjewewebwinkel.Service.BestellingService;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import com.anjewe.anjewewebwinkel.Service.KlantService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -40,17 +43,21 @@ public class BestellingController {
     
     // Datafields
     @Autowired 
-    GenericServiceInterface <Bestelling, Long> bestellingService;
+    GenericServiceInterface <Bestelling, Long> bestellingService = new BestellingService();
     
     BestellingService bs = new BestellingService();
     
-
+    @Autowired
+    GenericServiceInterface<Artikel, Long> artikelService = new ArtikelService();
+    
 
     @Autowired
-    GenericServiceInterface<Klant, Long> klantService;
+    GenericServiceInterface<Klant, Long> klantService = new KlantService();
     
     @Autowired
     MessageSource messageSource;
+    
+    
 
     // Methoden
     
@@ -65,27 +72,37 @@ public class BestellingController {
         public String createBestelling(ModelMap model, @PathVariable Long klantId){
             Klant klant = klantService.zoekNaarBean(klantId);    
             Bestelling bestelling = new Bestelling();
-            bestelling.setBestellingDatum(new Date());
-            bestelling.setKlant(klant);
+            ArrayList<Artikel>artikelLijst = (ArrayList<Artikel>)artikelService.zoekAlleBeans();
+            //bestelling.setBestellingDatum(new Date());
+            //bestelling.setKlant(klant);
             model.addAttribute("bestelling", bestelling);
+            model.addAttribute("klant", klant);
+            //model.addAttribute("artikellijst", artikelLijst);
             model.addAttribute("edit", false);
+            // in view regelen dat er een artikel en aantal naar post gaat >> tussenoplossing om te zien of het werkt
+            // code klopt nu niet
+            // artikellijst blijft leeg. in readallartkel werkt het wel. wellciht met manier van weergave te maken. 
+            //beter een artikel id opvragen en verder op omzetten naar artikel? 
+            // later sowieso via andere view? 
+            // idee: naar artikelkeuzelijst, daar artikelen aan klikken die in bestelling horen
+            // probleem: kunnen nu geen bestelling opslaan zonder artikel. zodat met eerst de bestelling opslaat en dan update
+            
             return "bestelling/addbestelling";              
     }
     
     // Bestelling opslaan
-    @RequestMapping(value = "/bestelling/createbestelling", method = RequestMethod.POST)
-        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model){
+    @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
+        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){
           if (result.hasErrors()){
-              model.addAttribute("error", "er is een error");
+              model.addAttribute("error", "er is een error " + result.getNestedPath());
               return "bestelling/addbestelling";
           }  
-          
-          bestellingService.voegNieuweBeanToe(bestelling);
+         // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
+          bs.voegBestellingToe(bestelling, artikelAantal, artikel);
           model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
           
           return "bestelling/toevoegengelukt";
         }
-        
         
         
     /*

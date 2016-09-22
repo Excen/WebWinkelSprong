@@ -162,7 +162,7 @@ private static final Logger log = LoggerFactory.getLogger(AdresController.class)
         ka.setAdres(adres);
         ka.setKlant(klant);
         ka.setCreatedDate(new Date());
-        adres.getKlantAdressen().add(ka);
+        klant.getKlantAdressen().add(ka);
         klantService.wijzigBeanGegevens(klant);
         
         model.addAttribute("succes",  "klant met Id: " + klant.getId() + 
