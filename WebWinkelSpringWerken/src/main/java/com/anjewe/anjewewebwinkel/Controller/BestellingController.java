@@ -77,11 +77,11 @@ public class BestellingController {
             Long bestellingId = bestellingService.voegNieuweBeanToe(bestelling);
             
             // return "redirect:/bestelling/createbestelling" + bestellingId;
-            return "redirect:/bestelling/createbestelling" + bestellingId;
+            return "redirect:/bestelling/addbestelling" + bestellingId;
         } 
         
     // Bestelling vullen
-    @RequestMapping(value = "/bestelling/createbestelling{bestellingId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bestelling/addbestelling{bestellingId}", method = RequestMethod.GET)
         public String bestellingInfoEnArtikellenTonen(ModelMap model, @PathVariable Long bestellingId){
            
             Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
@@ -112,18 +112,18 @@ public class BestellingController {
         }
 
     // Bestelling opslaan
-    @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
-        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){
-          if (result.hasErrors()){
-              model.addAttribute("error", "er is een error " + result.getNestedPath());
-              return "bestelling/addbestelling";
-          }  
-         // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
-         // bs.voegBestellingToe(bestelling, artikelAantal, artikel);
-          model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
-          
-          return "bestelling/toevoegengelukt";
-        }
+//    @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
+//        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){
+//          if (result.hasErrors()){
+//              model.addAttribute("error", "er is een error " + result.getNestedPath());
+//              return "bestelling/addbestelling";
+//          }  
+//         // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
+//         // bs.voegBestellingToe(bestelling, artikelAantal, artikel);
+//          model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
+//          
+//          return "bestelling/toevoegengelukt";
+//        }
         
         
     /*
