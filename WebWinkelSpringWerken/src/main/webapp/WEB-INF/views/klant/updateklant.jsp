@@ -17,3 +17,4 @@
         <c:redirect url = "/klant/readallklant"/>
     </body>
 </html>
+
