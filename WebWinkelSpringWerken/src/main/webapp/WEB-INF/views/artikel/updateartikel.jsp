@@ -13,6 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:redirect url ="/artikel/readallartikel.jsp"/>
+        <c:redirect url ="/artikel/readallartikel"/>
     </body>
 </html>

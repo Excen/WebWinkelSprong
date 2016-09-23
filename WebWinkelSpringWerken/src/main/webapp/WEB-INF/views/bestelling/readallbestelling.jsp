@@ -23,8 +23,6 @@
 
                  <c:forEach var="bestelling" items="${bestellinglijst}" varStatus="status">
                 <tr>
-                    
-                    
                     <td>${bestelling.id}</td>
                     <td>${bestelling.klant.id}</td>
                     <td>${bestelling.bestellingDatum}</td>  

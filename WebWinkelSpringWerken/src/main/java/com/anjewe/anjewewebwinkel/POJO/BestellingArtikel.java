@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.springframework.stereotype.Component;
 /**
  *
@@ -51,16 +52,11 @@ public class BestellingArtikel implements Serializable {
     
     
     // Constructor
-    public BestellingArtikel(Artikel artikel, Bestelling bestelling, int artikelAantal){        
-        this.artikel = artikel;
-        this.bestelling = bestelling;
+    public BestellingArtikel(int artikelAantal){     
         this.artikelAantal = artikelAantal;
     }
     
-    
-    
     public BestellingArtikel(){
-        
     }    
   
 
@@ -119,6 +115,12 @@ public class BestellingArtikel implements Serializable {
     public void setBestelling(Bestelling bestelling) {
         this.bestelling = bestelling;
     }
+
+    /**
+     * @return the artikel
+     */
+   
+   
     
     
     

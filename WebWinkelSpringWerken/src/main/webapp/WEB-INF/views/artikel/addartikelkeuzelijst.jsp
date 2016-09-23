@@ -36,8 +36,8 @@
                     </td>
                     
                     <td><a href="<c:url value='/artikel/readartikel-${artikel.id}' />"> Bekijk artikel </a></td>  
-                     <td><a href="<c:url value='/artikel/addartikelkeuzelijst-${bestelling.id}-${artikel.id}' />"> kies </a></td> 
-                    <td><form method="POST"><input type ="hidden" name="ArtikelId" value="${artikel.id}">
+                      <td><a href="<c:url value='/artikel/addartikelkeuzelijst-${bestelling.id}-${artikel.id}' />"> kies </a></td> 
+                      <td><form method="POST"><input type ="hidden" name="ArtikelId" value="${artikel.id}">                        
                             <input type="submit" value="Bestelling toevoegen"/></form>
                     </td>
                     
