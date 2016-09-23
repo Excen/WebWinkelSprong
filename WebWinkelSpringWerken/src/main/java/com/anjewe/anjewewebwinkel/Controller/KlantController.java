@@ -187,7 +187,6 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         
         return "klant/adressenbijklant";
     }     
-     
-    
+      
     
 }
