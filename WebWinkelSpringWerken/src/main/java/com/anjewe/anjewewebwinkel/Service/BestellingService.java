@@ -171,18 +171,18 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
                     if (Objects.equals(best, b))
                         set.add(bestellingArtikel);
                 }
-                //bestellingArtikel = new BestellingArtikel();
+                bestellingArtikel = new BestellingArtikel();
                 bestellingArtikel.setArtikel(a);
                 bestellingArtikel.setBestelling(b);
                 bestellingArtikel.setArtikelAantal(artikelAantal);
-               // bestellingArtikelDao.insert(bestellingArtikel);
+                bestellingArtikel = bestellingArtikelDao.insertReturnType(bestellingArtikel); // hier moet een long Id uitkomen
                 
                 set.add(bestellingArtikel);
                 t.setBestellingArtikellen(set);
             }
             
         }
-        bestellingDao.update(t);
+        bestellingDao.update(t);  
         return t;
     }
     

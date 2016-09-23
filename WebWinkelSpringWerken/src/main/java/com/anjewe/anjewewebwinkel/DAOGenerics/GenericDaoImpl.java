@@ -65,6 +65,17 @@ public abstract class GenericDaoImpl <T, PK extends Serializable>  {
         return id;           
     }
     
+     @Transactional
+    public T insertReturnType(T t) {        
+        log.info(beanType.getSimpleName() + " creeeren in de database. Return id");
+        
+        T tNew = (T) getSession().save(t);      
+        
+        return tNew;           
+    }
+    
+    
+    
     
      // -- werkt
     @Transactional

@@ -48,6 +48,15 @@ public class Bestelling implements Serializable {
     @OneToOne (mappedBy = "bestelling")
     private Factuur factuur; 
 
+    public Bestelling(Klant klant, Date bestellingDatum, Factuur factuur) {        
+        this.klant = klant;
+        this.bestellingDatum = bestellingDatum;
+        this.factuur = factuur;
+    }
+    
+    public Bestelling(){}
+    
+    
     public long getId() {
         return Id;
     }

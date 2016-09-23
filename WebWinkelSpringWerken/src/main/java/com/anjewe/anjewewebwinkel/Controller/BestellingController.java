@@ -129,6 +129,8 @@ public class BestellingController {
         public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, @PathVariable Long artikelId, 
                 @Valid Bestelling bestelling, @Valid Artikel artikel, BindingResult result, ModelMap model){
             
+            artikel = artikelService.zoekNaarBean(artikelId);
+            model.addAttribute("artikel", artikel);
             bestelling = bs.wijzigBestelling(bestellingId, artikel, 1);
             model.addAttribute("bestelling", bestelling);
             return "bestelling/toevoegengelukt";  
