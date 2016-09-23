@@ -3,7 +3,7 @@
     Created on : Sep 21, 2016, 9:57:44 PM
     Author     : Excen
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <c:redirect url="/artikel/artikelkeuzelijst-${bestellingId}" />
+        
     </body>
 </html>

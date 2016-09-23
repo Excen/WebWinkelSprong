@@ -7,6 +7,7 @@ package com.anjewe.anjewewebwinkel.Service;
 
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
+import com.anjewe.anjewewebwinkel.DAOs.ArtikelDao;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingArtikelDao;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingDao;
 import com.anjewe.anjewewebwinkel.POJO.Artikel;
@@ -14,7 +15,11 @@ import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikelId;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +47,9 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     
     @Autowired
     protected GenericDaoImpl<Bestelling, Long> bestellingDao;
+    
+    @Autowired 
+    protected GenericDaoImpl<Artikel, Long> artikelDao;
     
     @Autowired
     Bestelling bestelling;
@@ -140,6 +148,43 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
                 
     }
     
+     public Bestelling wijzigBestelling(Long bestellingId, Artikel a, int artikelAantal) {
+       
+         Bestelling t = (Bestelling)bestellingDao.readById(bestellingId);
+        if (t != null){
+            t.setFactuur(t.getFactuur());
+            t.setId(t.getId());
+            t.setKlant(t.getKlant());
+            t.setBestellingDatum(t.getBestellingDatum());
+        
+        ArrayList<BestellingArtikel> baLijst = bestellingArtikelDao.readByBestellingId(bestellingId);
+        Set<BestellingArtikel> set = new HashSet<>();
+           
+            if (artikelAantal >= 1){
+                //Artikel a = artikelDao.readById(artikelId);
+                Bestelling b = bestellingDao.readById(bestellingId);
+                
+                for (Iterator<BestellingArtikel> it = baLijst.iterator(); it.hasNext();) {
+                    BestellingArtikel bestellingArtikel = it.next();
+                    //Artikel art = ba.getArtikel();
+                    Bestelling best = bestellingArtikel.getBestelling();
+                    if (Objects.equals(best, b))
+                        set.add(bestellingArtikel);
+                }
+                //bestellingArtikel = new BestellingArtikel();
+                bestellingArtikel.setArtikel(a);
+                bestellingArtikel.setBestelling(b);
+                bestellingArtikel.setArtikelAantal(artikelAantal);
+               // bestellingArtikelDao.insert(bestellingArtikel);
+                
+                set.add(bestellingArtikel);
+                t.setBestellingArtikellen(set);
+            }
+            
+        }
+        bestellingDao.update(t);
+        return t;
+    }
     
     
     

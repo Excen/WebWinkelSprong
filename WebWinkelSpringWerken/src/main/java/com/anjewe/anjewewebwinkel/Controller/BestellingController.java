@@ -66,7 +66,7 @@ public class BestellingController {
             return "bestelling/homebestelling";
         }
     
-    // Standaard bestelling aanmaken
+    // Standaard bestelling aanmaken + opslaan
     @RequestMapping(value = "/klant/readallklant", method = RequestMethod.POST)
         public String standaardBestellingMaken(ModelMap model, @RequestParam("KlantId") Long klantId){
             
@@ -75,55 +75,82 @@ public class BestellingController {
             bestelling.setBestellingDatum(new Date());
             bestelling.setKlant(klant);
             Long bestellingId = bestellingService.voegNieuweBeanToe(bestelling);
+            model.addAttribute("bestellingId", bestellingId);
             
-            // return "redirect:/bestelling/createbestelling" + bestellingId;
-            return "redirect:/bestelling/addbestelling" + bestellingId;
+            return "bestelling/KlantPass";
+//            return "artikel/artikelkeuzelijst-{bestellingId}";
         } 
         
-    // Bestelling vullen
-    @RequestMapping(value = "/bestelling/addbestelling{bestellingId}", method = RequestMethod.GET)
+        // Bestelling vullen
+        @RequestMapping(value = {"/artikel/artikelkeuzelijst-{bestellingId}"}, method = RequestMethod.GET)
         public String bestellingInfoEnArtikellenTonen(ModelMap model, @PathVariable Long bestellingId){
            
             Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
             ArrayList<Artikel>artikelLijst = (ArrayList<Artikel>)artikelService.zoekAlleBeans();
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("artikellijst", artikelLijst);
-            model.addAttribute("edit", false);
+            //model.addAttribute("edit", false);
+            //model.addAttribute("bestellingId", bestellingId);
             
-            return "redirect:/bestelling/createbestelling" + bestellingId;                           
-    }
-    
-    @RequestMapping(value = {"/bestelling/createbestelling{bestellingId}"}, method = RequestMethod.POST)
-        public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, @Valid Bestelling bestelling, 
-               @RequestParam ("ArtikelId") Long ArtikelId, BindingResult result, ModelMap model){
-            
-            // Bestelling bestelling = bestellingService.zoekNaarBean(bestellingId);
-
+            return "artikel/artikelkeuzelijst";                           
+        }
+     
+        // geeft aan dat artikel id er niet is >> in de wijzigbestelling methode >> insert >> artikel_id mag niet null zijn.
+        @RequestMapping(value = {"/artikel/addartikelkeuzelijst-{bestellingId}", "/artikel/artikelkeuzelijst-{bestellingId}"}, 
+            method = RequestMethod.POST)
+        public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, 
+                @Valid Bestelling bestelling, @RequestParam ("ArtikelId") Long ArtikelId, BindingResult result, ModelMap model){
+           
             Artikel artikel = artikelService.zoekNaarBean(ArtikelId);
-            BestellingArtikel bestellingArtikel = new BestellingArtikel();
-            bestellingArtikel.setArtikel(artikel);
-            bestellingArtikel.setArtikelAantal(1);
-            bestelling.getBestellingArtikellen().add(bestellingArtikel);
-            bestellingService.wijzigBeanGegevens(bestelling);
+            bestelling = bs.wijzigBestelling(bestellingId, artikel, 1);
             
             model.addAttribute("bestelling", bestelling);
+            model.addAttribute("artikel", artikel);
             
             return "bestelling/toevoegengelukt";  
         }
+        
+         
+        
+        // via de kies knop
+        @RequestMapping(value = {"/artikel/addartikelkeuzelijst-{bestellingId}-{artikelId}"
+            , "/artikel/artikelkeuzelijst-{bestellingId}-{artikelId}"}, method = RequestMethod.GET)
+        public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, @PathVariable Long artikelId, 
+                @Valid Bestelling bestelling, ModelMap model){
+            
+            Artikel artikel = artikelService.zoekNaarBean(artikelId);
+            model.addAttribute("artikel", artikel);
+            return "artikel/artikelkeuzelijst";  // 
+            
+        }
+        
+        @RequestMapping(value = {"/artikel/addartikelkeuzelijst-{bestellingId}-{artikelId}"
+            , "/artikel/artikelkeuzelijst-{bestellingId}-{artikelId}"}, method = RequestMethod.POST)
+        public String bestellingArtikellenToevoegen (@PathVariable Long bestellingId, @PathVariable Long artikelId, 
+                @Valid Bestelling bestelling, @Valid Artikel artikel, BindingResult result, ModelMap model){
+            
+            bestelling = bs.wijzigBestelling(bestellingId, artikel, 1);
+            model.addAttribute("bestelling", bestelling);
+            return "bestelling/toevoegengelukt";  
+        }
+        
+        
+        
+        
 
     // Bestelling opslaan
-//    @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
-//        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){
-//          if (result.hasErrors()){
-//              model.addAttribute("error", "er is een error " + result.getNestedPath());
-//              return "bestelling/addbestelling";
-//          }  
-//         // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
-//         // bs.voegBestellingToe(bestelling, artikelAantal, artikel);
-//          model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
-//          
-//          return "bestelling/toevoegengelukt";
-//        }
+    @RequestMapping(value = {"/bestelling/createbestelling{klantId}", "/bestelling/createbestelling"}, method = RequestMethod.POST)
+        public String saveBestelling(@Valid Bestelling bestelling, BindingResult result, ModelMap model, @PathVariable Long klantId){
+          if (result.hasErrors()){
+              model.addAttribute("error", "er is een error " + result.getNestedPath());
+              return "bestelling/addbestelling";
+          }  
+         // >> zie hierboven: artikelaantal en artikel eerst ophalen om hier toe te kunnen voegen
+         // bs.voegBestellingToe(bestelling, artikelAantal, artikel);
+         // model.addAttribute("succes", "Bestelling: " + bestelling.getId() + "BestellingDatum: " + bestelling.getBestellingDatum() + "Bestelling Klant: " + bestelling.getKlant().getId());
+          
+          return "bestelling/toevoegengelukt";
+        }
         
         
     /*
@@ -183,7 +210,7 @@ public class BestellingController {
         
     
     // bestelling ophalen
-    @RequestMapping(value = {"bestelling/readbestelling-{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"bestelling/readbestelling{id}"}, method = RequestMethod.GET)
         public String readBestelling (@PathVariable Long id, ModelMap model){
             Bestelling bestelling = bestellingService.zoekNaarBean(id);
             ArrayList <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(id);
@@ -193,23 +220,25 @@ public class BestellingController {
         }
         
     // bestelling updaten     
-    @RequestMapping(value = {"/bestelling/updatebestelling"}, method = RequestMethod.POST)    
-        public String updateBestelling (@PathVariable Long Id, ModelMap model) {
-            Bestelling bestelling = (Bestelling)bestellingService.zoekNaarBean(Id);
+    @RequestMapping(value = {"/bestelling/updatebestelling{bestellingId}"}, method = RequestMethod.POST)    
+        public String updateBestelling (@PathVariable Long bestellingId, ModelMap model) {
+            Bestelling bestelling = (Bestelling)bestellingService.zoekNaarBean(bestellingId);
+            ArrayList <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(bestellingId);
+            model.addAttribute("bestellingartikellijst", bestellingartikellijst);
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("edit", true);
-            return "bestelling/updatebestelling";
+            return "bestelling/createbestelling";
         }
         
     // bestelling verwijderen
-    @RequestMapping(value = {"/bestelling/deletebestelling"}, method = RequestMethod.POST)
-        public String deleteBestelling(@PathVariable Long Id) {
-            bestellingService.verwijderBeanGegevens(Id);
+    @RequestMapping(value = {"/bestelling/deletebestelling{bestellingId}"}, method = RequestMethod.GET)
+        public String deleteBestelling(@PathVariable Long bestellingId) {
+            bestellingService.verwijderBeanGegevens(bestellingId);
             return "bestelling/deletebestelling";
         }
     
     // alle bestellingen verwijderen    
-    @RequestMapping(value = {"/bestelling/deleteallbestelling"}, method = RequestMethod.POST)    
+    @RequestMapping(value = {"/bestelling/deleteallbestelling"}, method = RequestMethod.GET)    
         public String delleteAllBestelling(){
             bestellingService.verwijderAlleBeans();
             return "bestelling/deleteallbestelling";

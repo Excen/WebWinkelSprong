@@ -41,11 +41,12 @@
                     <td><a href="<c:url value='/bestelling/artikelinbestelling-${artikel.id}-${artikelAantal}' />">In winkelmandje</a></td>
                     
                     
-                    
-                </tr>
-               
+  
+
         </table>
-        
+                      
+                <img src="../../../resources/plaatjes/${artikel.artikelNummer}.jpg" width="284" height="177" alt="${artikel.artikelNummer}"/>
+                <img src="../../../resources/plaatjes/romp10.jpg" width="284" height="177" alt="romp10"/>
                     
     </body>
 </html>

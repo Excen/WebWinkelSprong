@@ -43,7 +43,7 @@ public class Bestelling implements Serializable {
     private Date bestellingDatum;
     
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "pk.bestelling", cascade = CascadeType.ALL)
-    private Set<BestellingArtikel> bestellingArtikellen = new HashSet<>();
+    private Set<BestellingArtikel> bestellingArtikellen = new HashSet<>(0);
     
     @OneToOne (mappedBy = "bestelling")
     private Factuur factuur; 
