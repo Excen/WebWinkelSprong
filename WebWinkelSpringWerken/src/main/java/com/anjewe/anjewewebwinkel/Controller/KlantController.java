@@ -39,8 +39,8 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
     @Autowired
     GenericServiceInterface <Adres, Long> adresService = new AdresService();
     
-//    @Autowired
-//    KlantService ks = new KlantService();
+    @Autowired
+    KlantService ks = new KlantService();
     
     @Autowired
     MessageSource messageSource; 
@@ -179,15 +179,15 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         return "klant/toevoegenadresgelukt";
     }
         
-//    @RequestMapping (value= "/klant/adressenbijklant-{Id}", method = RequestMethod.GET)
-//    public String readAdressen(ModelMap model, @PathVariable Long Id, @Valid Klant klant) {
-//        KlantAdres ka = new KlantAdres();
-//        List<Adres> adressen = (List<Adres>)ks.zoekAdressenBijKlant(klant);
-//        model.addAttribute("adressen", adressen);
-//        
-//        return "klant/adressenbijklant";
-//    }     
-//     
+    @RequestMapping (value= "/klant/adressenbijklant-{Id}", method = RequestMethod.GET)
+    public String readAdressen(ModelMap model, @PathVariable Long Id, @Valid Klant klant) {
+        KlantAdres ka = new KlantAdres();
+        List<Adres> adressen = (List<Adres>)ks.zoekAdressenBijKlant(klant);
+        model.addAttribute("adressen", adressen);
+        
+        return "klant/adressenbijklant";
+    }     
+     
     
     
 }
