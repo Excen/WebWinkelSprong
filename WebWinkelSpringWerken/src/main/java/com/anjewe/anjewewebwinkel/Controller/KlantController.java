@@ -186,6 +186,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         model.addAttribute("adressen", adressen);
         
         return "klant/adressenbijklant";
-    }      
+    }     
+    
     
 }
