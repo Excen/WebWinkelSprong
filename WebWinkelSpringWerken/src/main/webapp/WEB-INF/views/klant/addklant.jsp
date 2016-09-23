@@ -17,14 +17,19 @@
         <form method = "POST" >
                         
           <c:choose>
-              <%-- <c:when test="${edit}">
+              <c:when test="${edit}">
                     klant nummer &nbsp <input type = "text" name = "klantNummer" /><br/>
                     Voornaam <input type = "text" name = "voornaam" /> <br/>
                     Achternaam <input type = "text" name = "achternaam" /> <br/>
                     Tussenvoegsel <input type = "text" name = "tussenvoegsel" /> <br/>
                     Email <input type = "text" name = "email" /> <br/>
+                    
+                    <input type = "submit" value = "opslaan"/> || 
+                    <a href="<c:url value='/klant/readallklant' />">Annuleer</a> || 
+            
+                    <a href = "<c:url value = "/klant/addadrestoklant-${klant.id}"/>">voeg adres toe</a>
               </c:when>
-              --%>
+              
               <c:otherwise>
                     klant nummer &nbsp <input type = "text" name = "klantNummer" /><br/>
                     Voornaam &nbsp &nbsp <input type = "text" name = "voornaam" /> <br/>
@@ -32,12 +37,7 @@
                     Tussenvoegsel &nbsp <input type = "text" name = "tussenvoegsel" /> <br/>
                     Email &nbsp &nbsp &nbsp <input type = "email" name = "email" /> <br/>
                     <input type="submit" value="voeg toe" /> |
-                    <a href="<c:url value='/klant/readallklant' />">Annuleer</a>
-                    
-                    <%--
-                    doorverwijzen naar methode die klant kan terug geven
-                    --%>
-                   
+                    <a href="<c:url value='/klant/readallklant' />">Annuleer</a>       
                     
                     
               </c:otherwise>
@@ -48,3 +48,5 @@
            
     </body>
 </html>
+
+   

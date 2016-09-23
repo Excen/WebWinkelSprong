@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alle klanten ophalen</title>
     </head>
@@ -30,12 +31,24 @@
                     <td>${klant.achternaam}</td>
                     <td>${klant.tussenvoegsel}</td>
                     <td>${klant.email}</td>
-                    <td><form method="POST"><input type ="hidden" name="KlantId" value="${klant.id}">
+                    td><form method="POST"><input type ="hidden" name="KlantId" value="${klant.id}">
                             <input type="submit" value="Bestelling maken"></input></form>
-                    </td>
+                   
+                     <td><a href="<c:url value='/klant/updateklant-${klant.id}' />">wijzig || </a></td> 
+                    <td><a href="<c:url value='/klant/deleteklant-${klant.id}' />">verwijder || </a></td>   
+                    <td><a href = "<c:url value ='/klant/adressenbijklant-${klant.id}'/>">adressen || </a></td>  
+                     <td><a href="<c:url value='/klant/addadrestoklant-${klant.id}' />">adres toevoegen</a></td> 
+                    
                 </tr>
                 </c:forEach>             
             </table>
+            <br/>
+        <a href = "<c:url value = '/klant/createklant'/>" >Nieuwe klant toevoegen </a>
+        <br/>
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         </div>
     </body>
 </html>
+
+
+              
