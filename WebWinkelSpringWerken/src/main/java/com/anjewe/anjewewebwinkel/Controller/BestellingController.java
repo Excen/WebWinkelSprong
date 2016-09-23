@@ -11,6 +11,7 @@ import com.anjewe.anjewewebwinkel.POJO.Account;
 import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
+import com.anjewe.anjewewebwinkel.POJO.BestellingArtikelId;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
 import com.anjewe.anjewewebwinkel.Service.ArtikelService;
 import com.anjewe.anjewewebwinkel.Service.BestellingService;
@@ -102,6 +103,10 @@ public class BestellingController {
                 @Valid Bestelling bestelling, @RequestParam ("ArtikelId") Long ArtikelId, BindingResult result, ModelMap model){
            
             Artikel artikel = artikelService.zoekNaarBean(ArtikelId);
+            BestellingArtikelId BSID = new BestellingArtikelId();
+            BSID.setArtikel(artikel);
+            BSID.setBestelling(bestellingService.zoekNaarBean(bestellingId));
+            
             bestelling = bs.wijzigBestelling(bestellingId, artikel, 1);
             
             model.addAttribute("bestelling", bestelling);
