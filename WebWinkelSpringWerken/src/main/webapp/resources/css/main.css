@@ -5,7 +5,7 @@ body {
     background-position: center center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
-    color: darkorange;
+    color: darkslateblue;
     font-family: 'Agency FB';
     text-decoration:none;
 }
@@ -25,10 +25,10 @@ nav {
 }
 
 .navigatie li:hover{
-    color: darkorange;
+    color: sienna;
     cursor:pointer;
     font-weight: bold;
-    font-size:28px;
+    font-size:17px;
 }
 
 a:link{
@@ -40,11 +40,11 @@ a:link{
 } 
     
 li a:visited{
-    color: darkorange;
+    color: darkslateblue;
     text-decoration: none;
 }
 li a:active{
-    color: darkorange;
+    color: darkslateblue;
     text-decoration: none;
 }
     
@@ -57,7 +57,7 @@ li a:active{
 
 p{
     font-size: 30px; 
-    color: darkorange;
+    color: darkslateblue;
 }
 
 input{
@@ -72,7 +72,7 @@ input{
         outline:none !important;}
     
 input[type="submit"]{
-    background: darkorange;
+    background: darkslateblue;
     color: gray;
 }
 

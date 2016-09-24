@@ -45,6 +45,9 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     @Autowired
     protected BestellingArtikelDao bestellingArtikelDao;
     
+     @Autowired
+    protected GenericDaoImpl<BestellingArtikel, Long> baDao;
+    
     @Autowired
     protected GenericDaoImpl<Bestelling, Long> bestellingDao;
     
@@ -141,41 +144,48 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
 
     // Optionele bestellingArtikel lijstzoekmethode
     
-    public ArrayList<BestellingArtikel> zoekBestellingArtikelByBestellingId(Long Id){
-        ArrayList<BestellingArtikel>BSLijst = new ArrayList<>();
-        BSLijst = bestellingArtikelDao.readByBestellingId(Id);
-        return BSLijst;
-                
+    public Set<BestellingArtikel> zoekBestellingArtikelByBestellingId(Long Id){
+        bestelling = (Bestelling)bestellingDao.readById(Id);
+        ArrayList<BestellingArtikel> baLijst = (ArrayList<BestellingArtikel>) baDao.readAll(BestellingArtikel.class);
+        Set<BestellingArtikel> set = new HashSet<>();
+        
+        for (BestellingArtikel ba : baLijst) {
+                    //Artikel art = ba.getArtikel();
+                    Bestelling best = ba.getBestelling();
+                    if (Objects.equals(best, bestelling))
+                        set.add(ba);
+                }    
+        
+        return set;                
     }
     
      public Bestelling wijzigBestelling(Long bestellingId, Artikel a, int artikelAantal) {
        
          Bestelling t = (Bestelling)bestellingDao.readById(bestellingId);
         if (t != null){
-            t.setFactuur(t.getFactuur());
-            t.setId(t.getId());
-            t.setKlant(t.getKlant());
-            t.setBestellingDatum(t.getBestellingDatum());
+//            t.setFactuur(t.getFactuur());
+//            t.setId(t.getId());
+//            t.setKlant(t.getKlant());
+//            t.setBestellingDatum(t.getBestellingDatum());
         
-        ArrayList<BestellingArtikel> baLijst = bestellingArtikelDao.readByBestellingId(bestellingId);
+        ArrayList<BestellingArtikel> baLijst = (ArrayList<BestellingArtikel>) baDao.readAll(BestellingArtikel.class);
         Set<BestellingArtikel> set = new HashSet<>();
            
             if (artikelAantal >= 1){
                 //Artikel a = artikelDao.readById(artikelId);
                 Bestelling b = bestellingDao.readById(bestellingId);
                 
-                for (Iterator<BestellingArtikel> it = baLijst.iterator(); it.hasNext();) {
-                    BestellingArtikel bestellingArtikel = it.next();
+                for (BestellingArtikel ba : baLijst) {
                     //Artikel art = ba.getArtikel();
-                    Bestelling best = bestellingArtikel.getBestelling();
+                    Bestelling best = ba.getBestelling();
                     if (Objects.equals(best, b))
-                        set.add(bestellingArtikel);
+                        set.add(ba);
                 }
-                bestellingArtikel = new BestellingArtikel();
+                //bestellingArtikel = new BestellingArtikel();
                 bestellingArtikel.setArtikel(a);
                 bestellingArtikel.setBestelling(b);
                 bestellingArtikel.setArtikelAantal(artikelAantal);
-                bestellingArtikel = bestellingArtikelDao.insertReturnType(bestellingArtikel); // hier moet een long Id uitkomen
+                //bestellingArtikel = (BestellingArtikel) bestellingArtikelDao.insertReturnType(bestellingArtikel); // hier moet een long Id uitkomen
                 
                 set.add(bestellingArtikel);
                 t.setBestellingArtikellen(set);

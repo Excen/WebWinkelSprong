@@ -100,7 +100,7 @@ public class Bestelling implements Serializable {
     
     @Override
     public String toString(){
-         String output = "Bestelling ID: " + this.getId() + "\n Klant ID: " + this.getKlant().getKlantNummer();
+         String output = "Bestelling ID: " + this.getId() + "\n Klant ID: " + this.getKlant().getId();
          return output;
     }
 
@@ -113,9 +113,4 @@ public class Bestelling implements Serializable {
     }
     
     
-   
-
-
-
-
 }
