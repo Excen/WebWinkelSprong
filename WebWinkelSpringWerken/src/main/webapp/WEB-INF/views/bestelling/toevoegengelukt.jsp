@@ -22,9 +22,9 @@
         ${artikelAantal}
         </div>
     
-        <a href="<c:url value='#' />">
-            <input type="button" value="bestelling afronden"></a>
-        <a href="<c:url value='#' />">
+        <a href="<c:url value='/factuur/createfactuur-${bestellingId}' />">
+            <input type="button" value="bestelling afronden" ><input type = "hidden" name="bestellingId" value="${bestellingId}"></a>
+        <a href="<c:url value="/artikel/artikelkeuzelijst-${bestellingId}" />">
             <input type="button" value="verder winkelen"></a>
         <a href="<c:url value='/bestelling/homebestelling' />">
             <input type="button" value="terug naar home"></a>

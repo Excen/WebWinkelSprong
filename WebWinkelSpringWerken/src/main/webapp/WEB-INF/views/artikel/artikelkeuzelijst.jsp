@@ -16,7 +16,7 @@
     </head>
     <body>
         
-         <form method="POST">
+         
         <div align = "center">
            <h1>Keuzelijst Artikelen</h1>   
              <table>
@@ -26,29 +26,23 @@
                 <th>Aantal</th>
                 <th></th>
                 <th></th>
-                <th></th>
+                
              
                
                 <c:forEach var="artikel" items="${artikellijst}" varStatus="status">
-                <tr>  
-                                  
+                <tr>  <form method="POST">
                     <td>${artikel.artikelNummer}</td>
                     <td>${artikel.artikelNaam}</td>                    
                     <td><fmt:setLocale value='de-DE' />
                     <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="€" value="${artikel.artikelPrijs}" />
                     </td>
-                    <td><input type="text" name = "artikelAantal" size = "3" 
-                                                   value="${bestellingArtikel.artikelAantal}"/></td>
-                    
-                    
-                    <td><a href="<c:url value='/artikel/readartikel-${artikel.id}' />"> Bekijk artikel </a></td>  
-                     
-                    <td><input type ="hidden" name="ArtikelId" value="${artikel.id}">
-                            <input type="submit" value="Bestelling toevoegen"/> </td>
-                    
+                    <td><input type="text" name="artikelAantal" size="3" value="${bestellingArtikel.artikelAantal}"/></td>                     
+                    <td> <input type ="hidden" name="ArtikelId" value="${artikel.id}"><td>
+                    <td> <input type="submit" value="Artikel toevoegen"/></td>
+                     </form>   <td><a href="<c:url value='/artikel/readartikel-${artikel.id}' />"> Bekijk artikel </a></td> 
              </tr> 
                </c:forEach>
-                                
+                              
            </table>
         <br/>
         <a href = "<c:url value = '/bestelling/homebestelling'/>" >Terug naar start bestelling </a>
@@ -57,7 +51,7 @@
         </div>        
                           
         
-       </form>
+       
  
     </body>
 </html>

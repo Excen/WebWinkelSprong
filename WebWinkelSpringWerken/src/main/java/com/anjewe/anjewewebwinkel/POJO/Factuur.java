@@ -50,7 +50,7 @@ public class Factuur implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "factuur")
     private Set<Betaling> betalingset;
     
-    @OneToOne (fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BESTELLING_ID")
     protected Bestelling bestelling;
     

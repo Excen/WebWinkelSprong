@@ -97,6 +97,7 @@ public class BestellingController {
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("artikel", artikel);
             model.addAttribute("artikelAantal", artikelAantal);
+            model.addAttribute("bestellingId", bestellingId);
             
             return "bestelling/toevoegengelukt";  
         }

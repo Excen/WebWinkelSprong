@@ -6,8 +6,11 @@ package com.anjewe.anjewewebwinkel.Service;
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
 import com.anjewe.anjewewebwinkel.DAOs.FactuurDao;
+import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.Factuur;
+import com.anjewe.anjewewebwinkel.POJO.Klant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +32,10 @@ private static final Logger log = LoggerFactory.getLogger(FactuurService.class);
     Factuur gewijzigdeFactuur;   
     @Autowired
     GenericDaoImpl<Factuur, Long> factuurDao = new FactuurDao();  
-    
+    @Autowired
+    BestellingService bs; 
+    @Autowired
+    GenericServiceInterface<Klant, Long> klantService;
    
        
     
@@ -40,9 +46,24 @@ private static final Logger log = LoggerFactory.getLogger(FactuurService.class);
 
     @Override
     public Long voegNieuweBeanToe(Factuur factuur) {
+        
+        
        Long factuurId = factuurDao.insert(factuur); 
-       return factuurId; 
-    }
+       return factuurId; }
+    
+    
+    public Long voegFactuurToe(Factuur factuur, Long klantId, Long bestellingId){
+        
+            // eerst bestelling gegevens ophalen?
+            Bestelling bestelling = bs.zoekNaarBean(bestellingId);    
+            factuur.setBestelling(bestelling);
+            Klant klant = klantService.zoekNaarBean(klantId);
+            factuur.setKlant(klant);
+            factuur.setFactuurdatum(new Date());
+            
+            Long factuurId = factuurDao.insert(factuur);
+        return factuurId;
+    } 
 
     @Override
     public Factuur zoekNaarBean(Long Id) {

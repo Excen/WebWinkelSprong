@@ -28,11 +28,11 @@
                 <c:forEach var="factuur" items="${factuurlijst}" varStatus="status">
                 <tr>
                     <td><c:out value ="${factuur.id}"/></td>
-                    <td><c:out value = "${factuur.factuurnummer}"/>></td>
-                    <td><c:out value = "${factuur.factuurdatum}"/>></td>  
+                    <td><c:out value = "${factuur.factuurnummer}"/></td>
+                    <td><c:out value = "${factuur.factuurdatum}"/></td>  
                     <td><a href="<c:url value='/factuur/updatefactuur-${factuur.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/factuur/deletefactuur-${factuur.id}' />">verwijder </a></td>     
-                    <td><a href=" "<c:url value="/factuur/readfactuur-${factuur.id}" />>gegevens inzien</a></td>
+                    <td><a href= "<c:url value="/factuur/readfactuur-${factuur.id}" />">gegevens inzien</a></td>
                 </tr>
                 </c:forEach>
                 

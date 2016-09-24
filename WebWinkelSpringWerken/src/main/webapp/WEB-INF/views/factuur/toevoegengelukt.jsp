@@ -1,4 +1,4 @@
-<%@taglib prefix="c"uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core"%>
 <%-- 
     Document   : toevoegengelukt
     Created on : 19-sep-2016, 0:03:20
@@ -15,9 +15,21 @@
     </head>
     <body>
         <h1>Factuur succesvol toegevoegd</h1>
-        <div>${succes}</div>
-        <div>${factuurBedrag}</div>
-        <table>
+        <div>${success}</div>
+        
+        <table>    
+            <th>Artikel</th>
+            <th>Aantal</th>
+        
+        <c:forEach var="bestellingartikel" items="${bestelartikelset}" varStatus = "status">
+            <tr>
+                <td>${bestellingArtikel.artikel}</td>
+                <td>${bestellingArtikel.artikelAantal}</td>    
+            </tr>
+        </c:forEach>
+        </table>    
+        <div> ${factuurbedrag}</div>
+       <table>
             <th>Betaaldatum</th>
             <th>Betaalwijze</th>
             <c:forEach var="betaling" items ="${betalingset}" varStatus = "status">
