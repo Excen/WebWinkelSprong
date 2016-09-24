@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <title>Adres aan klant toevoegen</title>
     </head>
     <body>
@@ -16,12 +17,12 @@
         <form method ="POST">
             <c:choose>
                 <c:when test = "${edit}">
-                    straatnaam <input type ="text" name ="straatnaam" /><br/>
-                    postcode <input type ="text" name= "postcode" /><br/>
-                    toevoeging <input type = "text" name = "toevoeging" /><br/>
-                    huisnummer <input type ="text" name = "huisnummer" /><br/>
-                    woonplaats <input type = "text" name = "woonplaats" /><br/>
-                    Adres type <select name="adresType" >                
+                    Straatnaam <input type = "text" name = "straatnaam" /> <br/>
+                    Huisnummer <input type = "text" name = "huisnummer" /> <br/>
+                    Toevoeging <input type = "text" name = "toevoeging" /><br/>
+                    Postcode  <input type = "text" name = "postcode" /><br/>
+                    Woonplaats <input type = "text" name = "woonplaats" /><br/>
+                    Adres type <select name="adresType" >
                         <c:forEach items="${enumValues}" var="adresType" varStatus = "status">
                             <option value="${adresType}" label="--Maak uw keuze">                                
                                 <c:out value="${adresType}"></c:out>

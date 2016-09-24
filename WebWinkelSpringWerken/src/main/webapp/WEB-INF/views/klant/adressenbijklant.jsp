@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : adressenbijklant
     Created on : 23-sep-2016, 10:55:26
@@ -15,7 +16,7 @@
     </head>
     <body>
         <div align="center">
-        <h1>Adressen bij klant et klantId - $(klant.id}</h1>
+        <h1>Adressen bij klant met klantId - $(klant.id}</h1>
         <table>
                
             <th>AdresId</th>
