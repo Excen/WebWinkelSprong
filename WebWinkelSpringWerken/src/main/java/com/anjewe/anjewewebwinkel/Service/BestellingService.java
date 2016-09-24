@@ -97,6 +97,9 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     @Override
     public Bestelling zoekNaarBean(Long Id) {
         bestelling = (Bestelling)bestellingDao.readById(Id);
+        Set<BestellingArtikel>set = zoekBestellingArtikelByBestellingId(Id);
+        bestelling.setBestellingArtikellen(set);
+        bestelling.setKlant(bestelling.getKlant());
         return bestelling;
     }
 
@@ -180,6 +183,7 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
                     Bestelling best = ba.getBestelling();
                     if (Objects.equals(best, b))
                         set.add(ba);
+                    // als al bestaat > artikel++
                 }
                 //bestellingArtikel = new BestellingArtikel();
                 bestellingArtikel.setArtikel(a);

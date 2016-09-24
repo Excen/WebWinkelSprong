@@ -5,8 +5,11 @@ import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
 import com.anjewe.anjewewebwinkel.POJO.Betaling;
 import com.anjewe.anjewewebwinkel.POJO.Factuur;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
+import com.anjewe.anjewewebwinkel.Service.BestellingService;
+import com.anjewe.anjewewebwinkel.Service.FactuurService;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Set;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -30,8 +33,13 @@ public class FactuurController {
         @Autowired
         GenericServiceInterface<Factuur, Long> factuurService;
         @Autowired
+        FactuurService fs;
+        @Autowired
         GenericServiceInterface<Bestelling, Long> bestellingService;
-
+        @Autowired
+        BestellingService bs;
+        @Autowired
+        GenericServiceInterface<Klant, Long> klantService;
 
         // startpagina factuur
         @RequestMapping(value = "/factuur/homefactuur", method = RequestMethod.GET)
@@ -40,35 +48,57 @@ public class FactuurController {
         }
 
         // nieuwe factuur aanmaken
-        @RequestMapping(value = "/factuur/createfactuur", method = RequestMethod.GET)
-        public String nieuwFactuur(ModelMap model) {
+        @RequestMapping(value = "/factuur/createfactuur-{bestellingId}", method = RequestMethod.GET)
+        public String nieuwFactuur(ModelMap model, @PathVariable Long bestellingId) {
+            
+            Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
+            Long klantId = bestelling.getKlant().getId();
+            Klant klant = klantService.zoekNaarBean(klantId);
             Factuur factuur = new Factuur();
-            model.addAttribute("factuur", factuur);
+            
+            model.addAttribute("bestelling", bestelling);
+            model.addAttribute("klant", klant);
             model.addAttribute("edit", false);
             return "factuur/addfactuur";
-
         }
         
         // nieuwe factuuropslaan
-        @RequestMapping (value = "/factuur/createfactuur", method = RequestMethod.POST)
-        public String saveFactuur(ModelMap model, @Valid Factuur factuur, BindingResult result){
+        @RequestMapping (value = "/factuur/createfactuur-{bestellingId}", method = RequestMethod.POST)
+        public String saveFactuur(ModelMap model, @Valid Factuur f, @Valid Bestelling bestelling, 
+                @Valid Klant klant, BindingResult result, @PathVariable Long bestellingId){
 
             if (result.hasErrors()) {
-                        return "factuur/addfactuur"; // aanpassen> aangeven waar error zit
-                    }
-
-            factuurService.voegNieuweBeanToe(factuur);
-               model.addAttribute("success", "Factuur: Factuurnummer " + factuur.getFactuurnummer()
-                            + " Factuurdatum  " + factuur.getFactuurdatum()+ " Factuur bij bestelling  " 
-                            + factuur.getBestelling()+ " bijbehorende klant" + factuur.getKlant()+ 
+                model.addAttribute("error", result.toString());
+                        return "factuur/addfactuur"; 
+                }
+            
+            bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
+            Long klantId = bestelling.getKlant().getId();
+            fs.voegFactuurToe(f, klantId, bestellingId );
+            //Factuur f = factuurService.zoekNaarBean(factuurId);
+            //factuurService.voegNieuweBeanToe(factuur);
+            model.addAttribute("success", "FactuurId: " + f.getId() +" en factuurnummer:  " + f.getFactuurnummer()
+                            + " Factuurdatum  " + f.getFactuurdatum()+ /*" Factuur bij bestelling  " 
+                            + f.getBestelling()+ " bijbehorende klant" + f.getKlant()+ */
                             " is toegevoegd aan het bestand");
 
-               double factuurBedrag = berekenTotaalBedrag(factuur);
+               
+                    // bedrag berekenen
+                     double totaalBedrag = 0.0;   
+                     Set<BestellingArtikel> ba = (BestellingArtikel) bs.zoekBestellingArtikelByBestellingId(bestellingId);
+                     for (BestellingArtikel bestelArtikel : ba) {
+                         int aantal = bestelArtikel.getArtikelAantal();
+                         double artPrijs = bestelArtikel.getArtikel().getArtikelPrijs();
+                         double bedrag = aantal * artPrijs;
+                         totaalBedrag += bedrag;
+                     }
+                
                model.addAttribute("factuurbedrag", 
-                            "Het totale bedrag van de factuur bedraagt € " + factuurBedrag);
-
-               Set <Betaling> betalingen = factuur.getBetalingset();   
-               model.addAttribute("betalingset", betalingen );
+                            "Het totale bedrag van de factuur bedraagt € " + totaalBedrag);
+                
+               model.addAttribute("bestelartikelset", ba);
+//             Set <Betaling> betalingen = factuur.getBetalingset();   
+//               model.addAttribute("betalingset", betalingen );
 
                return "factuur/toevoegengelukt"; 
         }
@@ -79,8 +109,7 @@ public class FactuurController {
             ArrayList<Factuur> factuurLijst = (ArrayList<Factuur>) factuurService.zoekAlleBeans();
             model.addAttribute("factuurlijst", factuurLijst);
             return "factuur/readallfactuur";            
-// waar de loop voor betaling view of hier?
-// waar bedrag berekenen view of hier?
+
         }
 
         // readone
@@ -101,7 +130,7 @@ public class FactuurController {
                 Klant klant = factuur.getKlant();
                 model.addAttribute("factuurklant", 
                         klant.getVoornaam() + " " + klant.getTussenvoegsel() + " " + klant.getAchternaam());
-                double factuurBedrag = berekenTotaalBedrag(factuur);
+                double factuurBedrag = berekenTotaalBedrag(factuur.getBestelling().getId());
                 model.addAttribute("factuurbedrag", factuurBedrag);
             
                 return "factuur/readfactuur";
@@ -113,6 +142,7 @@ public class FactuurController {
         public String update () {
                 return "factuur/updatefactuur";
             }
+        
         
         @RequestMapping (value = {"/factuur/updatefactuur-{Id}"}, method = RequestMethod.POST)
         public String updateFactuur(@PathVariable Long Id, ModelMap model, BindingResult result, 
@@ -128,7 +158,7 @@ public class FactuurController {
                         + factuur.getBestelling()+ " bijbehorende klant" + factuur.getKlant()+ 
                         " is gewijzigd in het bestand");
 
-            double factuurBedrag = berekenTotaalBedrag(factuur);
+            double factuurBedrag = berekenTotaalBedrag(factuur.getBestelling().getId());                        
             model.addAttribute("factuurbedrag", 
                         "Het totale bedrag van de factuur bedraagt € " + factuurBedrag);
 
@@ -153,16 +183,15 @@ public class FactuurController {
          }  
 
         
-        public double berekenTotaalBedrag(Factuur factuur) {
+        public double berekenTotaalBedrag(Long bestellingId) {
 
-            double totaalBedrag = 0.0;
-            long bestellingId = factuur.getBestelling().getId();
-
-            Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
-            Set<BestellingArtikel> ba = bestelling.getBestellingArtikellen();
+            double totaalBedrag = 0.0;            
+//            Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
+            
+            Set<BestellingArtikel> ba = bs.zoekBestellingArtikelByBestellingId(bestellingId);
             for (BestellingArtikel bestelArtikel : ba) {
                 int aantal = bestelArtikel.getArtikelAantal();
-                //moet artikel uit db gehaal worden? of fetchtype.eager?
+                //artikel = bestelArtikel.getArtikel();
                 double artPrijs = bestelArtikel.getArtikel().getArtikelPrijs();
                 double bedrag = aantal * artPrijs;
 

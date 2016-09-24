@@ -19,9 +19,9 @@
         
         <form method = "POST">
             
-            Factuurnummer <input type = "text" name = "factuurnummer" value =${factuur.factuurnummer}/> <br/>
+            Factuurnummer <input type = "text" name = "factuurnummer" value ="2016-${bestelling.id}" /> <br/>
             Factuurdatum <input type = "text" name = "factuurdatum" value = ${factuur.factuurdatum}/><br/>
-            Bestelling <input type = "text" name = "artikelNummer" value = ${factuur.bestelling}/><br/>
+            Bestelling <input type = "text" name = "bestelling" value = ${factuur.bestelling}/><br/>
             Klant <input type = "text" name = "klant" value = ${factuur.klant}/> <br/>
             Betaling <input type = "text" name = "betaling" value = ${factuur.betalingset}/><br/>
 
