@@ -3,6 +3,7 @@
 
 package com.anjewe.anjewewebwinkel.Controller;
 import com.anjewe.anjewewebwinkel.POJO.Adres;
+import com.anjewe.anjewewebwinkel.POJO.AdresType;
 import com.anjewe.anjewewebwinkel.Service.KlantService;
 import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Klant;
@@ -11,6 +12,7 @@ import com.anjewe.anjewewebwinkel.Service.AdresService;
 import com.anjewe.anjewewebwinkel.Service.ArtikelService;
 import com.anjewe.anjewewebwinkel.Service.GenericServiceInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
@@ -69,9 +71,8 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         }
 
         // save        
-        @RequestMapping(value = { "/klant/createklant", "/account/createaccount" }, method = RequestMethod.POST)
-        public String saveKlant(@Valid Klant klant, BindingResult result,
-            ModelMap model){
+        @RequestMapping(value =  "/klant/createklant", method = RequestMethod.POST)
+        public String saveKlant(@Valid Klant klant, ModelMap model, BindingResult result){
             
                 if (result.hasErrors()) {
                     return "klant/addklant"; // aanpassen> aangeven waar error zit
@@ -81,9 +82,9 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
                 
                 
                 model.addAttribute("success", "Klant: Klant nummer " + klant.getKlantNummer()
-                        + " Klant voornaam " + klant.getVoornaam() + " Klant achternaam " 
-                        + klant.getAchternaam() + " Tussenvoegsel " + klant.getTussenvoegsel() 
-                        + " Klant email " + klant.getEmail() + " is toegevoegd aan het bestand");
+                        + ", klant voornaam: " + klant.getVoornaam() + ", klant achternaam: " 
+                        + klant.getAchternaam() + ", tussenvoegsel: " + klant.getTussenvoegsel() 
+                        + ", klant email: " + klant.getEmail() + " is toegevoegd aan het bestand");
             //return "success"; 
               
             return "klant/toevoegengelukt"; 
@@ -147,15 +148,19 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
     public String createAdresVoorKlant(@PathVariable Long Id, ModelMap model) {
         Long klantId = Id;
         Adres adres = new Adres();
+        
+        AdresType[] at = AdresType.values();
+        List<AdresType> enumValues =  Arrays.asList(at);
         model.addAttribute("adres", adres);
-        model.addAttribute("adresId", Id);
+        model.addAttribute("enumValues", enumValues);
+        model.addAttribute("klantId", Id);
         model.addAttribute("edit", false);
         
         return "/adres/addadres";
     }
         
     @RequestMapping (value = "/klant/addadrestoklant-{Id}", method = RequestMethod.POST)
-    public String voegAdresAanKlantToe(@PathVariable Long Id, ModelMap model, BindingResult result, @Valid Adres adres) {
+    public String voegAdresAanKlantToe(@Valid Adres adres, ModelMap model, BindingResult result, @PathVariable Long Id) {
         
         if (result.hasErrors()) {
             return "klant/addklant";
@@ -173,10 +178,10 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
                 " is toegevoegd aan klant met id: " + klant.getId());
         
         // deze kan niet worden aan geroepen ivm lazy / bij eager stackoverflow
-        model.addAttribute("klantadresset", adres.getKlantAdressen());
+       // model.addAttribute("klantadresset", adres.getKlantAdressen());
         
         
-        return "klant/toevoegenadresgelukt";
+        return "adres/toevoegengelukt";
     }
         
     @RequestMapping (value= "/klant/adressenbijklant-{Id}", method = RequestMethod.GET)
@@ -184,7 +189,7 @@ private static final Logger log = LoggerFactory.getLogger(KlantController.class)
         KlantAdres ka = new KlantAdres();
         List<Adres> adressen = (List<Adres>)ks.zoekAdressenBijKlant(klant);
         model.addAttribute("adressen", adressen);
-        
+    
         return "klant/adressenbijklant";
     }     
     

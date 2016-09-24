@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Wendy
  */
-@Transactional
 @Service
 public class KlantService implements GenericServiceInterface <Klant, Long> {
 

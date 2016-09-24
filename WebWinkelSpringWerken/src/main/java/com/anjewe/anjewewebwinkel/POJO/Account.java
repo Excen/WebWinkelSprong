@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.stereotype.Component;
 
 /**
@@ -45,7 +46,7 @@ public class Account implements Serializable {
     @JoinColumn(name ="KLANT_ID")// hoe zit de relatie met klant?
     private Klant klant;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date creatieDatum;
 
     /**

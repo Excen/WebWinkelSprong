@@ -46,12 +46,34 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
             return "account/homeaccount";
         }
     
-    /**
-     * Lijst bestaande accounts
-     * @param model
-     * @return 
-     */
     
+        
+        // create account
+    @RequestMapping(value = {"account", "/account/createaccount"}, method = RequestMethod.GET)
+    public String nieuwAccount(ModelMap model) {
+        Account account = new Account();
+         model.addAttribute("account", account);
+         model.addAttribute("edit", false);  
+        return "account/addaccount";
+    } 
+
+     // save        
+        @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.POST)
+        public String saveAccount(@Valid Account account, BindingResult result, 
+            ModelMap model){
+            
+                if (result.hasErrors()) {
+                    return "account/addaccount"; // aanpassen> aangeven waar error zit
+                } 
+                
+                accountService.voegNieuweBeanToe(account); 
+                model.addAttribute("success", "Account: Account username " + account.getUsername()
+                        + " account password " + account.getPassword() + " is toegevoegd aan het bestand");
+            //return "success"; 
+            return "account/registratiegelukt"; 
+        }   
+    
+        //read all
     @RequestMapping(value = {"accounts", "/account/readallaccount" }, method = RequestMethod.GET)
     public String listAccounts(ModelMap model) { // wat doet modelMap?
  
@@ -66,17 +88,13 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
      * @return 
      */
     
-    @RequestMapping(value = {"account", "/account/createaccount"}, method = RequestMethod.GET)
-    public String nieuwAccount() {
-        return "klant/createklant";
-    }
     
-    @RequestMapping(value = { "account", "/account/createaccountklant-{Id}" }, method = RequestMethod.GET) // value= waarvan?
-    public String nieuwAccountKlant(ModelMap model, @PathVariable Long Id) {
-        Account account = new Account();
-        Klant klant = klantService.zoekNaarBean(Id);
-        account.setKlant(klant);
-        
+//    @RequestMapping(value = { "account", "/account/createaccountklant-{Id}" }, method = RequestMethod.GET) // value= waarvan?
+//    public String nieuwAccountKlant(ModelMap model, @PathVariable Long Id) {
+//        Account account = new Account();
+//        Klant klant = klantService.zoekNaarBean(Id);
+//        account.setKlant(klant);
+//        
 //        dit wil je kunnen doen
 //        begin vanuit account view create
 //          
@@ -86,30 +104,12 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
 //        alles in een view?
 //        
 
-        
-        model.addAttribute("account", account); 
-        model.addAttribute("edit", false); 
-        return "account/addaccount"; 
-    }
+//        
+//        model.addAttribute("account", account); 
+//        model.addAttribute("edit", false); 
+//        return "account/addaccount"; 
+//    }
     
-     // save        
-        @RequestMapping(value = { "/account/createaccountklant-{Id}" }, method = RequestMethod.POST)
-        public String saveAccount(@Valid Account account, @PathVariable Long Id, BindingResult result, 
-            ModelMap model){
-            
-                if (result.hasErrors()) {
-                    return "account/addaccount"; // aanpassen> aangeven waar error zit
-                } 
-                Klant klant = klantService.zoekNaarBean(Id);
-                account.setKlant(klant);
-                
-                accountService.voegNieuweBeanToe(account); 
-                model.addAttribute("success", "Account: Account username " + account.getUsername()
-                        + " account password " + account.getPassword() + " is toegevoegd aan het bestand");
-            //return "success"; 
-            return "account/registratiegelukt"; 
-        }
-        
     
     /**
      * This method will be called on form submission, handling POST request for
