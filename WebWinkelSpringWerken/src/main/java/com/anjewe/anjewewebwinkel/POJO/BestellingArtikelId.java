@@ -57,7 +57,7 @@ public class BestellingArtikelId implements Serializable {
     public int hashCode() {
         int result;
         result = (bestelling != null ? bestelling.hashCode() : 0);
-        result = 31 * result + (bestelling != null ? bestelling.hashCode() : 0);
+        result = 31 * result + (artikel != null ? artikel.hashCode() : 0);
         return result;
     }
 }

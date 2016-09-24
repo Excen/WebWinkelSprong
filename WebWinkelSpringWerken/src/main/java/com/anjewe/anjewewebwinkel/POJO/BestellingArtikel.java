@@ -39,16 +39,16 @@ public class BestellingArtikel implements Serializable {
     
     @Column (nullable = false) 
     private int artikelAantal;
-    
-    @ManyToOne
-    @JoinColumn (name = "ARTIKEL_ID", insertable = false, updatable = false)
-    private Artikel artikel;
-    
-    @ManyToOne
-    @JoinColumn (name = "BESTELLING_ID", insertable = false, updatable = false)
-    private Bestelling bestelling;
-    
-   
+//    
+//    @ManyToOne
+//    @JoinColumn (name = "ARTIKEL_ID", insertable = false, updatable = false)
+//    private Artikel artikel;
+//    
+//    @ManyToOne
+//    @JoinColumn (name = "BESTELLING_ID", insertable = false, updatable = false)
+//    private Bestelling bestelling;
+//    
+//   
     
     
     // Constructor
@@ -91,35 +91,52 @@ public class BestellingArtikel implements Serializable {
     /**
      * @return the artikel
      */
+    @Transient
     public Artikel getArtikel() {
-        return artikel;
+        return getPk().getArtikel();
     }
 
     /**
      * @param artikel the artikel to set
      */
     public void setArtikel(Artikel artikel) {
-        this.artikel = artikel;
+        getPk().setArtikel(artikel);
     }
 
     /**
      * @return the bestelling
      */
+    @Transient
     public Bestelling getBestelling() {
-        return bestelling;
+        return getPk().getBestelling();
     }
 
     /**
      * @param bestelling the bestelling to set
      */
     public void setBestelling(Bestelling bestelling) {
-        this.bestelling = bestelling;
+        getPk().setBestelling(bestelling);
     }
 
-    /**
-     * @return the artikel
-     */
-   
+       @Override
+        public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		BestellingArtikel that = (BestellingArtikel) o;
+
+		return !(getPk() != null ? !getPk().equals(that.getPk())
+                        : that.getPk() != null);
+	}
+
+        @Override
+	public int hashCode() {
+		return (getPk() != null ? getPk().hashCode() : 0);
+	}
+        
+       
    
     
     
