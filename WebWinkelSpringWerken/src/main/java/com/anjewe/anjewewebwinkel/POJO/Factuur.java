@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import static javax.persistence.GenerationType.AUTO;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -50,7 +49,7 @@ public class Factuur implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "factuur")
     private Set<Betaling> betalingset;
     
-    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne (fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BESTELLING_ID")
     protected Bestelling bestelling;
     

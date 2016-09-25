@@ -7,25 +7,20 @@ package com.anjewe.anjewewebwinkel.Service;
 
 
 import com.anjewe.anjewewebwinkel.DAOGenerics.GenericDaoImpl;
-import com.anjewe.anjewewebwinkel.DAOs.ArtikelDao;
 import com.anjewe.anjewewebwinkel.DAOs.BestellingArtikelDao;
-import com.anjewe.anjewewebwinkel.DAOs.BestellingDao;
 import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikelId;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -97,7 +92,7 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
     @Override
     public Bestelling zoekNaarBean(Long Id) {
         bestelling = (Bestelling)bestellingDao.readById(Id);
-        Set<BestellingArtikel>set = zoekBestellingArtikelByBestellingId(Id);
+        Set<BestellingArtikel>set = zoekBestellingArtikelByBestellingId(bestelling);
         bestelling.setBestellingArtikellen(set);
         bestelling.setKlant(bestelling.getKlant());
         return bestelling;
@@ -147,15 +142,15 @@ public class BestellingService implements GenericServiceInterface <Bestelling, L
 
     // Optionele bestellingArtikel lijstzoekmethode
     
-    public Set<BestellingArtikel> zoekBestellingArtikelByBestellingId(Long Id){
-        bestelling = (Bestelling)bestellingDao.readById(Id);
+    public Set<BestellingArtikel> zoekBestellingArtikelByBestellingId(Bestelling bestelling){
+       
         ArrayList<BestellingArtikel> baLijst = (ArrayList<BestellingArtikel>) baDao.readAll(BestellingArtikel.class);
         Set<BestellingArtikel> set = new HashSet<>();
         
         for (BestellingArtikel ba : baLijst) {
                     //Artikel art = ba.getArtikel();
                     Bestelling best = ba.getBestelling();
-                    if (Objects.equals(best, bestelling))
+                    if (Objects.equals(best.getId(), bestelling.getId()))
                         set.add(ba);
                 }    
         

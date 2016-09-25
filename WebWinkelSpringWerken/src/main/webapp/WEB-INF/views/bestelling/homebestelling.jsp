@@ -9,18 +9,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="<c:url value="/src/main/resources/main.css" />" rel="stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <title>Bestelling startpagina</title>
     </head>
     <body>
         <h1>Startpagina Bestelling</h1>
-        <a href = "<c:url value = '/klant/readallklant'/>"> Bestelling toevoegen</a><br>
-        <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Bestelling wijzigen </a><br>
-        <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Zoek bestellinginfo op </a><br>
-        <a href = "<c:url value = '/bestelling/readallbestelling'/>"> Alle Bestellingen opvragen </a><br>
-        <a href = "<c:url value = '/bestelling/deleteallbestelling'/>"> Alle Bestellingen verwijderen </a><br>
+        <p>Wat wilt u doen?</p>
+        
+        <ul>
+            <li><a href = "<c:url value = '/klant/readallklant'/>"> Bestelling toevoegen</a></li>
+            <li><a href = "<c:url value = '/bestelling/readallbestelling'/>"> Bestelling wijzigen </a></li>
+            <li><a href = "<c:url value = '/bestelling/readallbestelling'/>"> Zoek bestellinginfo op </a></li>
+            <li><a href = "<c:url value = '/bestelling/readallbestelling'/>"> Alle Bestellingen opvragen </a></li>
+            <li><a href = "<c:url value = '/bestelling/deleteallbestelling'/>"> Alle Bestellingen verwijderen </a></li>
+        </ul>
         
     </body>
 </html>

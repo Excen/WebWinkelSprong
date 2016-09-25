@@ -20,6 +20,8 @@ import org.springframework.stereotype.Component;
 /**
  * @author Wendy
  */
+
+
 @Component
 public class FactuurService implements GenericServiceInterface <Factuur, Long>{
 
