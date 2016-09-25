@@ -24,7 +24,7 @@
             <li> <a href = "<c:url value = '/betaling/readallbetaling'/>">Overzicht betalingen </a></li>
         </ul>
 
-        
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         
         
     </body>
