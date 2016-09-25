@@ -27,7 +27,7 @@ private static final Logger log = LoggerFactory.getLogger(BestellingArtikelDao.c
         super();
     }
     
-    public ArrayList<BestellingArtikel> readByBestellingId (Long Id){
+    public ArrayList<BestellingArtikel> readByBestellingId(Long Id){
          
         String sqlQuery = "SELECT * FROM bestellingartikel where BESTELLING_ID = " + Id;
         String hqlQuery = "FROM BestellingArtikel ba WHERE ba.bestelling.Id = " + Id;

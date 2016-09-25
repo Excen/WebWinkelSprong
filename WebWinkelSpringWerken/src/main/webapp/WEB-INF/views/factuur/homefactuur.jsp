@@ -17,8 +17,8 @@
         <h1>Factuur start </h1>
         <p>Wat wilt u doen?</p>
         <ul type="disc">
-                <li><a href = "<c:url value = "/factuur/createfactuur"/>"  >Factuur toevoegen</a></li>
-                <li><a href = "<c:url value = "/factuur/deletefactuur"/>"  >Factuur verwijderen</a></li>
+                
+                <li><a href = "<c:url value = "/factuur/readallfactuur"/>">Factuur verwijderen</a></li>
                 <li><a href = "<c:url value = "/factuur/updatefactuur"/>"  >Factuur aanpassen</a></li>
                 <li><a href = "<c:url value = "/factuur/readallfactuur"/>"  >Factuurlijst opvragen</a></li>
             </ul>

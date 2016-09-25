@@ -6,8 +6,6 @@
 package com.anjewe.anjewewebwinkel.Controller;
 
 // imports
-
-
 import com.anjewe.anjewewebwinkel.POJO.Artikel;
 import com.anjewe.anjewewebwinkel.POJO.Bestelling;
 import com.anjewe.anjewewebwinkel.POJO.BestellingArtikel;
