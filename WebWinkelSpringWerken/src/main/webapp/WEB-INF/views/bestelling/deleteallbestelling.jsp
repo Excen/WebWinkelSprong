@@ -16,7 +16,7 @@
         <title>Alle bestelling zijn verwijderd</title>
     </head>
     <body>
-        <a href = <c:url value = '/'/> Terug naar huis </a>
+       <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         
     </body>
 </html>
