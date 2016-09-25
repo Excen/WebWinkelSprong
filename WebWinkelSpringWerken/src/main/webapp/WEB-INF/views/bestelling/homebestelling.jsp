@@ -25,5 +25,7 @@
             <li><a href = "<c:url value = '/bestelling/deleteallbestelling'/>"> Alle Bestellingen verwijderen </a></li>
         </ul>
         
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
+        
     </body>
 </html>

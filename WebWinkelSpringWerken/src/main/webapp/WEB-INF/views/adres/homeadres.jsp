@@ -24,6 +24,7 @@
         <a href = "<c:url value = '/adres/readalladres'/>"> Adressenlijst opvragen </a><br>
         <%--a href = "<c:url value = '/adres/deletealladres'/>"> Adressenlijst verwijderen </a><br--%>
         
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         
     </body>
 </html>
