@@ -60,10 +60,12 @@ p{
     color: darkslateblue;
 }
 
+.bedrag{ font-size: 30px}
+
 input{
      border: 0; 
-     padding: 8px;
-     font-size: 14px;
+     padding: 7px;
+     font-size: 12px;
      border-radius: 20px;
 }
     

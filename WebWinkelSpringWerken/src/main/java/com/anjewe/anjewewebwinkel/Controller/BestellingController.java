@@ -130,7 +130,7 @@ public class BestellingController {
     @RequestMapping(value = {"/bestelling/readbestelling{id}"}, method = RequestMethod.GET)
         public String readBestelling (@PathVariable Long id, ModelMap model){
             Bestelling bestelling = bestellingService.zoekNaarBean(id);
-            Set <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(id);
+            Set <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(bestelling);
             model.addAttribute("bestellingartikellijst", bestellingartikellijst);
             model.addAttribute("bestelling", bestelling);
             return "bestelling/readbestelling";
@@ -140,7 +140,7 @@ public class BestellingController {
     @RequestMapping(value = {"/bestelling/updatebestelling{bestellingId}"}, method = RequestMethod.POST)    
         public String updateBestelling (@PathVariable Long bestellingId, ModelMap model) {
             Bestelling bestelling = (Bestelling)bestellingService.zoekNaarBean(bestellingId);
-            Set <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(bestellingId);
+            Set <BestellingArtikel> bestellingartikellijst = bs.zoekBestellingArtikelByBestellingId(bestelling);
             model.addAttribute("bestellingartikellijst", bestellingartikellijst);
             model.addAttribute("bestelling", bestelling);
             model.addAttribute("edit", true);

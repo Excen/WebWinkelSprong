@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- 
     Document   : toevoegengelukt
     Created on : 19-sep-2016, 0:03:20
@@ -14,35 +15,52 @@
         <title>Factuur toegevoegd</title>
     </head>
     <body>
+        <div  align="center">
         <h1>Factuur succesvol toegevoegd</h1>
-        <div>${success}</div>
+        <h3>${success}</h3>
         
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <table>    
             <th>Artikel</th>
             <th>Aantal</th>
-        
-        <c:forEach var="bestellingartikel" items="${bestelartikelset}" varStatus = "status">
-            <tr>
-                <td>${bestellingArtikel.artikel}</td>
+            
+           
+            
+           
+            <c:forEach var="bestellingArtikel" items="${bestelartikelset}" varStatus = "status">
+             <tr>
+                 <td>${bestellingArtikel.artikel.artikelNaam}</td>
                 <td>${bestellingArtikel.artikelAantal}</td>    
-            </tr>
-        </c:forEach>
-        </table>    
-        <div> ${factuurbedrag}</div>
-       <table>
-            <th>Betaaldatum</th>
-            <th>Betaalwijze</th>
-            <c:forEach var="betaling" items ="${betalingset}" varStatus = "status">
-            <tr>
+             </tr> 
+            </c:forEach>
+          
+            <%--c:forEach var="betaling" items ="${betalingset}" varStatus = "status">
+            
                 <td>${betaling.betaaldatum}</td>
                 <td>${betaling.betaalwijze}</td>
-            </tr>        
-            </c:forEach>
-            
+                   
+            </c:forEach--%>  
+              
+           
         </table>    
+       
+            <h3>Factuurbedrag</h3>
+                <h3><fmt:setLocale value='de-DE' />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="€" value="${factuurbedrag}" />
+                    </h3>
+          
+            
+          
         <br/>
         <br/>
          Ga naar <a href="<c:url value='/factuur/readallfactuur' />"> Facturen in bestand</a>
          Ga naar <a href="<c:url value ="/factuur/homefactuur"/> "> Startpagina factuur</a>
+         
+         </div>
     </body>
 </html>

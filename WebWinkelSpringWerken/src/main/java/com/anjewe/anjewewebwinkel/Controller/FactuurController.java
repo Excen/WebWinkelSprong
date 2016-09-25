@@ -83,24 +83,22 @@ public class FactuurController {
                             " is toegevoegd aan het bestand");
 
                
-                    // bedrag berekenen
-                     double totaalBedrag = 0.0;   
-                     Set<BestellingArtikel> ba = (Set<BestellingArtikel>)bs.zoekBestellingArtikelByBestellingId(bestellingId);
-                     for (BestellingArtikel bestelArtikel : ba) {
-                         int aantal = bestelArtikel.getArtikelAantal();
-                         double artPrijs = bestelArtikel.getArtikel().getArtikelPrijs();
-                         double bedrag = aantal * artPrijs;
-                         totaalBedrag += bedrag;
-                     }
+            // bedrag berekenen
+             double totaalBedrag = 0.0;   
+             Set<BestellingArtikel> ba = bs.zoekBestellingArtikelByBestellingId(bestelling);
+             for (BestellingArtikel bestelArtikel : ba) {
+                 int aantal = bestelArtikel.getArtikelAantal();
+                 double artPrijs = bestelArtikel.getArtikel().getArtikelPrijs();
+                 double bedrag = aantal * artPrijs;
+                 totaalBedrag += bedrag;
+             }
                 
-               model.addAttribute("factuurbedrag", 
-                            "Het totale bedrag van de factuur bedraagt € " + totaalBedrag);
-                
-               model.addAttribute("bestelartikelset", ba);
+            model.addAttribute("factuurbedrag", totaalBedrag);
+            model.addAttribute("bestelartikelset", ba);
 //             Set <Betaling> betalingen = factuur.getBetalingset();   
 //               model.addAttribute("betalingset", betalingen );
 
-               return "factuur/toevoegengelukt"; 
+            return "factuur/toevoegengelukt"; 
         }
 
         // readall
@@ -159,8 +157,7 @@ public class FactuurController {
                         " is gewijzigd in het bestand");
 
             double factuurBedrag = berekenTotaalBedrag(factuur.getBestelling().getId());                        
-            model.addAttribute("factuurbedrag", 
-                        "Het totale bedrag van de factuur bedraagt € " + factuurBedrag);
+            model.addAttribute("factuurbedrag", factuurBedrag);
 
             Set <Betaling> betalingen = factuur.getBetalingset();   
             model.addAttribute("betalingset", betalingen );
@@ -186,9 +183,9 @@ public class FactuurController {
         public double berekenTotaalBedrag(Long bestellingId) {
 
             double totaalBedrag = 0.0;            
-//            Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
+            Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
             
-            Set<BestellingArtikel> ba = (Set<BestellingArtikel>)bs.zoekBestellingArtikelByBestellingId(bestellingId);
+            Set<BestellingArtikel> ba = (Set<BestellingArtikel>)bs.zoekBestellingArtikelByBestellingId(bestelling);
             for (BestellingArtikel bestelArtikel : ba) {
                 int aantal = bestelArtikel.getArtikelAantal();
                 //artikel = bestelArtikel.getArtikel();
