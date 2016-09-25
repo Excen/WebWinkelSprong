@@ -85,7 +85,7 @@ public class FactuurController {
                
             // bedrag berekenen
              double totaalBedrag = 0.0;   
-             Set<BestellingArtikel> ba = bs.zoekBestellingArtikelByBestellingId(bestellingId);
+             Set<BestellingArtikel> ba = bs.zoekBestellingArtikelByBestellingId(bestelling);
              for (BestellingArtikel bestelArtikel : ba) {
                  int aantal = bestelArtikel.getArtikelAantal();
                  double artPrijs = bestelArtikel.getArtikel().getArtikelPrijs();
@@ -188,7 +188,7 @@ public class FactuurController {
             double totaalBedrag = 0.0;            
             Bestelling bestelling = (Bestelling) bestellingService.zoekNaarBean(bestellingId);
             
-            Set<BestellingArtikel> ba = (Set<BestellingArtikel>)bs.zoekBestellingArtikelByBestellingId(bestellingId);
+            Set<BestellingArtikel> ba = (Set<BestellingArtikel>)bs.zoekBestellingArtikelByBestellingId(bestelling);
             for (BestellingArtikel bestelArtikel : ba) {
                 int aantal = bestelArtikel.getArtikelAantal();
                 //artikel = bestelArtikel.getArtikel();

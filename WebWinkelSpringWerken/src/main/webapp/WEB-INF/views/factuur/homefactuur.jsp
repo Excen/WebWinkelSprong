@@ -21,6 +21,8 @@
                 <li><a href = "<c:url value = "/factuur/readallfactuur"/>">Factuur verwijderen</a></li>
                 <li><a href = "<c:url value = "/factuur/updatefactuur"/>"  >Factuur aanpassen</a></li>
                 <li><a href = "<c:url value = "/factuur/readallfactuur"/>"  >Factuurlijst opvragen</a></li>
+                <br>
+                <a href = "<c:url value = '/'/>"> Terug naar huis</a>
             </ul>
     </body>
 </html>

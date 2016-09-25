@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="<c:url value="/src/main/resources/main.css" />" rel="stylesheet" type = "text/css">
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Account startpagina</title>
     </head>
@@ -19,6 +19,8 @@
         <a href = "<c:url value = '/account/updateaccount'/>"> Account update </a><br>
         <a href = "<c:url value = '/account/readallaccount'/>"> Accounts opvragen </a><br>
         <a href = "<c:url value = '/account/deleteaccount'/>"> Account verwijderen </a><br>
+        <br>
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
     </body> 
 </html>
 

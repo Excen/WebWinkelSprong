@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href = "<c:url value = "/resources/css/main.css"/>"  rel = "stylesheet" type = "text/css">
         <title>Klant homepage</title>
     </head>
     <body>
@@ -18,6 +19,8 @@
         <a href = "<c:url value = '/klant/updateklant'/>"> Klant update </a><br>
         <a href = "<c:url value = '/klant/readallklant'/>"> Klanten opvragen </a><br>
         <a href = "<c:url value = '/klant/deleteklant'/>"> Klant verwijderen </a><br>
+        <br>
+        <a href = "<c:url value = '/'/>"> Terug naar huis</a>
     </body>
 </html>
 
