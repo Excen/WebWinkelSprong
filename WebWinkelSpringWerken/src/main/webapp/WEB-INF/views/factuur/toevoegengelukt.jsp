@@ -19,12 +19,7 @@
         <h1>Factuur succesvol toegevoegd</h1>
         <h3>${success}</h3>
         
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+       
         <table>    
             <th>Artikel</th>
             <th>Aantal</th>

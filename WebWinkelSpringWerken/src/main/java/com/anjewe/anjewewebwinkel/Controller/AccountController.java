@@ -60,7 +60,7 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
     } 
 
      // save        
-        @RequestMapping(value = { "/account/createaccount-{Id}", "/klant/readallklant" }, method = RequestMethod.POST)
+        @RequestMapping(value = { "/account/createaccount-{Id}" }, method = RequestMethod.POST)
         public String saveAccount(@Valid Account account, BindingResult result, 
             ModelMap model, @PathVariable Long Id){
             

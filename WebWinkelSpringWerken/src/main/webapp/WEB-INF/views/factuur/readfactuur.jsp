@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- 
     Document   : readfactuur
     Created on : 19-sep-2016, 16:29:27
@@ -14,7 +16,7 @@
         
         <title>FACTUUR NR-${factuurId}</title>
     </head>
-    <body>
+    <body><div align ="center">
         <h1>Factuur</h1>
        <table>
            <tr>
@@ -26,9 +28,11 @@
                <td>${factuurnummer}</td>
            </tr>  
            <tr>
-               <td> factuurdatum</td>
-               <td>${factuurdatum}</td>
-           </tr>  
+               <td> factuurdatum</td>              
+                <td><fmt:formatDate type="both" 
+                   dateStyle="long" timeStyle="short" 
+                   value="${factuurdatum}" /></td>              
+            </tr>  
            <tr>
                <td> factuur bij bestelling</td>
                <td>${factuurbestelling}</td>
@@ -38,17 +42,19 @@
                <td>${factuurklant}</td>
            </tr>  
            
-           
+           <tr><tr>
            <tr>
-               <td>Totaalbedrag van factuur</td>
-               <td>${factuurbedrag}</td>
+               <td >Totaalbedrag van factuur</td>
+               <td><fmt:setLocale value='de-DE' />
+                    <fmt:formatNumber type="currency" maxFractionDigits='2' minFractionDigits="2" currencySymbol="€" value="${factuurbedrag}" />
+                    </td>
                    
-           <tr>
+           <%--tr>
                <td>Betalingen bij factuur</td>
                <c:forEach var="factuur" items="${factuurbetalingset}" varStatus="status">
                <td>${factuurbetalingset}</td>
                </c:forEach>
-           </tr>  
+           </tr--%>  
        </table>
         
         <br/>
@@ -56,6 +62,6 @@
         <a href = "<c:url value = '/factuur/readallfactuur'/>" >Terug naar factuurlijst </a>
         <br/>
         <a href = "<c:url value = '/'/>"> Terug naar huis</a>
-        
+        </div>
     </body>
 </html>

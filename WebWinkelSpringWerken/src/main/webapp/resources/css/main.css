@@ -1,6 +1,7 @@
 body {
     text-align: center;
     background: url("http://www.hvrgroup.nl/wp-content/uploads/2014/07/Kunst-die-je-op-het-verkeerde-been-zet-720x427.jpg");
+    
     background-size: cover;
     background-position: center center; 
     background-repeat: no-repeat;
@@ -8,6 +9,11 @@ body {
     color: darkslateblue;
     font-family: 'Agency FB';
     text-decoration:none;
+    font-size: 16px;
+}
+
+background{
+    opacity: 0.35;
 }
 
 nav {
@@ -77,7 +83,7 @@ input[type="submit"]{
 }
 
 img{
-    opacity: 0.65;
+    opacity: 0.10;
     border-radius: 5px;
     margin-top:70px
     }

@@ -1,4 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- 
     Document   : readallfactuur
     Created on : 18-sep-2016, 23:19:02
@@ -14,6 +16,7 @@
         <title>Alle facturen</title>
     </head>
     <body>
+        <div align="center">
         <h1>Factuurlijst</h1>
         
         
@@ -29,7 +32,9 @@
                 <tr>
                     <td><c:out value ="${factuur.id}"/></td>
                     <td><c:out value = "${factuur.factuurnummer}"/></td>
-                    <td><c:out value = "${factuur.factuurdatum}"/></td>  
+                    
+                    <td><c:set var="factuurdatum" value = "${factuur.factuurdatum}"/><fmt:formatDate type="both" 
+                   dateStyle="long" value="${factuurdatum}" /></td>  
                     <td><a href="<c:url value='/factuur/updatefactuur-${factuur.id}' />">wijzig</a></td>
                     <td><a href="<c:url value='/factuur/deletefactuur-${factuur.id}' />">verwijder </a></td>     
                     <td><a href= "<c:url value="/factuur/readfactuur-${factuur.id}" />">gegevens inzien</a></td>
@@ -42,7 +47,7 @@
         <br/>
         <a href = "<c:url value = '/'/>"> Terug naar huis</a>
         
-        
+        </div>
         
     </body>
 </html>
