@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Account startmenu</h1>
-        <a href = "<c:url value = '/account/createaccount'/>"> Account toevoegen</a><br>
+        <a href = "<c:url value = '/klant/createklant'/>"> Account toevoegen</a><br>
         <a href = "<c:url value = '/account/updateaccount'/>"> Account update </a><br>
         <a href = "<c:url value = '/account/readallaccount'/>"> Accounts opvragen </a><br>
         <a href = "<c:url value = '/account/deleteaccount'/>"> Account verwijderen </a><br>

@@ -42,7 +42,7 @@
            </c:choose> 
         </form>
            
-                    <a href = "<c:url value = '/'/>"> Terug naar huis</a>
+                <a href = "<c:url value = '/'/>"> Terug naar huis</a>
                  
     </body>
 </html>

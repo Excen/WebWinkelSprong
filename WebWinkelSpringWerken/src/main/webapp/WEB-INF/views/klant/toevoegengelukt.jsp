@@ -18,7 +18,10 @@
         <div>
         ${success}
         </div>
-        
+        <ul>
+        <li><a href = "<c:url value = '/'/>"> Terug naar huis</a></li>
+        <li><a href = "<c:url value = '/klant/homeklant'/>"> Startpagina Klant</a></li>
        
+        </ul>
     </body>
 </html>

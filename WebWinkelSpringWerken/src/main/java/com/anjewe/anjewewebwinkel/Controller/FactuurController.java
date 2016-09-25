@@ -77,10 +77,10 @@ public class FactuurController {
             fs.voegFactuurToe(f, klantId, bestellingId );
             //Factuur f = factuurService.zoekNaarBean(factuurId);
             //factuurService.voegNieuweBeanToe(factuur);
-            model.addAttribute("success", "FactuurId: " + f.getId() +" en factuurnummer:  " + f.getFactuurnummer()
-                            + " Factuurdatum  " + f.getFactuurdatum()+ /*" Factuur bij bestelling  " 
+            model.addAttribute("success", "Factuur met Id: " + f.getId() +" met factuurnummer:  " + f.getFactuurnummer()
+                            + " is op factuurdatum: " + f.getFactuurdatum()+ /*" Factuur bij bestelling  " 
                             + f.getBestelling()+ " bijbehorende klant" + f.getKlant()+ */
-                            " is toegevoegd aan het bestand");
+                            " toegevoegd aan het bestand.");
 
                
             // bedrag berekenen
@@ -112,18 +112,15 @@ public class FactuurController {
 
         // readone
         @RequestMapping (value= "/factuur/readfactuur-{Id}", method = RequestMethod.GET)
-        public String readFactuur(@PathVariable Long Id, ModelMap model, BindingResult result, 
-                @Valid Factuur factuur){
+        public String readFactuur(@PathVariable Long Id, ModelMap model){
     
-                if (result.hasErrors()){
-                    return "factuur/readallfactuur";
-                }
-                factuurService.zoekNaarBean(Id);
-                model.addAttribute("factuurId", factuur.getId());
+                
+                Factuur factuur = factuurService.zoekNaarBean(Id);
+                model.addAttribute("factuurId", Id);
                 model.addAttribute("factuurnummer", factuur.getFactuurnummer() );
                 model.addAttribute("factuurdatum", factuur.getFactuurdatum());
                 model.addAttribute("factuurbestelling", factuur.getBestelling());
-                 Set <Betaling> betalingen = factuur.getBetalingset();  
+                Set <Betaling> betalingen = factuur.getBetalingset();  
                 model.addAttribute("factuurbetalingset", betalingen);
                 Klant klant = factuur.getKlant();
                 model.addAttribute("factuurklant", 
