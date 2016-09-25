@@ -49,22 +49,26 @@ private static final Logger log = LoggerFactory.getLogger(AccountController.clas
     
         
         // create account
-    @RequestMapping(value = {"account", "/account/createaccount"}, method = RequestMethod.GET)
-    public String nieuwAccount(ModelMap model) {
+    @RequestMapping(value = {"account", "/account/createaccount-{Id}"}, method = RequestMethod.GET)
+    public String nieuwAccount(ModelMap model, @PathVariable Long Id) {
         Account account = new Account();
+        Klant klant = klantService.zoekNaarBean(Id);
+        account.setKlant(klant);
          model.addAttribute("account", account);
          model.addAttribute("edit", false);  
         return "account/addaccount";
     } 
 
      // save        
-        @RequestMapping(value = { "/account/createaccount" }, method = RequestMethod.POST)
+        @RequestMapping(value = { "/account/createaccount-{Id}", "/klant/readallklant" }, method = RequestMethod.POST)
         public String saveAccount(@Valid Account account, BindingResult result, 
-            ModelMap model){
+            ModelMap model, @PathVariable Long Id){
             
                 if (result.hasErrors()) {
                     return "account/addaccount"; // aanpassen> aangeven waar error zit
                 } 
+                Klant klant = klantService.zoekNaarBean(Id);
+                account.setKlant(klant);
                 
                 accountService.voegNieuweBeanToe(account); 
                 model.addAttribute("success", "Account: Account username " + account.getUsername()
@@ -200,20 +204,18 @@ validation
     /**
      * This method will delete an user by it's ID value.
      */
-    @RequestMapping(value = { "/deleteallaccount-{Id}" }, method = RequestMethod.GET)
+    
+    @RequestMapping(value ="/account/deleteaccount", method = RequestMethod.GET)
+        public String delete(){
+            return "account/deleteaccount";
+        }
+    
+    @RequestMapping(value = { "/deleteaccount-{Id}" }, method = RequestMethod.GET)
     public String deleteUser(@PathVariable Long Id) {
         accountService.verwijderBeanGegevens(Id);
-        return "redirect:/list";
+        return "redirect:/account/readallaccount";
     }
      
- 
-    /**
-     * This method will provide UserProfile list to views
-     */
-    /* @ModelAttribute("roles")
-    public List<UserProfile> initializeProfiles() {
-    return userProfileService.findAll();
-    }
-    */
+     
 
 }
