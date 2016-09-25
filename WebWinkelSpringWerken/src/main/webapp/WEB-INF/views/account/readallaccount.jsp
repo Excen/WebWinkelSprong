@@ -26,7 +26,7 @@
                     <td>${account.id + 1}</td>
                     <td>${account.username}</td>
                     <td>${account.password}</td>
-                             
+                    <td><a href="<c:url value='/account/deleteaccount-${account.id}' />">verwijder </a></td>         
                 </tr>
                 </c:forEach>             
             </table>
