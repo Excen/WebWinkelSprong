@@ -38,6 +38,7 @@
                     <td><a href="<c:url value='/klant/deleteklant-${klant.id}' />">verwijder || </a></td>   
                     <td><a href = "<c:url value ='/klant/adressenbijklant-${klant.id}'/>">adressen || </a></td>  
                      <td><a href="<c:url value='/klant/addadrestoklant-${klant.id}' />">adres toevoegen</a></td> 
+                    <td><a href="<c:url value='/account/createaccount-${klant.id}' />">maak account || </a></td>
                     
                 </tr>
                 </c:forEach>             
